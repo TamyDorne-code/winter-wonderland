@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Locations</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: linear-gradient(120deg, #e0eafc 0%, #fffde4 100%);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 700px;
+            margin: 48px auto;
+            background: rgba(255,255,255,0.97);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+            padding: 48px 32px 32px 32px;
+            text-align: center;
+        }
+        h1 {
+            color: #2e8b57;
+            font-size: 2.2em;
+            margin-bottom: 16px;
+            letter-spacing: 2px;
+        }
+        .intro {
+            font-size: 1.1em;
+            color: #333;
+            margin-bottom: 32px;
+        }
+        .location-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 auto 32px auto;
+            max-width: 500px;
+        }
+        .location-list li {
+            background: #f7fafd;
+            border-radius: 12px;
+            margin: 16px 0;
+            padding: 18px 12px;
+            font-size: 1.08em;
+            box-shadow: 0 2px 8px rgba(46,139,87,0.08);
+            transition: box-shadow 0.2s;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        .location-info {
+            flex: 1;
+        }
+        .location-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(46,139,87,0.10);
+            background: #eee;
+            cursor: pointer;
+            transition: box-shadow 0.2s;
+        }
+        .location-list li:focus-within,
+        .location-list li:hover {
+            box-shadow: 0 4px 16px rgba(46,139,87,0.18);
+        }
+        .event-name {
+            font-weight: bold;
+            color: #d7263d;
+        }
+        .event-address {
+            color: #2e8b57;
+            font-size: 0.98em;
+        }
+        .event-access {
+            color: #888;
+            font-size: 0.95em;
+        }
+        .back-btn {
+            margin-top: 20px;
+            padding: 10px 24px;
+            font-size: 1em;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(90deg, #2e8b57 0%, #d7263d 100%);
+            color: #fff;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(46,139,87,0.12);
+            transition: background 0.2s, transform 0.2s;
+            font-weight: bold;
+        }
+        .back-btn:focus,
+        .menu-toggle:focus,
+        .close-modal:focus {
+            outline: 2px solid #d7263d;
+        }
+        .back-btn:hover {
+            background: linear-gradient(90deg, #d7263d 0%, #2e8b57 100%);
+            transform: scale(1.05);
+        }
+        /* Mobile menu styles */
+        .menu-toggle {
+            display: none;
+            background: #2e8b57;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 18px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 18px;
+        }
+        @media (max-width: 600px) {
+            .container {
+                max-width: 98vw;
+                padding: 24px 4vw 24px 4vw;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .location-list {
+                display: none;
+            }
+            .location-list.active {
+                display: block;
+            }
+            .location-list li {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            .location-img {
+                width: 100%;
+                height: 120px;
+            }
+        }
+        /* Modal styles */
+        .modal-bg {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0; top: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-bg.active {
+            display: flex;
+        }
+        .modal-content {
+            position: relative;
+            background: #fff;
+            border-radius: 18px;
+            padding: 24px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .modal-img {
+            max-width: 80vw;
+            max-height: 60vh;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(46,139,87,0.18);
+            margin-bottom: 18px;
+        }
+        .close-modal {
+            position: absolute;
+            top: 12px;
+            right: 18px;
+            background: #d7263d;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            font-size: 1.5em;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(46,139,87,0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .close-modal:hover {
+            background: #2e8b57;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" role="main" aria-label="Event Locations">
+        <h1 tabindex="0">📍 Event Locations</h1>
+        <div class="intro" tabindex="0">
+            Find out where each Winter Wonderland event will take place.<br>
+            Addresses, directions, and accessibility info included.
+        </div>
+        <button class="menu-toggle" aria-controls="locationList" aria-expanded="false" aria-label="Toggle location list">
+            Show Locations
+        </button>
+        <ul class="location-list" id="locationList">
+            <li tabindex="0">
+                <img src="https://barrie360.com/cobPub/uploads/2024/07/Season-of-Lights.png" alt="Winter Wonderland Hall" class="location-img" data-full="https://barrie360.com/cobPub/uploads/2024/07/Season-of-Lights.png">
+                <div class="location-info">
+                    <span class="event-name">🎄 Christmas Season Celebration</span><br>
+                    <span class="event-address">Winter Wonderland Hall, 123 Holiday Ave</span><br>
+                    <span class="event-access">Wheelchair accessible, parking available</span>
+                </div>
+            </li>
+            <li tabindex="0">
+                <img src="https://assets.classbento.com.au/images/class_extra/christmas-cookie-decorating-class-brisbane-0-1-portrait-big.jpg?v=1757867255" alt="Sugar & Spice Community Center" class="location-img" data-full="https://assets.classbento.com.au/images/class_extra/christmas-cookie-decorating-class-brisbane-0-1-portrait-big.jpg?v=1757867255">
+                <div class="location-info">
+                    <span class="event-name">🍪 Cookie Decorating Workshop</span><br>
+                    <span class="event-address">Sugar & Spice Community Center, 45 Baker St</span><br>
+                    <span class="event-access">Family friendly, accessible entrance</span>
+                </div>
+            </li>
+            <li tabindex="0">
+                <img src="https://www.epwinterfest.com/images/pages/Holiday-Movies.jpg" alt="Starlight Community Hall" class="location-img" data-full="https://www.epwinterfest.com/images/pages/Holiday-Movies.jpg">
+                <div class="location-info">
+                    <span class="event-name">🎬 Holiday Movie Night</span><br>
+                    <span class="event-address">Starlight Community Hall, 88 Cinema Rd</span><br>
+                    <span class="event-access">Accessible seating, snacks available</span>
+                </div>
+            </li>
+            <li tabindex="0">
+                <img src="https://cdn.shopify.com/s/files/1/0336/3763/0092/files/isaac-martin-7M_Q0DYcI08-unsplash_1024x1024.jpg?v=1669165905" alt="Winter Wonderland Hall" class="location-img" data-full="https://cdn.shopify.com/s/files/1/0336/3763/0092/files/isaac-martin-7M_Q0DYcI08-unsplash_1024x1024.jpg?v=1669165905">
+                <div class="location-info">
+                    <span class="event-name">🎁 Gift Exchange & Celebration</span><br>
+                    <span class="event-address">Winter Wonderland Hall, 123 Holiday Ave</span><br>
+                    <span class="event-access">Wheelchair accessible, parking available</span>
+                </div>
+            </li>
+            <li tabindex="0">
+                <img src="https://media.istockphoto.com/id/1300203249/video/santa-claus-entering-magic-workshop.jpg?s=640x640&k=20&c=TCg-YGZshpxuKraV2oGKAsxQxUlzqei-rfwa8Qsyw5o=" alt="North Pole Community Center" class="location-img" data-full="https://media.istockphoto.com/id/1300203249/video/santa-claus-entering-magic-workshop.jpg?s=640x640&k=20&c=TCg-YGZshpxuKraV2oGKAsxQxUlzqei-rfwa8Qsyw5o=">
+                <div class="location-info">
+                    <span class="event-name">🎅 Santa's Workshop</span><br>
+                    <span class="event-address">North Pole Community Center, 77 Arctic Blvd</span><br>
+                    <span class="event-access">Kids welcome, stroller friendly</span>
+                </div>
+            </li>
+            <li tabindex="0">
+                <img src="https://substackcdn.com/image/fetch/$s_!e6lt!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fedaf655c-9fa0-46a1-af37-c0879b9dbad1_950x646.jpeg" alt="Blue Lake Ice Rink" class="location-img" data-full="https://substackcdn.com/image/fetch/$s_!e6lt!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fedaf655c-9fa0-46a1-af37-c0879b9dbad1_950x646.jpeg">
+                <div class="location-info">
+                    <span class="event-name">⛸️ Ice Skating Party</span><br>
+                    <span class="event-address">Blue Lake Ice Rink, 200 Winter Dr</span><br>
+                    <span class="event-access">Rental skates available, accessible rink</span>
+                </div>
+            </li>
+            <!-- Add more events and locations as needed -->
+        </ul>
+        <button onclick="location.href='index.html'" class="back-btn" aria-label="Back to Main Page">
+            Back to Main Page
+        </button>
+        <!-- Modal for enlarged image -->
+        <div class="modal-bg" id="modalBg" role="dialog" aria-modal="true" aria-label="Enlarged location photo">
+            <div class="modal-content">
+                <button class="close-modal" id="closeModal" aria-label="Close enlarged photo">&times;</button>
+                <img src="" alt="" class="modal-img" id="modalImg">
+            </div>
+        </div>
+    </div>
+    <script>
+        // Mobile menu toggle for accessibility
+        const menuToggle = document.querySelector('.menu-toggle');
+        const locationList = document.getElementById('locationList');
+        menuToggle.addEventListener('click', function() {
+            const expanded = locationList.classList.toggle('active');
+            menuToggle.setAttribute('aria-expanded', expanded);
+            menuToggle.textContent = expanded ? 'Hide Locations' : 'Show Locations';
+        });
+        // Show locations by default on desktop
+        function handleResize() {
+            if (window.innerWidth > 600) {
+                locationList.classList.add('active');
+                menuToggle.setAttribute('aria-expanded', true);
+                menuToggle.style.display = 'none';
+            } else {
+                locationList.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', false);
+                menuToggle.style.display = 'block';
+                menuToggle.textContent = 'Show Locations';
+            }
+        }
+        window.addEventListener('resize', handleResize);
+        window.addEventListener('DOMContentLoaded', handleResize);
+
+        // Modal logic for enlarged images
+        const modalBg = document.getElementById('modalBg');
+        const modalImg = document.getElementById('modalImg');
+        const closeModal = document.getElementById('closeModal');
+        const locationImgs = document.querySelectorAll('.location-img');
+
+        locationImgs.forEach(img => {
+            img.addEventListener('click', function() {
+                modalImg.src = img.getAttribute('data-full') || img.src;
+                modalImg.alt = img.alt;
+                modalBg.classList.add('active');
+                closeModal.focus();
+            });
+        });
+
+        closeModal.addEventListener('click', function() {
+            modalBg.classList.remove('active');
+            modalImg.src = '';
+            modalImg.alt = '';
+        });
+
+        // Close modal on background click or Escape key
+        modalBg.addEventListener('click', function(e) {
+            if (e.target === modalBg) {
+                modalBg.classList.remove('active');
+                modalImg.src = '';
+                modalImg.alt = '';
+            }
+        });
+        document.addEventListener('keydown', function(e) {
+            if (modalBg.classList.contains('active') && (e.key === 'Escape' || e.key === 'Esc')) {
+                modalBg.classList.remove('active');
+                modalImg.src = '';
+                modalImg.alt = '';
+            }
+        });
+    </script>
+</body>
+</html>

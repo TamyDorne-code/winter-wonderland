@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ice Skating Party Invitation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: linear-gradient(120deg, #e0f7fa 0%, #1565c0 100%);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 600px;
+            margin: 48px auto;
+            background: rgba(240,248,255,0.97);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(21,101,192,0.12);
+            padding: 48px 32px 32px 32px;
+            text-align: center;
+        }
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            color: #1565c0;
+            font-size: 2.6em;
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 8px #e3f2fd;
+        }
+        .event-details {
+            color: #0d47a1;
+            margin-bottom: 24px;
+            font-size: 1.15em;
+        }
+        .coming-soon {
+            font-size: 1.2em;
+            color: #039be5;
+            font-weight: bold;
+            margin-bottom: 10px;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { color: #039be5; }
+            50% { color: #1565c0; }
+            100% { color: #039be5; }
+        }
+        .days-left {
+            font-size: 1.1em;
+            color: #1565c0;
+            margin-bottom: 8px;
+        }
+        .time-left {
+            font-size: 1em;
+            color: #039be5;
+            margin-bottom: 16px;
+        }
+        .description {
+            margin: 18px 0 24px 0;
+            color: #0d47a1;
+            font-size: 1.08em;
+        }
+        .dates {
+            font-size: 1.15em;
+            color: #1565c0;
+            margin-bottom: 24px;
+            font-weight: bold;
+        }
+        .rsvp-btn {
+            background: linear-gradient(90deg, #039be5 0%, #1565c0 100%);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            padding: 14px 40px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(21,101,192,0.12);
+            transition: background 0.2s, transform 0.2s;
+        }
+        .rsvp-btn:focus,
+        .back-btn:focus,
+        .menu-toggle:focus {
+            outline: 2px solid #039be5;
+        }
+        .rsvp-btn:hover {
+            background: linear-gradient(90deg, #1565c0 0%, #039be5 100%);
+            transform: scale(1.05);
+        }
+        .footer {
+            margin-top: 36px;
+            color: #1976d2;
+            font-size: 1em;
+        }
+        .highlight {
+            color: #1565c0;
+            font-weight: bold;
+        }
+        ul.skating-list {
+            text-align: left;
+            margin: 18px auto 24px auto;
+            max-width: 400px;
+            color: #1976d2;
+            font-size: 1.07em;
+        }
+        .back-btn {
+            margin-top: 20px;
+            padding: 10px 24px;
+            font-size: 1em;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(90deg, #039be5 0%, #1565c0 100%);
+            color: #fff;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(21,101,192,0.12);
+            transition: background 0.2s, transform 0.2s;
+            font-weight: bold;
+        }
+        .back-btn:hover {
+            background: linear-gradient(90deg, #1565c0 0%, #039be5 100%);
+            transform: scale(1.05);
+        }
+        /* Mobile menu styles */
+        .menu-toggle {
+            display: none;
+            background: #039be5;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 18px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 18px;
+        }
+        @media (max-width: 600px) {
+            .container {
+                max-width: 98vw;
+                padding: 24px 4vw 24px 4vw;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .event-details {
+                display: none;
+            }
+            .event-details.active {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" role="main" aria-label="Ice Skating Party Event">
+        <h1 tabindex="0">⛸️ Ice Skating Party ⛸️</h1>
+        <button class="menu-toggle" aria-controls="eventDetails" aria-expanded="false" aria-label="Toggle event details">
+            Show Details
+        </button>
+        <div class="event-details" id="eventDetails">
+            <div class="coming-soon">Coming Soon!</div>
+            <div class="days-left">
+                The skating party starts in <span id="daysLeft"></span> days.
+            </div>
+            <div class="time-left">
+                (<span id="timeLeft"></span>)
+            </div>
+            <div class="description">
+                <span class="highlight">Glide into winter fun with friends and family!</span><br>
+                Join us for a frosty celebration:
+                <ul class="skating-list">
+                    <li>⛸️ Open Ice Skating</li>
+                    <li>🎶 Music & Dance on Ice</li>
+                    <li>🍫 Hot Cocoa & Treats</li>
+                    <li>🏆 Skating Games & Prizes</li>
+                    <li>📸 Winter Photo Booth</li>
+                    <li>🧤 Cozy Lounge Area</li>
+                </ul>
+                <span style="color:#039be5; font-weight:bold;">All ages and skill levels welcome!</span>
+            </div>
+        </div>
+        <div class="dates" tabindex="0">
+            <strong>Event Date:</strong> December 5 to December 15
+        </div>
+        <button class="rsvp-btn" onclick="alert('Thank you for your RSVP! See you on the ice!')" aria-label="RSVP for Ice Skating Party">RSVP</button>
+        <div class="footer" tabindex="0">
+            Location: <span class="highlight">Blue Lake Ice Rink</span><br>
+            Hosted by: <span class="highlight">Winter Wonderland Events - Skating Crew</span><br>
+            Why this event?: <span class="highlight">To celebrate winter with fun, movement, and community spirit!</span>
+        </div>
+        <button onclick="location.href='index.html'" class="back-btn" aria-label="Back to Main Page">
+            Back to Main Page
+        </button>
+    </div>
+    <script>
+        // Countdown logic: days, total hours, minutes, seconds
+        function updateCountdown() {
+            const now = new Date();
+            let eventYear = now.getFullYear();
+            const eventStart = new Date(eventYear, 11, 27, 0, 0, 0); // December is month 11 (0-indexed)
+            if (now > eventStart) {
+                eventYear++;
+            }
+            const nextEventStart = new Date(eventYear, 11, 27, 0, 0, 0);
+            let diff = nextEventStart - now;
+
+            let daysLeft = Math.floor(diff / (1000 * 60 * 60 * 24));
+            let totalHoursLeft = Math.floor(diff / (1000 * 60 * 60));
+            let minutesLeft = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            let secondsLeft = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('daysLeft').textContent = daysLeft;
+            document.getElementById('timeLeft').textContent =
+                `${totalHoursLeft} hours, ${minutesLeft} minutes, ${secondsLeft} seconds`;
+        }
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Mobile menu toggle for accessibility
+        const menuToggle = document.querySelector('.menu-toggle');
+        const eventDetails = document.getElementById('eventDetails');
+        menuToggle.addEventListener('click', function() {
+            const expanded = eventDetails.classList.toggle('active');
+            menuToggle.setAttribute('aria-expanded', expanded);
+            menuToggle.textContent = expanded ? 'Hide Details' : 'Show Details';
+        });
+        // Show details by default on desktop
+        function handleResize() {
+            if (window.innerWidth > 600) {
+                eventDetails.classList.add('active');
+                menuToggle.setAttribute('aria-expanded', true);
+                menuToggle.style.display = 'none';
+            } else {
+                eventDetails.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', false);
+                menuToggle.style.display = 'block';
+                menuToggle.textContent = 'Show Details';
+            }
+        }
+        window.addEventListener('resize', handleResize);
+        window.addEventListener('DOMContentLoaded', handleResize);
+    </script>
+</body>
+</html>

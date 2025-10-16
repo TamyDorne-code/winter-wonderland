@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christmas Season Event Invitation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        .snow-bg {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .container {
+            margin-top: 48px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 48px;
+            background: rgba(255,255,255,0.97);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+            padding: 48px 32px 32px 32px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            overflow: hidden;
+        }
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            color: #d7263d;
+            font-size: 2.8em;
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 8px #fff6f6;
+        }
+        .event-details {
+            color: #333;
+            margin-bottom: 24px;
+            font-size: 1.15em;
+        }
+        .coming-soon {
+            font-size: 1.3em;
+            color: #2e8b57;
+            font-weight: bold;
+            margin-bottom: 10px;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { color: #2e8b57; }
+            50% { color: #d7263d; }
+            100% { color: #2e8b57; }
+        }
+        .days-left {
+            font-size: 1.2em;
+            color: #d7263d;
+            margin-bottom: 8px;
+        }
+        .time-left {
+            font-size: 1em;
+            color: #2e8b57;
+            margin-bottom: 16px;
+        }
+        .description {
+            margin: 18px 0 24px 0;
+            color: #444;
+            font-size: 1.08em;
+        }
+        .dates {
+            font-size: 1.15em;
+            color: #2e8b57;
+            margin-bottom: 24px;
+            font-weight: bold;
+        }
+        .rsvp-btn {
+            background: linear-gradient(90deg, #d7263d 0%, #2e8b57 100%);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            padding: 14px 40px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(46,139,87,0.12);
+            transition: background 0.2s, transform 0.2s;
+        }
+        .rsvp-btn:focus,
+        .back-btn:focus,
+        .menu-toggle:focus {
+            outline: 2px solid #d7263d;
+        }
+        .rsvp-btn:hover {
+            background: linear-gradient(90deg, #2e8b57 0%, #d7263d 100%);
+            transform: scale(1.05);
+        }
+        .footer {
+            margin-top: 36px;
+            color: #888;
+            font-size: 1em;
+        }
+        .highlight {
+            color: #d7263d;
+            font-weight: bold;
+        }
+        .back-btn {
+            margin-top: 20px;
+            padding: 10px 24px;
+            font-size: 1em;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(90deg, #2e8b57 0%, #d7263d 100%);
+            color: #fff;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(46,139,87,0.12);
+            transition: background 0.2s, transform 0.2s;
+            font-weight: bold;
+        }
+        .back-btn:hover {
+            background: linear-gradient(90deg, #d7263d 0%, #2e8b57 100%);
+            transform: scale(1.05);
+        }
+        /* Mobile menu styles */
+        .menu-toggle {
+            display: none;
+            background: #2e8b57;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 18px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 18px;
+        }
+        @media (max-width: 700px) {
+            .container {
+                max-width: 98vw;
+                padding: 24px 4vw 24px 4vw;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .event-details {
+                display: none;
+            }
+            .event-details.active {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas class="snow-bg" aria-hidden="true"></canvas>
+    <div class="container" role="main" aria-label="Christmas Season Event">
+        <h1 tabindex="0">🎄 Christmas Season Celebration 🎄</h1>
+        <button class="menu-toggle" aria-controls="eventDetails" aria-expanded="false" aria-label="Toggle event details">
+            Show Details
+        </button>
+        <div class="event-details" id="eventDetails">
+            <div class="coming-soon">Coming Soon!</div>
+            <div class="days-left">
+                Our Christmas event starts in <span id="daysLeft"></span> days.
+            </div>
+            <div class="time-left">
+                (<span id="timeLeft"></span>)
+            </div>
+            <div class="description">
+                <span class="highlight">Step into a world of wonder and joy!</span><br>
+                <ul style="text-align:left; margin: 18px auto 24px auto; max-width: 400px;">
+                    <li>✨ Grand tree lighting ceremony</li>
+                    <li>🎅 Magical visit from Santa Claus</li>
+                    <li>🎶 Live music & carol singing</li>
+                    <li>🍰 Festive treats & hot cocoa bar</li>
+                    <li>🎁 Holiday crafts & games for all ages</li>
+                    <li>❄️ Nightly snow show & sparkling lights</li>
+                    <li>🕺 Dance floor & photo booth</li>
+                    <li>🎉 Countdown to New Year's Eve</li>
+                </ul>
+                <span style="color:#2e8b57; font-weight:bold;">Make memories with friends and family in a festive paradise!</span>
+            </div>
+            <div style="margin: 18px 0;">
+                <img src="https://img.icons8.com/color/96/000000/christmas-star.png" alt="Star" style="margin:0 8px;vertical-align:middle;">
+                <img src="https://img.icons8.com/color/96/000000/christmas-tree.png" alt="Tree" style="margin:0 8px;vertical-align:middle;">
+                <img src="https://img.icons8.com/color/96/000000/gift.png" alt="Gift" style="margin:0 8px;vertical-align:middle;">
+                <img src="https://img.icons8.com/color/96/000000/santa.png" alt="Santa" style="margin:0 8px;vertical-align:middle;">
+            </div>
+        </div>
+        <div class="dates" tabindex="0">
+            <strong>Event Dates:</strong> December 23 – December 31
+        </div>
+        <button class="rsvp-btn" onclick="alert('Thank you for your RSVP! We can’t wait to celebrate with you!')" aria-label="RSVP for Christmas Season Celebration">RSVP</button>
+        <div class="footer" tabindex="0">
+            Location: <span class="highlight">Winter Wonderland Hall</span><br>
+            Hosted by: <span class="highlight">Winter Wonderland - The Christmas Committee</span><br>
+            Why this event?: <span class="highlight">To celebrate the joy and spirit of the holiday season with our community! All family members are welcome!</span>
+        </div>
+        <button onclick="location.href='index.html'" class="back-btn" aria-label="Back to Main Page">
+            Back to Main Page
+        </button>
+    </div>
+    <script>
+        // Countdown logic: days, total hours, minutes, seconds
+        function updateCountdown() {
+            const now = new Date();
+            let eventYear = now.getFullYear();
+            const eventStart = new Date(eventYear, 11, 23, 0, 0, 0);
+            if (now > eventStart) {
+                eventYear++;
+            }
+            const nextEventStart = new Date(eventYear, 11, 23, 0, 0, 0);
+            let diff = nextEventStart - now;
+
+            let daysLeft = Math.floor(diff / (1000 * 60 * 60 * 24));
+            let totalHoursLeft = Math.floor(diff / (1000 * 60 * 60));
+            let minutesLeft = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            let secondsLeft = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('daysLeft').textContent = daysLeft;
+            document.getElementById('timeLeft').textContent =
+                `${totalHoursLeft} hours, ${minutesLeft} minutes, ${secondsLeft} seconds`;
+        }
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Snow animation for background only
+        const canvas = document.querySelector('.snow-bg');
+        const ctx = canvas.getContext('2d');
+        let snowflakes = [];
+        function resizeSnow() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            createSnowflakes();
+        }
+        function createSnowflakes() {
+            snowflakes = [];
+            for (let i = 0; i < 80; i++) {
+                snowflakes.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    r: Math.random() * 3 + 1,
+                    d: Math.random() * 1 + 0.5
+                });
+            }
+        }
+        function drawSnowflakes() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#fff";
+            for (let i = 0; i < snowflakes.length; i++) {
+                let sf = snowflakes[i];
+                // Don't draw snowflakes over the container area
+                const container = document.querySelector('.container');
+                const rect = container.getBoundingClientRect();
+                // If snowflake is NOT inside container, draw it
+                if (
+                    sf.x < rect.left ||
+                    sf.x > rect.right ||
+                    sf.y < rect.top ||
+                    sf.y > rect.bottom
+                ) {
+                    ctx.beginPath();
+                    ctx.arc(sf.x, sf.y, sf.r, 0, Math.PI * 2, true);
+                    ctx.fill();
+                }
+                sf.y += sf.d;
+                if (sf.y > canvas.height) {
+                    sf.y = 0;
+                    sf.x = Math.random() * canvas.width;
+                }
+            }
+        }
+        function animateSnow() {
+            drawSnowflakes();
+            requestAnimationFrame(animateSnow);
+        }
+        window.addEventListener('resize', resizeSnow);
+        window.addEventListener('DOMContentLoaded', () => {
+            resizeSnow();
+            animateSnow();
+        });
+
+        // Mobile menu toggle for accessibility
+        const menuToggle = document.querySelector('.menu-toggle');
+        const eventDetails = document.getElementById('eventDetails');
+        menuToggle.addEventListener('click', function() {
+            const expanded = eventDetails.classList.toggle('active');
+            menuToggle.setAttribute('aria-expanded', expanded);
+            menuToggle.textContent = expanded ? 'Hide Details' : 'Show Details';
+        });
+        // Show details by default on desktop
+        function handleResize() {
+            if (window.innerWidth > 700) {
+                eventDetails.classList.add('active');
+                menuToggle.setAttribute('aria-expanded', true);
+                menuToggle.style.display = 'none';
+            } else {
+                eventDetails.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', false);
+                menuToggle.style.display = 'block';
+                menuToggle.textContent = 'Show Details';
+            }
+        }
+        window.addEventListener('resize', handleResize);
+        window.addEventListener('DOMContentLoaded', handleResize);
+    </script>
+</body>
+</html>
