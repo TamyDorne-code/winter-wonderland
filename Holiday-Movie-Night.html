@@ -1,242 +1,559 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Holiday Movie Night Invitation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Montserrat', Arial, sans-serif;
-            background: linear-gradient(120deg, #e0eafc 0%, #bfc2c7 100%);
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-        }
-        .container {
-            max-width: 600px;
-            margin: 48px auto;
-            background: rgba(230,230,230,0.97);
-            border-radius: 24px;
-            box-shadow: 0 8px 32px rgba(60,60,60,0.12);
-            padding: 48px 32px 32px 32px;
-            text-align: center;
-        }
-h1 {
-    font-family: 'Great Vibes', cursive;
-    color: #333;
-    font-size: 2.4em;
-    margin-bottom: 12px;
-    letter-spacing: 2px;
-}
-        .event-details {
-            color: #444;
-            margin-bottom: 24px;
-            font-size: 1.15em;
-        }
-        .coming-soon {
-            font-size: 1.2em;
-            color: #555;
-            font-weight: bold;
-            margin-bottom: 10px;
-            animation: pulse 1.5s infinite;
-        }
-        @keyframes pulse {
-            0% { color: #555; }
-            50% { color: #888; }
-            100% { color: #555; }
-        }
-        .days-left {
-            font-size: 1.1em;
-            color: #555;
-            margin-bottom: 8px;
-        }
-        .time-left {
-            font-size: 1em;
-            color: #888;
-            margin-bottom: 16px;
-        }
-        .description {
-            margin: 18px 0 24px 0;
-            color: #444;
-            font-size: 1.08em;
-        }
-        .dates {
-            font-size: 1.15em;
-            color: #555;
-            margin-bottom: 24px;
-            font-weight: bold;
-        }
-        .rsvp-btn {
-            background: linear-gradient(90deg, #888 0%, #333 100%);
-            color: #fff;
-            border: none;
-            border-radius: 12px;
-            padding: 14px 40px;
-            font-size: 1.1em;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 2px 8px rgba(60,60,60,0.12);
-            transition: background 0.2s, transform 0.2s;
-        }
-        .rsvp-btn:focus,
-        .back-btn:focus,
-        .menu-toggle:focus {
-            outline: 2px solid #d7263d;
-        }
-        .rsvp-btn:hover {
-            background: linear-gradient(90deg, #333 0%, #888 100%);
-            transform: scale(1.05);
-        }
-        .footer {
-            margin-top: 36px;
-            color: #888;
-            font-size: 1em;
-        }
-        .highlight {
-            color: #333;
-            font-weight: bold;
-        }
-        ul.movie-list {
-            text-align: left;
-            margin: 18px auto 24px auto;
-            max-width: 400px;
-            color: #555;
-            font-size: 1.07em;
-        }
-        .back-btn {
-            margin-top: 20px;
-            padding: 10px 24px;
-            font-size: 1em;
-            border: none;
-            border-radius: 8px;
-            background: linear-gradient(90deg, #888 0%, #333 100%);
-            color: #fff;
-            cursor: pointer;
-            box-shadow: 0 2px 8px rgba(60,60,60,0.12);
-            transition: background 0.2s, transform 0.2s;
-            font-weight: bold;
-        }
-        .back-btn:hover {
-            background: linear-gradient(90deg, #333 0%, #888 100%);
-            transform: scale(1.05);
-        }
-        /* Mobile menu styles */
-        .menu-toggle {
-            display: none;
-            background: #888;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            padding: 10px 18px;
-            font-size: 1.1em;
-            font-weight: bold;
-            cursor: pointer;
-            margin-bottom: 18px;
-        }
-        @media (max-width: 600px) {
-            .container {
-                max-width: 98vw;
-                padding: 24px 4vw 24px 4vw;
-            }
-            .menu-toggle {
-                display: block;
-            }
-            .event-details {
-                display: none;
-            }
-            .event-details.active {
-                display: block;
-            }
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Holiday Movie Night — Winter Wonderland</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg-0:#060816; --bg-1:#081827;
+      --panel:#f7fbff; --muted:#9fb5cc; --accent:#c9a84b;
+      --card-radius:14px; --gap:22px; --max-width:1100px;
+      --poster-max:420px; --elegant-shadow: 0 14px 40px rgba(2,6,23,0.55);
+      --glass: rgba(255,255,255,0.03);
+    }
+
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Montserrat,system-ui,Arial;background:
+      radial-gradient(800px 200px at 10% 8%, rgba(201,168,75,0.04), transparent 8%),
+      linear-gradient(180deg,var(--bg-0),var(--bg-1));color:var(--panel);-webkit-font-smoothing:antialiased}
+
+    .wrap{max-width:var(--max-width);margin:36px auto;padding:20px}
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.016), rgba(255,255,255,0.004));
+      border-radius:var(--card-radius);
+      padding:20px;
+      box-shadow:var(--elegant-shadow);
+      border:1px solid rgba(255,255,255,0.03);
+    }
+
+    header.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+    .brand{display:flex;gap:12px;align-items:center}
+    h1{margin:0;font-family:'Great Vibes',cursive;color:var(--accent);font-size:1.9rem}
+    .sub{color:var(--muted);font-weight:600;font-size:.95rem}
+
+    .nav-toggle{display:none;background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--panel);padding:8px 10px;border-radius:8px;cursor:pointer}
+    nav#mobileNav{position:fixed;top:0;right:0;height:100vh;width:300px;background:linear-gradient(180deg,#041123,#07162a);transform:translateX(110%);transition:transform .28s;box-shadow:-12px 0 40px rgba(0,0,0,0.6);padding:18px;z-index:120}
+    nav#mobileNav[aria-hidden="false"]{transform:translateX(0)}
+    nav#mobileNav a{display:block;color:var(--panel);text-decoration:none;padding:10px 6px;border-radius:8px}
+    nav .close-nav{display:inline-block;margin-bottom:12px;background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 10px;border-radius:8px;color:var(--panel);cursor:pointer}
+
+    .main{
+      display:grid;
+      grid-template-columns: minmax(240px, var(--poster-max)) 1fr;
+      gap:var(--gap);
+      align-items:start;
+      margin-top:18px;
+    }
+
+    .poster{
+      width:100%;
+      max-width:var(--poster-max);
+      border-radius:12px;
+      overflow:visible;
+      margin:0;
+      align-self:start;
+    }
+    .poster-card{
+      border-radius:12px;
+      overflow:hidden;
+      position:relative;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+      transition:transform .28s ease, box-shadow .28s ease;
+      border:1px solid rgba(255,255,255,0.04);
+      background:linear-gradient(180deg,#0f1720,#0b1220);
+    }
+    .poster-card:hover{ transform: translateY(-6px); box-shadow: 0 24px 60px rgba(0,0,0,0.6); }
+
+    .poster-figure{margin:0;position:relative;width:100%;aspect-ratio:3/4;overflow:hidden}
+    .poster-figure img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+    .poster-overlay{
+      position:absolute;left:0;right:0;bottom:0;padding:12px;
+      background:linear-gradient(180deg, rgba(0,0,0,0.0), rgba(2,6,23,0.55));
+      color:var(--panel);font-size:0.92rem;
+    }
+    .poster-credit{margin-top:8px;font-size:0.82rem;color:var(--muted)}
+
+    .meta{min-width:0}
+    .meta-header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+    .event-title{margin:0;font-family:'Great Vibes',cursive;color:var(--accent);font-size:1.6rem}
+    .venue{color:#d6e9ff;font-weight:700}
+    .venue-sub{color:var(--muted);font-size:.92rem;margin-top:6px}
+
+    .info{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}
+    .pill{background:var(--glass);padding:6px 10px;border-radius:999px;font-weight:600;color:var(--panel);font-size:.95rem;border:1px solid rgba(255,255,255,0.03)}
+
+    .synopsis{color:#d6dce4;line-height:1.6;margin-bottom:12px;font-size:1rem}
+    .controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+    .btn{background:linear-gradient(90deg,var(--accent),#f3d78f);color:#081827;border:none;padding:10px 16px;border-radius:10px;font-weight:700;cursor:pointer;box-shadow:0 8px 18px rgba(201,168,75,0.12);display:inline-flex;gap:10px;align-items:center}
+    .btn.secondary{background:transparent;color:var(--panel);border:1px solid rgba(255,255,255,0.06);box-shadow:none}
+    .countdown{color:#cfe9ff;font-weight:700;background:rgba(255,255,255,0.01);padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
+
+    .details{margin-top:8px;padding:14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));border:1px solid rgba(255,255,255,0.03)}
+    .snacks-list{margin-top:8px;color:#cfe9ff;line-height:1.6;display:none}
+    .snacks-list[aria-hidden="false"]{display:block}
+
+    .footer{margin-top:18px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:.95rem}
+
+    /* RSVP UI */
+    .rsvp-count { background: rgba(255,255,255,0.02); padding:6px 10px; border-radius:8px; color:var(--panel); font-weight:700; border:1px solid rgba(255,255,255,0.04); font-size:0.95rem; }
+    .rsvp-manage { display:inline-flex; gap:8px; align-items:center; }
+
+    .rsvp-card{
+      margin-top:12px;
+      padding:12px;
+      border-radius:12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.04);
+      display:flex;align-items:center;gap:12px;justify-content:space-between;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+    }
+    .rsvp-card .meta { flex:1; }
+    .rsvp-card .meta b{display:block;color:var(--accent); font-size:1.06rem}
+    .rsvp-actions{display:flex;gap:8px;align-items:center}
+
+    /* modal */
+    .modal-backdrop{ position:fixed; inset:0; background:rgba(2,6,23,0.6); display:none; align-items:center; justify-content:center; z-index:2000; padding:20px; }
+    .modal-backdrop.show{ display:flex; }
+    .modal{ background:linear-gradient(180deg,#071226,#06101a); border-radius:12px; padding:18px; width:min(520px,calc(100% - 40px)); box-shadow:0 20px 60px rgba(0,0,0,0.7); border:1px solid rgba(255,255,255,0.04); color:var(--panel); transform:translateY(8px); transition:transform .18s ease; }
+    .modal.show{ transform:translateY(0); }
+    .modal h3{ margin:0 0 8px 0; font-family:'Great Vibes',cursive; color:var(--accent); font-size:1.4rem }
+    .modal label{ display:block; font-size:0.9rem; color:var(--muted); margin-top:10px }
+    .modal input, .modal select, .modal textarea{
+      width:100%; padding:10px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.06); background:rgba(255,255,255,0.02); color:var(--panel); margin-top:6px;
+      appearance:none; -webkit-appearance:none; -moz-appearance:none;
+    }
+    .modal select{
+      padding-right:36px;
+      background-image:
+        linear-gradient(45deg, transparent 50%, rgba(255,255,255,0.18) 50%),
+        linear-gradient(135deg, rgba(255,255,255,0.18) 50%, transparent 50%);
+      background-position: calc(100% - 18px) calc(50% - 3px), calc(100% - 12px) calc(50% - 3px);
+      background-size:6px 6px,6px 6px;
+      background-repeat:no-repeat;
+      color: #ffffff;
+      -webkit-text-fill-color: #ffffff;
+    }
+    .modal select option{ color:#081827; background:linear-gradient(180deg,#071226,#06101a); }
+    .modal .row{ display:flex; gap:8px }
+    .modal .row > *{ flex:1 }
+    .modal .actions{ display:flex; gap:8px; justify-content:flex-end; margin-top:12px }
+    .modal .small-help{ font-size:0.86rem; color:var(--muted); margin-top:6px }
+
+
+    /* small inline agree checkbox next to text */
+    .agree {
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      margin-top:8px;
+      color:var(--panel);
+      font-size:0.95rem;
+      cursor:pointer;
+      user-select:none;
+    }
+    .agree input[type="checkbox"]{
+      /* restore native checkbox appearance (global rule set appearance:none) */
+      -webkit-appearance: checkbox;
+      -moz-appearance: checkbox;
+      appearance: auto;
+
+      width:18px;
+      height:18px;
+      margin:0;
+      padding:0;
+      border-radius:4px;
+      border:1px solid rgba(255,255,255,0.08);
+      background: transparent; /* let native checkmark render */
+      accent-color: var(--accent); /* modern browsers color the tick */
+      display:inline-block;
+      vertical-align:middle;
+      cursor:pointer;
+    }
+    .agree input[type="checkbox"]:focus{
+      /* restore native checkbox appearance (global rule set appearance:none) */
+      -webkit-appearance: checkbox;
+      -moz-appearance: checkbox;
+      appearance: auto;
+
+      width:18px;
+      height:18px;
+      margin:0;
+      padding:0;
+      border-radius:4px;
+      border:1px solid rgba(255,255,255,0.08);
+      background: transparent; /* let native checkmark render */
+      accent-color: var(--accent); /* modern browsers color the tick */
+      display:inline-block;
+      vertical-align:middle;
+      cursor:pointer;
+  }
+    .agree span{ color:var(--muted); font-size:0.95rem; }
+ 
+
+    /* toast */
+    .toast{ position:fixed; right:18px; bottom:18px; background:linear-gradient(90deg,var(--accent),#f3d78f); color:#081827; padding:10px 14px; border-radius:10px; box-shadow:0 10px 30px rgba(0,0,0,0.45); display:none; z-index:3000; font-weight:700 }
+
+    .snow{position:fixed;left:0;top:0;width:100vw;height:100vh;pointer-events:none;z-index:1}
+    .visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap;border:0;padding:0;margin:-1px}
+
+    @media (max-width:900px){
+      :root{ --poster-max:380px; }
+      .main{grid-template-columns: minmax(220px, var(--poster-max)) 1fr}
+    }
+    @media (max-width:720px){
+      .nav-toggle{display:inline-block}
+      .main{grid-template-columns:1fr;align-items:center}
+      .poster-figure{aspect-ratio:16/9}
+      .meta-header{align-items:center;text-align:center}
+      .venue{width:100%}
+      .poster{max-width:100%}
+      .rsvp-card{flex-direction:column;align-items:flex-start}
+      .rsvp-actions{width:100%;justify-content:flex-end}
+    }
+    .modal select:focus{ outline: 2px solid rgba(201,168,75,0.18); }
+    .modal select::-ms-expand{ display:none; }
+  </style>
 </head>
 <body>
-    <div class="container" role="main" aria-label="Holiday Movie Night Event">
-        <h1 tabindex="0">🎬 Holiday Movie Night 🎬</h1>
-        <button class="menu-toggle" aria-controls="eventDetails" aria-expanded="false" aria-label="Toggle event details">
-            Show Details
-        </button>
-        <div class="event-details" id="eventDetails">
-            <div class="coming-soon">Coming Soon!</div>
-            <div class="days-left">
-                Movie Night starts in <span id="daysLeft"></span> days.
-            </div>
-            <div class="time-left">
-                (<span id="timeLeft"></span>)
-            </div>
-            <div class="description">
-                <span class="highlight">Get cozy and enjoy your favorite holiday films!</span><br>
-                Join us for two magical nights of movies, snacks, and fun:
-                <ul class="movie-list">
-                    <li>🎥 December 1: "Home Alone" & "Elf"</li>
-                    <li>🎥 December 2: "The Polar Express" & "The Grinch"</li>
-                    <li>🍿 Free popcorn & hot chocolate</li>
-                    <li>🎟️ Holiday trivia and prizes</li>
-                    <li>📸 Festive photo corner</li>
-                </ul>
-                <span style="color:#333; font-weight:bold;">Bring your friends and family for a festive movie experience!</span>
-            </div>
+  <canvas class="snow" aria-hidden="true"></canvas>
+
+  <div class="wrap">
+    <header class="top" role="banner">
+      <div class="brand">
+        <h1 tabindex="0">Winter Wonderland</h1>
+        <div class="sub" aria-hidden="true">Holiday Movie Night</div>
+      </div>
+
+      <div>
+        <button id="mobileMenuBtn" class="nav-toggle" aria-controls="mobileNav" aria-expanded="false" aria-label="Open navigation menu">☰ Menu</button>
+        <nav id="mobileNav" aria-hidden="true" aria-label="Primary navigation">
+          <button class="close-nav" id="closeNavBtn" aria-label="Close menu">Close ×</button>
+          <a href="index.html">Events</a>
+          <a href="Event-location.html">Event Locations</a>
+          <a href="Gift-Exchange.html">Gift Exchange</a>
+          <a href="Santa-Workshop.html">Santa Workshop</a>
+          <a href="mailto:winter@wonderland.com">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="card" role="main" aria-label="Holiday Movie Night">
+      <header style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <div style="display:flex;gap:12px;align-items:center">
+          <button id="backBtn" class="btn secondary" aria-label="Back to events">← Back</button>
+          <div>
+            <h2 style="margin:0;font-family:'Great Vibes',cursive;color:var(--accent);font-size:1.6rem">Holiday Movie Night</h2>
+            <div class="sub">An elegant evening of classic films & warm cocoa</div>
+          </div>
         </div>
-        <div class="dates" tabindex="0">
-            <strong>Event Dates:</strong> December 1 & December 2
+
+        <div style="text-align:right">
+          <div style="color:#d6e9ff;font-weight:700">Winter Wonderland Hall</div>
+          <div style="color:var(--muted);font-size:.92rem;margin-top:6px">Accessible venue • Parking nearby</div>
         </div>
-        <button class="rsvp-btn" onclick="alert('Thank you for your RSVP! See you at the movies!')" aria-label="RSVP for Holiday Movie Night">RSVP</button>
-        <div class="footer" tabindex="0">
-            Location: <span class="highlight">Starlight Community Hall</span><br>
-            Hosted by: <span class="highlight">Winter Wonderland - Holiday Movie Crew</span>
+      </header>
+
+      <section class="main" aria-labelledby="eventHeading">
+        <div class="poster">
+          <div class="poster-card" role="img" aria-label="People watching a movie outdoors">
+            <figure class="poster-figure">
+              <img src="https://thumbs.dreamstime.com/b/people-enjoying-christmas-movie-projected-big-screen-night-market-winter-holidays-crowd-watching-329386182.jpg" alt="A girl ice skating during christmas holidays" loading="lazy" decoding="async">
+            </figure>
+            <div class="poster-overlay">
+              <div style="font-weight:700;color:var(--panel)">Holiday Movie Night</div>
+              <div style="color:var(--muted);font-size:0.9rem">Snacks, hot chocolate, cocoa and many more</div>
+            </div>
+          </div>
+          <div class="poster-credit">Photo: dreamstime</div>
         </div>
-        <button onclick="location.href='index.html'" class="back-btn" aria-label="Back to Main Page">
-            Back to Main Page
-        </button>
+
+        <div class="meta">
+          <div class="meta-header">
+            <div>
+              <h3 class="event-title">Holiday Movie Night</h3>
+              <div class="venue-sub">An elegant evening of classic films & warm cocoa</div>
+            </div>
+            <div style="text-align:right">
+              <div class="venue">Winter Wonderland Hall</div>
+              <div class="venue-sub">Accessible venue • Parking nearby</div>
+            </div>
+          </div>
+
+          <div class="info" aria-hidden="false">
+            <span class="pill">Dec 1 • 7:00 PM</span>
+            <span class="pill">Community Hall</span>
+            <span class="pill">Family Friendly</span>
+          </div>
+
+          <p class="synopsis" id="synopsis">
+            Join us for an intimate screening of holiday classics beneath soft lights and seasonal decor.
+            Complimentary hot cocoa and cookies will be available. Blankets provided — bring loved ones.
+          </p>
+
+          <div class="controls" id="controlBar">
+            <button id="snacksBtn" class="btn" aria-expanded="false" aria-controls="snacksList">Snacks</button>
+
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div id="rsvpArea" style="display:flex;align-items:center;gap:10px;">
+                <button class="btn" id="rsvpBtn" aria-haspopup="dialog">RSVP</button>
+                <div id="rsvpCount" class="rsvp-count" aria-live="polite">0 RSVPs</div>
+              </div>
+            </div>
+
+            <div class="countdown" id="countdown" data-date="2025-12-01T19:00:00" aria-live="polite">Loading...</div>
+          </div>
+
+          <div id="rsvpCardContainer" aria-live="polite"></div>
+
+          <div class="details" id="detailsPanel" aria-hidden="false">
+            <h4 style="margin:0;color:var(--accent);font-family:'Great Vibes',cursive">Event Details</h4>
+            <p style="color:#d6dce4;margin-top:8px">
+              Screenings: Dec 1 & Dec 2 — doors open 6:30 PM. Seating is first-come.
+              Pre-show sing-along and student short film showcase. Indoor, wheelchair accessible.
+            </p>
+
+            <div id="snacksList" class="snacks-list" aria-hidden="true">
+              <ul style="margin:0 0 8px 18px">
+                <li tabindex="0">Hot cocoa (classic & peppermint)</li>
+                <li tabindex="0">Assorted holiday cookies (gluten-free options available)</li>
+                <li tabindex="0">Warm apple cider</li>
+                <li tabindex="0">Popcorn station (butter & vegan seasoning)</li>
+                <li tabindex="0">Mini savory tarts</li>
+              </ul>
+              <div style="color:var(--muted);font-size:.92rem">Tell us dietary needs at arrival table.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <div>Location: <strong style="color:var(--accent)">Winter Wonderland Hall</strong></div>
+        <div><a href="Event-location.html" style="color:var(--muted);text-decoration:none">See all event locations →</a></div>
+      </footer>
     </div>
-    <script>
-        // Countdown logic: days, total hours, minutes, seconds
-        function updateCountdown() {
-            const now = new Date();
-            let eventYear = now.getFullYear();
-            const eventStart = new Date(eventYear, 11, 1, 0, 0, 0); // December is month 11 (0-indexed)
-            if (now > eventStart) {
-                eventYear++;
-            }
-            const nextEventStart = new Date(eventYear, 11, 1, 0, 0, 0);
-            let diff = nextEventStart - now;
+  </div>
 
-            let daysLeft = Math.floor(diff / (1000 * 60 * 60 * 24));
-            let totalHoursLeft = Math.floor(diff / (1000 * 60 * 60));
-            let minutesLeft = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            let secondsLeft = Math.floor((diff % (1000 * 60)) / 1000);
+  <!-- RSVP modal (single code, accessible) -->
+  <div class="modal-backdrop" id="rsvpModal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="rsvpTitle">
+      <h3 id="rsvpTitle">RSVP — Holiday Movie Night</h3>
+      <form id="rsvpForm" novalidate>
+        <label for="rsvpName">Full name <span style="color:#f3d78f">*</span></label>
+        <input id="rsvpName" name="name" type="text" required autocomplete="name" placeholder="Your name">
 
-            document.getElementById('daysLeft').textContent = daysLeft;
-            document.getElementById('timeLeft').textContent =
-                `${totalHoursLeft} hours, ${minutesLeft} minutes, ${secondsLeft} seconds`;
+        <label for="rsvpEmail">Email (optional)</label>
+        <input id="rsvpEmail" name="email" type="email" autocomplete="email" placeholder="name@example.com">
+
+        <div class="row">
+          <div>
+            <label for="rsvpGuests">Guests</label>
+            <select id="rsvpGuests" name="guests" aria-label="Number of guests">
+              <option value="0">0</option>
+              <option value="1">+1</option>
+              <option value="2">+2</option>
+              <option value="3">+3</option>
+              <option value="4">+4 (not more than 4 guests per person)</option>
+            </select>
+            <div class="small-help">Select how many people accompany you.</div>
+          </div>
+          <div>
+            <label for="rsvpPhone">Phone (optional)</label>
+            <input id="rsvpPhone" name="phone" type="tel" placeholder="(optional)">
+          </div>
+        </div>
+
+        <!-- inline small checkbox next to the text -->
+        <label class="agree" for="rsvpAgree">
+          <input type="checkbox" id="rsvpAgree" required>
+          <span>I agree to event terms</span>
+        </label>
+
+        <div class="actions">
+          <button type="button" id="rsvpCancel" class="btn secondary">Cancel</button>
+          <button type="submit" class="btn">Confirm RSVP</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    (function(){
+      /* Snow canvas */
+      (function(){
+        const canvas = document.querySelector('.snow'); if(!canvas) return;
+        const ctx = canvas.getContext('2d'); let flakes=[];
+        function resize(){ canvas.width=innerWidth; canvas.height=innerHeight; create(); }
+        function create(){ flakes=[]; const count=Math.max(12,Math.round((innerWidth*innerHeight)/90000)); for(let i=0;i<count;i++) flakes.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2+0.6,s:Math.random()*1+0.2}); }
+        function draw(){ ctx.clearRect(0,0,canvas.width,canvas.height); ctx.fillStyle="rgba(255,255,255,0.85)"; for(const f of flakes){ ctx.beginPath(); ctx.arc(f.x,f.y,f.r,0,Math.PI*2); ctx.fill(); f.y+=f.s+Math.sin(f.x/40)*0.3; if(f.y>canvas.height){ f.y=-8; f.x=Math.random()*canvas.width; } } requestAnimationFrame(draw); }
+        addEventListener('resize',resize); resize(); draw();
+      })();
+
+      /* Countdown */
+      (function(){ const el=document.getElementById('countdown'); if(!el) return; function update(){ const target=new Date(el.dataset.date), now=new Date(), diff=target-now; if(diff<=0){ el.textContent='Event started!'; return; } const d=Math.floor(diff/86400000), h=Math.floor((diff%86400000)/3600000), m=Math.floor((diff%3600000)/60000), s=Math.floor((diff%60000)/1000); el.textContent=`Starts in ${d}d ${h}h ${m}m ${s}s`; } update(); setInterval(update,1000); })();
+
+      /* Back nav */
+      (function(){ const back=document.getElementById('backBtn'); if(!back) return; back.addEventListener('click', ()=>{ try{ if(history.length>1) history.back(); else location.href='index.html'; }catch(e){ location.href='index.html'; } }, {passive:true}); })();
+
+      /* toast util */
+      function toast(msg, ms=2600){ const t=document.getElementById('toast'); if(!t) return; t.textContent=msg; t.style.display='block'; t.style.opacity=''; setTimeout(()=>{ t.style.opacity='0.98'; },10); setTimeout(()=>{ t.style.display='none'; }, ms); }
+
+      /* RSVP logic */
+      (function(){
+        const EVENT_KEY = 'Holiday Movie Night';
+        const STORE_KEY = 'ww_rsvps_v1';
+        const USER_KEY  = 'ww_rsvp_user_v1';
+
+        const rsvpBtn = document.getElementById('rsvpBtn');
+        const rsvpCountEl = document.getElementById('rsvpCount');
+        const modalBackdrop = document.getElementById('rsvpModal');
+        const form = document.getElementById('rsvpForm');
+        const cancelBtn = document.getElementById('rsvpCancel');
+        const rsvpCardContainer = document.getElementById('rsvpCardContainer');
+
+        function readStore(){ try{return JSON.parse(localStorage.getItem(STORE_KEY)||'{}')}catch{return{}} }
+        function writeStore(v){ try{ localStorage.setItem(STORE_KEY, JSON.stringify(v)); }catch{} }
+        function readUser(){ try{return JSON.parse(localStorage.getItem(USER_KEY)||'{}')}catch{return{}} }
+        function writeUser(v){ try{ localStorage.setItem(USER_KEY, JSON.stringify(v)); }catch{} }
+
+        function list(){ const s=readStore(); return Array.isArray(s[EVENT_KEY])?s[EVENT_KEY]:[]; }
+        function save(entry){ const s=readStore(); if(!Array.isArray(s[EVENT_KEY])) s[EVENT_KEY]=[]; s[EVENT_KEY].push(entry); writeStore(s); }
+        function removeById(id){ const s=readStore(); if(!Array.isArray(s[EVENT_KEY])) return; s[EVENT_KEY]=s[EVENT_KEY].filter(e=>e.id!==id); writeStore(s); }
+
+        function updateCount(){ const l=list(); rsvpCountEl.textContent=`${l.length} RSVP${l.length===1?'':'s'}`; }
+
+        function currentId(){ const u=readUser(); return u[EVENT_KEY]||null; }
+
+        function renderUserCard(){
+          rsvpCardContainer.innerHTML = '';
+          const id = currentId();
+          if(!id) return;
+          const l = list(); const me = l.find(x=>x.id===id); if(!me) return;
+          const card = document.createElement('div'); card.className='rsvp-card';
+          const meta = document.createElement('div'); meta.className='meta';
+          const name = document.createElement('b'); name.textContent = me.name;
+          const small = document.createElement('div'); small.style.color='var(--muted)'; small.textContent = `Guests: ${me.guests} · ${me.email || 'no email'}`;
+          meta.appendChild(name); meta.appendChild(small);
+          const actions = document.createElement('div'); actions.className='rsvp-actions';
+          const edit = document.createElement('button'); edit.className='btn secondary'; edit.textContent='Edit'; edit.addEventListener('click', openModalForEdit);
+          const cancel = document.createElement('button'); cancel.className='btn'; cancel.textContent='Cancel RSVP'; cancel.addEventListener('click', cancelMyRSVP);
+          actions.appendChild(edit); actions.appendChild(cancel);
+          card.appendChild(meta); card.appendChild(actions);
+          rsvpCardContainer.appendChild(card);
         }
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
 
-        // Mobile menu toggle for accessibility
-        const menuToggle = document.querySelector('.menu-toggle');
-        const eventDetails = document.getElementById('eventDetails');
-        menuToggle.addEventListener('click', function() {
-            const expanded = eventDetails.classList.toggle('active');
-            menuToggle.setAttribute('aria-expanded', expanded);
-            menuToggle.textContent = expanded ? 'Hide Details' : 'Show Details';
-        });
-        // Show details by default on desktop
-        function handleResize() {
-            if (window.innerWidth > 600) {
-                eventDetails.classList.add('active');
-                menuToggle.setAttribute('aria-expanded', true);
-                menuToggle.style.display = 'none';
-            } else {
-                eventDetails.classList.remove('active');
-                menuToggle.setAttribute('aria-expanded', false);
-                menuToggle.style.display = 'block';
-                menuToggle.textContent = 'Show Details';
-            }
+        function showModal(){ modalBackdrop.classList.add('show'); modalBackdrop.setAttribute('aria-hidden','false'); setTimeout(()=>document.getElementById('rsvpName').focus(),60); trapFocus(modalBackdrop); }
+        function hideModal(){ modalBackdrop.classList.remove('show'); modalBackdrop.setAttribute('aria-hidden','true'); releaseFocusTrap(); }
+
+        let lastFocused=null;
+        function trapFocus(container){
+          lastFocused=document.activeElement;
+          const focusables=container.querySelectorAll('a,button,input,select,textarea,[tabindex]:not([tabindex="-1"])');
+          if(!focusables.length) return;
+          const first=focusables[0], last=focusables[focusables.length-1];
+          function onKey(e){
+            if(e.key==='Tab'){
+              if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+              else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+            } else if(e.key==='Escape'){ hideModal(); }
+          }
+          container._onKey = onKey;
+          document.addEventListener('keydown', onKey);
         }
-        window.addEventListener('resize', handleResize);
-        window.addEventListener('DOMContentLoaded', handleResize);
-    </script>
+        function releaseFocusTrap(){ if(modalBackdrop && modalBackdrop._onKey) { document.removeEventListener('keydown', modalBackdrop._onKey); modalBackdrop._onKey=null; } if(lastFocused && lastFocused.focus) lastFocused.focus(); }
+
+        function openModalForEdit(){
+          const id = currentId();
+          if(!id){ showModal(); return; }
+          const me = list().find(x=>x.id===id);
+          if(me){
+            form.rsvpName.value = me.name||'';
+            form.rsvpEmail.value = me.email||'';
+            form.rsvpGuests.value = me.guests||'0';
+            form.rsvpPhone.value = me.phone||'';
+            form.rsvpAgree.checked = true;
+          }
+          showModal();
+        }
+
+        function cancelMyRSVP(){
+          if(!confirm('Are you sure you want to cancel your RSVP for this event?')) return;
+          if(!confirm('Press OK to cancel your RSVP')) return;
+          const id=currentId(); if(!id) return;
+          removeById(id);
+          const u=readUser(); delete u[EVENT_KEY]; writeUser(u);
+          updateCount(); renderUserCard();
+          toast('Your RSVP has been canceled.');
+        }
+
+        rsvpBtn.addEventListener('click', ()=>{ openModalForEdit(); }, {passive:true});
+        cancelBtn.addEventListener('click', ()=>hideModal());
+        modalBackdrop.addEventListener('click', e=>{ if(e.target===modalBackdrop) hideModal(); });
+
+        form.addEventListener('submit', function(ev){
+          ev.preventDefault();
+          const name = form.rsvpName.value.trim();
+          if(!name){ toast('Please enter your name.'); form.rsvpName.focus(); return; }
+          const agree = form.querySelector('#rsvpAgree');
+          if(!agree || !agree.checked){ toast('Please agree to event terms.'); agree?.focus(); return; }
+          const email = form.rsvpEmail.value.trim();
+          const guests = form.rsvpGuests.value;
+          const phone = form.rsvpPhone.value.trim();
+
+          const u = readUser(); const existingId = u[EVENT_KEY] || null;
+
+          if(existingId){
+            const arr = list();
+            const idx = arr.findIndex(x=>x.id===existingId);
+            if(idx!==-1){ arr[idx] = Object.assign({}, arr[idx], { name, email, guests, phone, updated:new Date().toISOString() }); const s = readStore(); s[EVENT_KEY] = arr; writeStore(s); toast('RSVP updated.'); }
+          } else {
+            const id = 'rsvp_' + Date.now();
+            const entry = { id, name, email, guests, phone, created:new Date().toISOString() };
+            save(entry);
+            const nu = readUser(); nu[EVENT_KEY] = id; writeUser(nu);
+            toast('Thanks — your RSVP is recorded.');
+          }
+
+          updateCount(); renderUserCard(); hideModal();
+        }, {passive:false});
+
+        updateCount();
+        renderUserCard();
+      })();
+
+      /* Snacks toggle */
+      (function(){
+        const btn = document.getElementById('snacksBtn'); const list = document.getElementById('snacksList');
+        if(!btn || !list) return;
+        btn.addEventListener('click', function(){
+          const expanded = btn.getAttribute('aria-expanded') === 'true';
+          btn.setAttribute('aria-expanded', String(!expanded));
+          list.setAttribute('aria-hidden', String(expanded));
+          btn.textContent = expanded ? 'Snacks' : 'Hide Snacks';
+          if(!expanded){ const first = list.querySelector('li'); if(first) first.focus?.(); } else btn.focus();
+        }, {passive:true});
+      })();
+
+      /* Mobile nav */
+      (function(){
+        const openBtn = document.getElementById('mobileMenuBtn');
+        const nav = document.getElementById('mobileNav');
+        const closeBtn = document.getElementById('closeNavBtn');
+        const focusableSelector = 'a, button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+        let lastFocus = null;
+        function openNav(){ lastFocus = document.activeElement; nav.setAttribute('aria-hidden','false'); openBtn.setAttribute('aria-expanded','true'); const first = nav.querySelector(focusableSelector); if(first) first.focus(); document.body.style.overflow='hidden'; }
+        function closeNav(){ nav.setAttribute('aria-hidden','true'); openBtn.setAttribute('aria-expanded','false'); document.body.style.overflow=''; if(lastFocus && lastFocus.focus) lastFocus.focus(); }
+        if(openBtn){ openBtn.addEventListener('click', function(){ const opened = openBtn.getAttribute('aria-expanded') === 'true'; if(opened) closeNav(); else openNav(); }, {passive:true}); }
+        if(closeBtn) closeBtn.addEventListener('click', closeNav, {passive:true});
+        document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && nav.getAttribute('aria-hidden') === 'false'){ closeNav(); } });
+        nav.addEventListener('click', function(e){ if(e.target === nav){ closeNav(); }});
+        document.addEventListener('focusin', function(e){ if(nav.getAttribute('aria-hidden') === 'false' && !nav.contains(e.target) && e.target !== openBtn){ const first = nav.querySelector(focusableSelector); if(first) first.focus(); e.preventDefault?.(); } });
+      })();
+
+    })();
+  </script>
 </body>
 </html>

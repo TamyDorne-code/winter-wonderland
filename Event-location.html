@@ -1,334 +1,324 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event Locations</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Montserrat', Arial, sans-serif;
-            background: linear-gradient(120deg, #e0eafc 0%, #fffde4 100%);
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-        }
-        .container {
-            max-width: 700px;
-            margin: 48px auto;
-            background: rgba(255,255,255,0.97);
-            border-radius: 24px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-            padding: 48px 32px 32px 32px;
-            text-align: center;
-        }
-        h1 {
-            color: #2e8b57;
-            font-size: 2.2em;
-            margin-bottom: 16px;
-            letter-spacing: 2px;
-        }
-        .intro {
-            font-size: 1.1em;
-            color: #333;
-            margin-bottom: 32px;
-        }
-        .location-list {
-            list-style: none;
-            padding: 0;
-            margin: 0 auto 32px auto;
-            max-width: 500px;
-        }
-        .location-list li {
-            background: #f7fafd;
-            border-radius: 12px;
-            margin: 16px 0;
-            padding: 18px 12px;
-            font-size: 1.08em;
-            box-shadow: 0 2px 8px rgba(46,139,87,0.08);
-            transition: box-shadow 0.2s;
-            text-align: left;
-            display: flex;
-            align-items: center;
-            gap: 18px;
-        }
-        .location-info {
-            flex: 1;
-        }
-        .location-img {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(46,139,87,0.10);
-            background: #eee;
-            cursor: pointer;
-            transition: box-shadow 0.2s;
-        }
-        .location-list li:focus-within,
-        .location-list li:hover {
-            box-shadow: 0 4px 16px rgba(46,139,87,0.18);
-        }
-        .event-name {
-            font-weight: bold;
-            color: #d7263d;
-        }
-        .event-address {
-            color: #2e8b57;
-            font-size: 0.98em;
-        }
-        .event-access {
-            color: #888;
-            font-size: 0.95em;
-        }
-        .back-btn {
-            margin-top: 20px;
-            padding: 10px 24px;
-            font-size: 1em;
-            border: none;
-            border-radius: 8px;
-            background: linear-gradient(90deg, #2e8b57 0%, #d7263d 100%);
-            color: #fff;
-            cursor: pointer;
-            box-shadow: 0 2px 8px rgba(46,139,87,0.12);
-            transition: background 0.2s, transform 0.2s;
-            font-weight: bold;
-        }
-        .back-btn:focus,
-        .menu-toggle:focus,
-        .close-modal:focus {
-            outline: 2px solid #d7263d;
-        }
-        .back-btn:hover {
-            background: linear-gradient(90deg, #d7263d 0%, #2e8b57 100%);
-            transform: scale(1.05);
-        }
-        /* Mobile menu styles */
-        .menu-toggle {
-            display: none;
-            background: #2e8b57;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            padding: 10px 18px;
-            font-size: 1.1em;
-            font-weight: bold;
-            cursor: pointer;
-            margin-bottom: 18px;
-        }
-        @media (max-width: 600px) {
-            .container {
-                max-width: 98vw;
-                padding: 24px 4vw 24px 4vw;
-            }
-            .menu-toggle {
-                display: block;
-            }
-            .location-list {
-                display: none;
-            }
-            .location-list.active {
-                display: block;
-            }
-            .location-list li {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 8px;
-            }
-            .location-img {
-                width: 100%;
-                height: 120px;
-            }
-        }
-        /* Modal styles */
-        .modal-bg {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0; top: 0;
-            width: 100vw; height: 100vh;
-            background: rgba(0,0,0,0.7);
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-bg.active {
-            display: flex;
-        }
-        .modal-content {
-            position: relative;
-            background: #fff;
-            border-radius: 18px;
-            padding: 24px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-            max-width: 90vw;
-            max-height: 90vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .modal-img {
-            max-width: 80vw;
-            max-height: 60vh;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(46,139,87,0.18);
-            margin-bottom: 18px;
-        }
-        .close-modal {
-            position: absolute;
-            top: 12px;
-            right: 18px;
-            background: #d7263d;
-            color: #fff;
-            border: none;
-            border-radius: 50%;
-            width: 36px;
-            height: 36px;
-            font-size: 1.5em;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 2px 8px rgba(46,139,87,0.12);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .close-modal:hover {
-            background: #2e8b57;
-        }
-    </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Event Locations — Winter Wonderland</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-1:#051022; --bg-2:#07142a;
+  --card:#071b2b; --muted:#9fb5cc; --accent:#d4b25a;
+  --glass: rgba(255,255,255,0.04);
+  --radius:12px;
+  --maxw:980px;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Arial;background:
+  radial-gradient(800px 300px at 10% 10%, rgba(212,178,90,0.03), transparent 10%),
+  linear-gradient(180deg,var(--bg-1),var(--bg-2)); color:#eef7ff;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:var(--maxw);margin:28px auto;padding:20px}
+.skip{position:absolute;left:8px;top:8px;background:#fff;color:#072033;padding:8px 12px;border-radius:8px;z-index:60;transform:translateY(-120%);transition:transform .18s}
+.skip:focus{transform:translateY(0);outline:none;box-shadow:0 6px 18px rgba(0,0,0,.4)}
+.header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#ffb86b);display:flex;align-items:center;justify-content:center;color:#032; font-family:'Great Vibes',cursive;font-size:22px;box-shadow:0 10px 30px rgba(0,0,0,.45)}
+.title{line-height:1}
+.title h1{margin:0;font-size:1.45rem}
+.title p{margin:2px 0 0;color:var(--muted);font-size:.95rem}
+
+/* controls */
+.top-controls{display:flex;align-items:center;gap:10px;margin-left:auto}
+.control-btn{background:transparent;border:1px solid var(--glass);padding:8px 12px;border-radius:10px;color:var(--muted);cursor:pointer}
+.control-btn.primary{background:linear-gradient(90deg,#bce0ff,#ffd07a);color:#041022;border:none;font-weight:600}
+.search{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.02);padding:8px;border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
+.search input{background:transparent;border:0;color:#eaf8ff;outline:none;width:180px}
+
+/* layout */
+.panel{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 30px 80px rgba(2,6,23,0.6)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:16px}
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);display:flex;gap:12px;align-items:flex-start}
+.thumb{width:140px;height:92px;border-radius:10px;background:#03233a;display:flex;align-items:center;justify-content:center;color:#7aa8d6;flex-shrink:0;overflow:hidden}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.card-body{flex:1}
+.card h3{margin:0;font-size:1.05rem}
+.addr{color:var(--muted);margin-top:6px;font-size:.95rem}
+.actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.btn{padding:8px 10px;border-radius:10px;border:1px solid var(--glass);background:transparent;color:#eaf7ff;cursor:pointer;font-weight:600}
+.btn.map{background:linear-gradient(90deg,#6ee0ff,#bdf3ff);color:#042631;border:none}
+.meta-row{display:flex;gap:10px;color:var(--muted);font-size:.9rem;margin-top:8px;align-items:center}
+
+/* mobile menu */
+.menu-toggle{display:none}
+.mobile-menu{position:fixed;right:16px;bottom:16px;background:linear-gradient(180deg,#05202c,#071428);padding:10px;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.5);z-index:80}
+.mobile-menu button{display:block;background:transparent;border:0;color:#dff7ff;padding:8px 10px;text-align:left;border-radius:8px;width:220px}
+@media (max-width:860px){
+  .grid{grid-template-columns:1fr}
+  .search input{width:100px}
+  .top-controls{gap:8px}
+  .menu-toggle{display:inline-flex}
+}
+
+/* footer */
+.footer{margin-top:18px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+/* accessibility focus */
+:focus{outline:none;box-shadow:0 6px 20px rgba(66,153,225,0.2);border-radius:8px}
+</style>
 </head>
 <body>
-    <div class="container" role="main" aria-label="Event Locations">
-        <h1 tabindex="0">📍 Event Locations</h1>
-        <div class="intro" tabindex="0">
-            Find out where each Winter Wonderland event will take place.<br>
-            Addresses, directions, and accessibility info included.
+  <a class="skip" href="#main">Skip to content</a>
+
+  <div class="wrap" id="page">
+    <header class="header" role="banner">
+      <div class="brand" aria-hidden="false">
+        <div class="logo" aria-hidden="true">WW</div>
+        <div class="title">
+          <h1>Event Locations</h1>
+          <p>Addresses and quick map previews — Winter Wonderland</p>
         </div>
-        <button class="menu-toggle" aria-controls="locationList" aria-expanded="false" aria-label="Toggle location list">
-            Show Locations
-        </button>
-        <ul class="location-list" id="locationList">
-            <li tabindex="0">
-                <img src="https://barrie360.com/cobPub/uploads/2024/07/Season-of-Lights.png" alt="Winter Wonderland Hall" class="location-img" data-full="https://barrie360.com/cobPub/uploads/2024/07/Season-of-Lights.png">
-                <div class="location-info">
-                    <span class="event-name">🎄 Christmas Season Celebration</span><br>
-                    <span class="event-address">Winter Wonderland Hall, 123 Holiday Ave</span><br>
-                    <span class="event-access">Wheelchair accessible, parking available</span>
-                </div>
-            </li>
-            <li tabindex="0">
-                <img src="https://assets.classbento.com.au/images/class_extra/christmas-cookie-decorating-class-brisbane-0-1-portrait-big.jpg?v=1757867255" alt="Sugar & Spice Community Center" class="location-img" data-full="https://assets.classbento.com.au/images/class_extra/christmas-cookie-decorating-class-brisbane-0-1-portrait-big.jpg?v=1757867255">
-                <div class="location-info">
-                    <span class="event-name">🍪 Cookie Decorating Workshop</span><br>
-                    <span class="event-address">Sugar & Spice Community Center, 45 Baker St</span><br>
-                    <span class="event-access">Family friendly, accessible entrance</span>
-                </div>
-            </li>
-            <li tabindex="0">
-                <img src="https://www.epwinterfest.com/images/pages/Holiday-Movies.jpg" alt="Starlight Community Hall" class="location-img" data-full="https://www.epwinterfest.com/images/pages/Holiday-Movies.jpg">
-                <div class="location-info">
-                    <span class="event-name">🎬 Holiday Movie Night</span><br>
-                    <span class="event-address">Starlight Community Hall, 88 Cinema Rd</span><br>
-                    <span class="event-access">Accessible seating, snacks available</span>
-                </div>
-            </li>
-            <li tabindex="0">
-                <img src="https://cdn.shopify.com/s/files/1/0336/3763/0092/files/isaac-martin-7M_Q0DYcI08-unsplash_1024x1024.jpg?v=1669165905" alt="Winter Wonderland Hall" class="location-img" data-full="https://cdn.shopify.com/s/files/1/0336/3763/0092/files/isaac-martin-7M_Q0DYcI08-unsplash_1024x1024.jpg?v=1669165905">
-                <div class="location-info">
-                    <span class="event-name">🎁 Gift Exchange & Celebration</span><br>
-                    <span class="event-address">Winter Wonderland Hall, 123 Holiday Ave</span><br>
-                    <span class="event-access">Wheelchair accessible, parking available</span>
-                </div>
-            </li>
-            <li tabindex="0">
-                <img src="https://media.istockphoto.com/id/1300203249/video/santa-claus-entering-magic-workshop.jpg?s=640x640&k=20&c=TCg-YGZshpxuKraV2oGKAsxQxUlzqei-rfwa8Qsyw5o=" alt="North Pole Community Center" class="location-img" data-full="https://media.istockphoto.com/id/1300203249/video/santa-claus-entering-magic-workshop.jpg?s=640x640&k=20&c=TCg-YGZshpxuKraV2oGKAsxQxUlzqei-rfwa8Qsyw5o=">
-                <div class="location-info">
-                    <span class="event-name">🎅 Santa's Workshop</span><br>
-                    <span class="event-address">North Pole Community Center, 77 Arctic Blvd</span><br>
-                    <span class="event-access">Kids welcome, stroller friendly</span>
-                </div>
-            </li>
-            <li tabindex="0">
-                <img src="https://substackcdn.com/image/fetch/$s_!e6lt!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fedaf655c-9fa0-46a1-af37-c0879b9dbad1_950x646.jpeg" alt="Blue Lake Ice Rink" class="location-img" data-full="https://substackcdn.com/image/fetch/$s_!e6lt!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fedaf655c-9fa0-46a1-af37-c0879b9dbad1_950x646.jpeg">
-                <div class="location-info">
-                    <span class="event-name">⛸️ Ice Skating Party</span><br>
-                    <span class="event-address">Blue Lake Ice Rink, 200 Winter Dr</span><br>
-                    <span class="event-access">Rental skates available, accessible rink</span>
-                </div>
-            </li>
-            <!-- Add more events and locations as needed -->
-        </ul>
-        <button onclick="location.href='index.html'" class="back-btn" aria-label="Back to Main Page">
-            Back to Main Page
-        </button>
-        <!-- Modal for enlarged image -->
-        <div class="modal-bg" id="modalBg" role="dialog" aria-modal="true" aria-label="Enlarged location photo">
-            <div class="modal-content">
-                <button class="close-modal" id="closeModal" aria-label="Close enlarged photo">&times;</button>
-                <img src="" alt="" class="modal-img" id="modalImg">
+      </div>
+
+      <div class="top-controls" role="region" aria-label="Page controls">
+        <div class="search" role="search" aria-label="Search locations">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 21l-4.35-4.35" stroke="#9fb5cc" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <input id="q" type="search" placeholder="Search locations" aria-label="Search locations" />
+        </div>
+
+        <button id="back" class="control-btn" title="Back to events">← Back</button>
+
+        <button id="menuBtn" class="control-btn menu-toggle" aria-haspopup="true" aria-controls="mobileMenu" aria-expanded="false">Menu ☰</button>
+      </div>
+    </header>
+
+    <main id="main" class="panel" role="main" aria-labelledby="main-title">
+      <h2 id="main-title" class="sr-only" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden">Event locations list</h2>
+
+      <p style="color:var(--muted);margin:0">Find venue addresses, preview maps, and open directions in Google Maps. Use the search to filter locations.</p>
+
+      <div class="grid" id="locations" aria-live="polite">
+        <!-- card template repeated -->
+        <article class="card" data-title="Winter Wonderland Hall Community Hall" tabindex="0">
+          <div class="thumb" aria-hidden="true">
+            <img src="https://www.kdmevents.co.uk/_cache/Winter%20wonderland%20theming-503x327.jpg" alt="">
+          </div>
+          <div class="card-body">
+            <h3>Winter Wonderland Hall — Community Hall</h3>
+            <div class="addr">123 Frost Lane, Wintertown — Indoor hall with accessible entrance and nearby parking.</div>
+            <div class="meta-row">Indoor · Accessible · Parking nearby</div>
+            <div class="actions">
+              <button class="btn map" data-address="123 Frost Lane, Wintertown">Open in Maps</button>
+              <button class="btn" data-preview="Community Hall">Preview</button>
             </div>
-        </div>
-    </div>
-    <script>
-        // Mobile menu toggle for accessibility
-        const menuToggle = document.querySelector('.menu-toggle');
-        const locationList = document.getElementById('locationList');
-        menuToggle.addEventListener('click', function() {
-            const expanded = locationList.classList.toggle('active');
-            menuToggle.setAttribute('aria-expanded', expanded);
-            menuToggle.textContent = expanded ? 'Hide Locations' : 'Show Locations';
-        });
-        // Show locations by default on desktop
-        function handleResize() {
-            if (window.innerWidth > 600) {
-                locationList.classList.add('active');
-                menuToggle.setAttribute('aria-expanded', true);
-                menuToggle.style.display = 'none';
-            } else {
-                locationList.classList.remove('active');
-                menuToggle.setAttribute('aria-expanded', false);
-                menuToggle.style.display = 'block';
-                menuToggle.textContent = 'Show Locations';
-            }
-        }
-        window.addEventListener('resize', handleResize);
-        window.addEventListener('DOMContentLoaded', handleResize);
+          </div>
+        </article>
 
-        // Modal logic for enlarged images
-        const modalBg = document.getElementById('modalBg');
-        const modalImg = document.getElementById('modalImg');
-        const closeModal = document.getElementById('closeModal');
-        const locationImgs = document.querySelectorAll('.location-img');
+        <article class="card" data-title="Outdoor Rink Riverside Park Rink" tabindex="0">
+          <div class="thumb" aria-hidden="true">
+            <img src="https://media.istockphoto.com/id/1388579464/photo/romantic-winter-snowy-evening-ice-skating-couple-having-fun-on-ice-rink-pair-figure-skating.jpg?s=612x612&w=0&k=20&c=Y8puNLYUgpr91LnbphdTAQAnwULBO2o1XY7iGlgFoPU=" alt="">
+          </div>
+          <div class="card-body">
+            <h3>Outdoor Rink</h3>
+            <div class="addr">Riverside Park Rink — 45 Riverwalk Drive. Open-air rink, warm-up tents available.</div>
+            <div class="meta-row">Outdoor · Tents · Family friendly</div>
+            <div class="actions">
+              <button class="btn map" data-address="45 Riverwalk Drive, Yourtown">Open in Maps</button>
+              <button class="btn" data-preview="Outdoor Rink">Preview</button>
+            </div>
+          </div>
+        </article>
 
-        locationImgs.forEach(img => {
-            img.addEventListener('click', function() {
-                modalImg.src = img.getAttribute('data-full') || img.src;
-                modalImg.alt = img.alt;
-                modalBg.classList.add('active');
-                closeModal.focus();
-            });
-        });
+        <article class="card" data-title="Main Plaza Town Main Plaza" tabindex="0">
+          <div class="thumb" aria-hidden="true">
+            <img src="https://thumbs.dreamstime.com/b/large-crowd-people-gathered-town-square-december-brasov-romania-large-crowd-people-gathered-town-387323937.jpg" alt="">
+          </div>
+          <div class="card-body">
+            <h3>Main Plaza</h3>
+            <div class="addr">Town Main Plaza — Central square, stage and seating.</div>
+            <div class="meta-row">Central · Stage · Wheelchair access</div>
+            <div class="actions">
+              <button class="btn map" data-address="Town Main Plaza">Open in Maps</button>
+              <button class="btn" data-preview="Main Plaza">Preview</button>
+            </div>
+          </div>
+        </article>
 
-        closeModal.addEventListener('click', function() {
-            modalBg.classList.remove('active');
-            modalImg.src = '';
-            modalImg.alt = '';
-        });
+        <article class="card" data-title="Community Kitchen 7 Baker Street" tabindex="0">
+          <div class="thumb" aria-hidden="true">
+            <img src="https://thumbs.dreamstime.com/b/eclectic-kitchen-wonderland-trend-generated-ai-eclectic-kitchen-wonderland-trend-312455359.jpg" alt="">
+          </div>
+          <div class="card-body">
+            <h3>Community Kitchen</h3>
+            <div class="addr">7 Baker Street — Kitchen and prep area for workshops and decorating events.</div>
+            <div class="meta-row">Indoor · Workshops · Volunteers</div>
+            <div class="actions">
+              <button class="btn map" data-address="7 Baker Street, Yourtown">Open in Maps</button>
+              <button class="btn" data-preview="Community Kitchen">Preview</button>
+            </div>
+          </div>
+        </article>
 
-        // Close modal on background click or Escape key
-        modalBg.addEventListener('click', function(e) {
-            if (e.target === modalBg) {
-                modalBg.classList.remove('active');
-                modalImg.src = '';
-                modalImg.alt = '';
-            }
-        });
-        document.addEventListener('keydown', function(e) {
-            if (modalBg.classList.contains('active') && (e.key === 'Escape' || e.key === 'Esc')) {
-                modalBg.classList.remove('active');
-                modalImg.src = '';
-                modalImg.alt = '';
-            }
-        });
-    </script>
+        <article class="card" data-title="Town Square" tabindex="0">
+          <div class="thumb" aria-hidden="true">
+            <img src="https://media.istockphoto.com/id/1359359999/photo/town-hall-square-with-house-of-the-blackheads-and-christmas-tree-in-winter.jpg?s=612x612&w=0&k=20&c=9cmPQtVHRRjXALiIklD6FviJQATrj5p84S5kOTQR9fE=" alt="">
+          </div>
+          <div class="card-body">
+            <h3>Town Square</h3>
+            <div class="addr">Town Square — Outdoor carol night location, public restrooms nearby.</div>
+            <div class="meta-row">Outdoor · Carol nights · Restrooms nearby</div>
+            <div class="actions">
+              <button class="btn map" data-address="Town Square, Yourtown">Open in Maps</button>
+              <button class="btn" data-preview="Town Square">Preview</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" data-title="Grand Hall 1 Celebration Ave" tabindex="0">
+          <div class="thumb" aria-hidden="true">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF1vAXcETLHVUw5OrJfuP9CCfVuA15nYjR8w&s" alt="">
+          </div>
+          <div class="card-body">
+            <h3>Grand Hall</h3>
+            <div class="addr">1 Celebration Ave — Formal ballroom for New Year's Eve Ball, coat check available.</div>
+            <div class="meta-row">Indoor · Formal · Coat check</div>
+            <div class="actions">
+              <button class="btn map" data-address="1 Celebration Ave, Yourtown">Open in Maps</button>
+              <button class="btn" data-preview="Grand Hall">Preview</button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+        <a class="control-btn" href="index.html" id="backLink">← Back to events</a>
+        <div style="color:var(--muted)">Contact: <a href="mailto:events@city.local">imaginary@city.com</a></div>
+      </div>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+      <div style="color:var(--muted)">© <span id="year"></span> City Events</div>
+      <div style="color:var(--muted)">Accessible viewing & support available</div>
+    </footer>
+  </div>
+
+  <!-- floating mobile menu -->
+  <div id="mobileMenu" class="mobile-menu" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Quick actions" style="display:none">
+    <button id="menuDetails">Toggle details</button>
+    <button id="menuSearch">Focus search</button>
+    <button id="menuBack">Back</button>
+    <button id="menuClose">Close</button>
+  </div>
+
+<script>
+/* small helpers and accessibility improvements */
+(function(){
+  // set year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // elements
+  const q = document.getElementById('q');
+  const cards = Array.from(document.querySelectorAll('#locations .card'));
+  const mobileMenu = document.getElementById('mobileMenu');
+  const menuBtn = document.getElementById('menuBtn');
+  const menuClose = document.getElementById('menuClose');
+  const menuBack = document.getElementById('menuBack');
+  const menuSearch = document.getElementById('menuSearch');
+  const menuDetails = document.getElementById('menuDetails');
+  const backBtn = document.getElementById('back');
+  const backLink = document.getElementById('backLink');
+
+  // search/filter
+  function filter(qs){
+    const t = (qs||'').trim().toLowerCase();
+    let count = 0;
+    cards.forEach(c=>{
+      const text = (c.getAttribute('data-title')||c.innerText).toLowerCase();
+      const show = !t || text.indexOf(t) !== -1;
+      c.style.display = show ? '' : 'none';
+      if(show) count++;
+    });
+    // announce results for screen readers
+    const live = document.getElementById('locations');
+    live && (live.setAttribute('aria-label', count + ' locations shown'));
+  }
+  q.addEventListener('input', ()=> filter(q.value));
+  q.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') { q.value=''; filter(''); q.blur(); } });
+
+  // map open
+  document.body.addEventListener('click', e=>{
+    const btn = e.target.closest('button.map');
+    if(!btn) return;
+    const address = btn.getAttribute('data-address') || '';
+    const url = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(address);
+    window.open(url, '_blank', 'noopener');
+  });
+
+  // preview action (simple)
+  document.body.addEventListener('click', e=>{
+    const p = e.target.closest('button[data-preview]');
+    if(!p) return;
+    const name = p.getAttribute('data-preview');
+    alert(name + ' — preview not available in this demo.');
+  });
+
+  // keyboard: enter on card focuses first action
+  cards.forEach(card=>{
+    card.addEventListener('keydown', e=>{
+      if(e.key === 'Enter') { card.querySelector('.btn')?.focus(); }
+    });
+  });
+
+  // mobile menu toggle with focus handling
+  function openMenu(){
+    mobileMenu.style.display = 'block';
+    mobileMenu.setAttribute('aria-hidden','false');
+    menuBtn?.setAttribute('aria-expanded','true');
+    // trap focus minimally: focus first button
+    mobileMenu.querySelector('button')?.focus();
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu(){
+    mobileMenu.style.display = 'none';
+    mobileMenu.setAttribute('aria-hidden','true');
+    menuBtn?.setAttribute('aria-expanded','false');
+    menuBtn?.focus();
+    document.body.style.overflow = '';
+  }
+  if(menuBtn){
+    menuBtn.addEventListener('click', ()=>{
+      const open = mobileMenu.style.display !== 'block';
+      open ? openMenu() : closeMenu();
+    });
+  }
+  menuClose?.addEventListener('click', closeMenu);
+  menuBack?.addEventListener('click', ()=> window.history.length > 1 ? window.history.back() : window.location.href = '/');
+  menuSearch?.addEventListener('click', ()=> { q.focus(); closeMenu(); });
+  menuDetails?.addEventListener('click', ()=>{
+    const details = document.getElementById('main');
+    details.classList.toggle('expanded');
+    closeMenu();
+  });
+
+  // back buttons
+  backBtn?.addEventListener('click', ()=> window.history.length > 1 ? window.history.back() : window.location.href = '/');
+  backLink?.addEventListener('keydown', e=>{ if(e.key === 'Enter') backLink.click(); });
+
+  // close mobile menu with ESC
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape' && mobileMenu.style.display === 'block') closeMenu();
+  });
+
+  // accessible announcements for focusable preview
+  cards.forEach(c=>{
+    c.setAttribute('role','article');
+    c.setAttribute('aria-label', c.querySelector('h3')?.innerText || 'Location');
+  });
+
+  // initial filter (none)
+  filter('');
+})();
+</script>
 </body>
 </html>

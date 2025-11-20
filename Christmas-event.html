@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Ice Skating Party — Winter Wonderland</title>
+  <title>Christmas Celebration — Winter Wonderland</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
   <style>
     :root{
       --bg-0:#061523; --bg-1:#0b3550;
       --panel:#f6f8fb; --muted:#9fbac9;
-      --accent:#c9a84b; --accent-ice:#8fd3e8;
+      --accent:#c9a84b; --accent-holly:#e75a4c; --accent-ice:#8fd3e8;
       --glass: rgba(255,255,255,0.03);
       --input-bg: #e9eef3;
       --card-radius:14px; --max-width:1100px; --gap:18px;
-      --text: #061523; /* dark text for inputs/contrast */
+      --text: #061523;
     }
     *,*::before,*::after{box-sizing:border-box}
     html,body{height:100%;margin:0;font-family:Montserrat,system-ui,Arial;background:
@@ -68,11 +68,10 @@
     .modal h3{ margin:0 0 8px 0; font-family:'Great Vibes',cursive; color:var(--accent); font-size:1.4rem }
     .modal label{ display:block; font-size:.92rem; color:var(--muted); margin-top:10px }
 
-    /* make input text clearly visible */
     .modal input, .modal select, .modal textarea{
       width:100%; padding:10px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);
-      background: var(--input-bg); /* grey background for inputs so typed text shows */
-      color: var(--text); /* dark text for readability */
+      background: var(--input-bg);
+      color: var(--text);
       margin-top:6px;
       appearance:auto;
     }
@@ -91,7 +90,7 @@
     @media (max-width:980px){ .main{ grid-template-columns: 1fr } .grid-2{ grid-template-columns: 1fr } .wrap{ padding:14px } }
     @media (max-width:520px){ h1{ font-size:1.5rem } .btn{ padding:9px 12px; font-size:.95rem } .modal{ padding:14px } }
 
-    .toast{ position:fixed; right:18px; bottom:18px; background:linear-gradient(90deg,var(--accent),#ffd88d); color:#061523; padding:10px 14px; border-radius:10px; box-shadow:0 10px 30px rgba(2,6,11,0.6); display:none; z-index:3000; font-weight:700 }
+    .toast{ position:fixed; right:18px; bottom:18px; background:linear-gradient(90deg,var(--accent-holly),#ffd88d); color:#061523; padding:10px 14px; border-radius:10px; box-shadow:0 10px 30px rgba(2,6,11,0.6); display:none; z-index:3000; font-weight:700 }
     .visually-hidden{ position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap;border:0;padding:0;margin:-1px }
   </style>
 </head>
@@ -102,38 +101,38 @@
     <header class="top" role="banner">
       <div class="brand">
         <h1 tabindex="0">Winter Wonderland</h1>
-        <div class="sub" aria-hidden="true">Ice Skating Party</div>
+        <div class="sub" aria-hidden="true">Christmas Celebration</div>
       </div>
       <div style="text-align:right">
-        <div style="color:var(--muted);font-weight:700">Blue Lake Ice Rink</div>
-        <div style="color:var(--muted);font-size:.92rem;margin-top:6px">Family friendly • Skate rentals available</div>
+        <div style="color:var(--muted);font-weight:700">Winter Wonderland Hall</div>
+        <div style="color:var(--muted);font-size:.92rem;margin-top:6px">Dec 20 — Dec 31 • Evenings</div>
       </div>
     </header>
 
-    <main class="card" role="main" aria-label="Ice Skating Party">
+    <main class="card" role="main" aria-label="Christmas Celebration">
       <header style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-bottom:6px">
         <div style="display:flex;gap:12px;align-items:center">
-        <button id="backBtn" class="back" aria-label="Back to events">← Back</button>
-         <div>
-            <h2 style="margin:0;font-family:'Great Vibes',cursive;color:var(--accent);font-size:1.4rem">Ice Skating Party</h2>
-            <div class="sub">Glide into winter fun with friends & family</div>
+          <button id="backBtn" class="btn secondary" aria-label="Back to events">← Back</button>
+          <div>
+            <h2 style="margin:0;font-family:'Great Vibes',cursive;color:var(--accent);font-size:1.4rem">Christmas Celebration</h2>
+            <div class="sub">Community festival — carols, dinner, movie nights & kids' programs</div>
           </div>
         </div>
         <div style="text-align:right">
-          <div style="color:var(--muted);font-weight:700">Dec 5 — Dec 15</div>
-          <div style="color:var(--muted);font-size:.92rem;margin-top:6px">Evening sessions • 6PM–9PM</div>
+          <div style="color:var(--muted);font-weight:700">Dec 20 — Dec 31</div>
+          <div style="color:var(--muted);font-size:.92rem;margin-top:6px">Evenings • Family friendly</div>
         </div>
       </header>
 
       <section class="main" aria-labelledby="eventHeading">
         <div class="poster">
-          <div class="poster-card" role="img" aria-label="Skaters on an ice rink">
+          <div class="poster-card" role="img" aria-label="Christmas celebration scene">
             <figure class="poster-figure">
-              <img src="https://thumbs.dreamstime.com/b/kids-ice-skating-winter-ice-skates-child-kids-ice-skating-winter-park-rink-children-ice-skate-christmas-fair-little-130014784.jpg" alt="A girl ice skating during christmas holidays" loading="lazy" decoding="async">
+              <img src="https://thumbs.dreamstime.com/b/big-christmas-outdoor-pine-tree-light-decoration-big-christmas-outdoor-pine-tree-light-decoration-111294267.jpg" alt="Christmas lights and tree" loading="lazy" decoding="async">
             </figure>
             <div class="poster-overlay">
-              <div style="font-weight:700;color:var(--panel)">Blue Lake Ice Rink</div>
-              <div style="color:var(--muted);font-size:0.9rem">Skate, music & cocoa</div>
+              <div style="font-weight:700;color:var(--panel)">Winter Wonderland Hall</div>
+              <div style="color:var(--muted);font-size:0.9rem">Carols • Community Dinner • Holiday Movies • Kids' Corner</div>
             </div>
           </div>
           <div class="poster-credit">Photo: dreamstime</div>
@@ -142,33 +141,33 @@
         <div class="meta">
           <div class="meta-header">
             <div>
-              <h3 id="eventHeading" class="event-title">Ice Skating Party</h3>
-              <div class="venue-sub">Open sessions • Rentals available</div>
+              <h3 id="eventHeading" class="event-title">Christmas Celebration</h3>
+              <div class="venue-sub">Community festival • Donations welcome</div>
             </div>
             <div style="text-align:right">
-              <div class="venue">Blue Lake Ice Rink</div>
-              <div class="venue-sub">Family friendly • Parking nearby</div>
+              <div class="venue">Winter Wonderland Hall</div>
+              <div class="venue-sub">Accessible venue • Volunteer desk</div>
             </div>
           </div>
 
           <div class="info" aria-hidden="false">
-            <span class="pill">Dec 5 — Dec 15</span>
-            <span class="pill">Evening sessions</span>
-            <span class="pill">Skate rentals</span>
+            <span class="pill">Dec 20 — Dec 31</span>
+            <span class="pill">Evening festivities</span>
+            <span class="pill">Holiday Movie Nights</span>
           </div>
 
-          <p class="synopsis">Join us for an outdoor ice skating celebration — live music, skating games, hot cocoa, and a cozy lounge. Rentals available on site. Dress warm; free skate lessons on weekends.</p>
+          <p class="synopsis">Join our multi-evening Christmas celebration — nightly carols, community dinners, ornament workshops, kids' gift corner on Dec 25 and Holiday Movie Night screenings. Volunteers & donations help us run free activities.</p>
 
           <div class="controls" id="controlBar">
-            <button id="detailsBtn" class="btn secondary" aria-expanded="false" aria-controls="detailsPanel">Venue Info</button>
-            <button id="snacksBtn" class="btn secondary" aria-expanded="false" aria-controls="snacksList">Snacks & Drinks</button>
+            <button id="detailsBtn" class="btn secondary" aria-expanded="false" aria-controls="detailsPanel">Program & Venue</button>
+            <button id="snacksBtn" class="btn secondary" aria-expanded="false" aria-controls="snacksList">Food & Drinks</button>
 
             <div style="display:flex;align-items:center;gap:8px;margin-left:auto">
               <button class="btn" id="rsvpBtn" aria-haspopup="dialog">RSVP</button>
               <div id="rsvpCount" class="rsvp-count" aria-live="polite">0 RSVPs</div>
             </div>
 
-            <div class="countdown" id="countdown" data-date="2025-12-05T18:00:00" aria-live="polite">Loading...</div>
+            <div class="countdown" id="countdown" data-date="2025-12-20T17:00:00" aria-live="polite">Loading...</div>
           </div>
 
           <div id="rsvpCardContainer" aria-live="polite"></div>
@@ -176,35 +175,30 @@
           <div id="detailsPanel" class="details" aria-hidden="true">
             <div class="grid-2">
               <div class="info-card">
-                <h5>Schedule</h5>
-                <div class="muted">Daily sessions 6PM–9PM. Doors open 5:30PM. Learn-to-skate: Sat & Sun 5PM.</div>
+                <h5>Evening Schedule</h5>
+                <div class="muted">6:00 PM — Carols & Welcome<br>6:30 PM — Community Dinner<br>7:30 PM — Performances & Kids' corner</div>
               </div>
               <div class="info-card">
-                <h5>Skate Rentals</h5>
-                <div class="muted">Adult & children sizes available. Rental fee: $6. Helmets available upon request.</div>
+                <h5>Holiday Movie Nights</h5>
+                <div class="muted">Family films on select nights with hot cocoa and popcorn. See schedule at the desk.</div>
               </div>
               <div class="info-card">
-                <h5>Accessibility</h5>
-                <div class="muted">Wheelchair accessible ramps and adaptive supports on site. Contact for accommodations.</div>
+                <h5>Donations & Volunteers</h5>
+                <div class="muted">Donate toys/food at drop-off or contact us to volunteer. Volunteer desk open each evening.</div>
               </div>
               <div class="info-card">
-                <h5>Parking & Transit</h5>
-                <div class="muted">Paid lot on-site + free street parking nearby. Bus stop within 8 minutes walk.</div>
+                <h5>Accessibility & Parking</h5>
+                <div class="muted">Wheelchair accessible, ramps & adaptive seating. Paid lot on-site; bus stop nearby.</div>
               </div>
-            </div>
-
-            <div style="margin-top:12px">
-              <h5>FAQ</h5>
-              <div class="muted" style="margin-top:6px">Bring layered clothing. Food service is cash and card. Lost & found at welcome desk.</div>
             </div>
           </div>
 
           <div id="snacksList" class="snacks-list" aria-hidden="true">
             <ul style="margin:8px 0 0 18px; color:var(--panel)">
-              <li>Hot cocoa (classic, peppermint, vegan options)</li>
-              <li>Mulled cider</li>
-              <li>Warm pretzels & savory bites</li>
-              <li>Seasonal pastries & gluten-free options</li>
+              <li>Community dinner (rotating menu)</li>
+              <li>Hot cocoa & spiced cider</li>
+              <li>Popcorn & seasonal pastries</li>
+              <li>Kid's snack packs & gluten-free options</li>
             </ul>
             <div class="muted" style="margin-top:8px">Tell us dietary needs at the welcome desk.</div>
           </div>
@@ -212,7 +206,7 @@
       </section>
 
       <footer class="footer" style="margin-top:14px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
-        <div>Location: <strong style="color:var(--accent)">Blue Lake Ice Rink</strong></div>
+        <div>Location: <strong style="color:var(--accent)">Winter Wonderland Hall</strong></div>
         <div><a href="Event-location.html" style="color:var(--muted);text-decoration:none">See all event locations →</a></div>
       </footer>
     </main>
@@ -221,7 +215,7 @@
   <!-- RSVP modal -->
   <div class="modal-backdrop" id="rsvpModal" aria-hidden="true">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="rsvpTitle">
-      <h3 id="rsvpTitle">RSVP — Ice Skating Party</h3>
+      <h3 id="rsvpTitle">RSVP — Christmas Celebration</h3>
       <form id="rsvpForm" novalidate>
         <label for="rsvpName">Full name <span style="color:var(--accent)">*</span></label>
         <input id="rsvpName" name="name" type="text" required autocomplete="name" placeholder="Your name">
@@ -260,7 +254,7 @@
     </div>
   </div>
 
-  <!-- Cancel feedback modal: two questions (reason + details) -->
+  <!-- Cancel feedback modal (two questions) -->
   <div class="modal-backdrop" id="cancelModal" aria-hidden="true">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="cancelTitle">
       <h3 id="cancelTitle">Cancel RSVP — Quick questions</h3>
@@ -303,15 +297,15 @@
       })();
 
       /* countdown */
-      (function(){ const el=document.getElementById('countdown'); if(!el) return; function update(){ const target=new Date(el.dataset.date); const now=new Date(); const diff=target-now; if(diff<=0){ el.textContent='Event started!'; return; } const d=Math.floor(diff/86400000), h=Math.floor((diff%86400000)/3600000), m=Math.floor((diff%3600000)/60000), s=Math.floor((diff%60000)/1000); el.textContent=`Starts in ${d}d ${h}h ${m}m ${s}s`; } update(); setInterval(update,1000); })();
+      (function(){ const el=document.getElementById('countdown'); if(!el) return; function update(){ const target=new Date(el.dataset.date); const now=new Date(); const diff=target-now; if(diff<=0){ el.textContent='Event running — drop in evenings through Dec 31'; return; } const d=Math.floor(diff/86400000), h=Math.floor((diff%86400000)/3600000), m=Math.floor((diff%3600000)/60000), s=Math.floor((diff%60000)/1000); el.textContent=`Starts in ${d}d ${h}h ${m}m ${s}s`; } update(); setInterval(update,1000); })();
 
       /* small toast helper */
-      function toast(msg, ms=2600){ const t=document.getElementById('toast'); if(!t) return; t.textContent=msg; t.style.display='block'; t.style.opacity=''; setTimeout(()=> t.style.opacity='0.98',10); setTimeout(()=> t.style.display='none', ms); }
+      function toast(msg, ms=2600){ const t=document.getElementById('toast'); if(!t) return; t.textContent=msg; t.style.display='block'; setTimeout(()=> t.style.display='none', ms); }
 
       /* back button */
       document.getElementById('backBtn')?.addEventListener('click', ()=>{ try{ if(history.length>1) history.back(); else location.href='index.html'; }catch(e){ location.href='index.html'; } }, {passive:true});
 
-      /* details & snacks toggles - venue info now opens details panel and focuses first heading */
+      /* details & snacks toggles */
       (function(){
         const detailsBtn=document.getElementById('detailsBtn'), detailsPanel=document.getElementById('detailsPanel');
         const snacksBtn=document.getElementById('snacksBtn'), snacksList=document.getElementById('snacksList');
@@ -320,12 +314,8 @@
             const open = detailsBtn.getAttribute('aria-expanded')==='true';
             detailsBtn.setAttribute('aria-expanded', String(!open));
             detailsPanel.setAttribute('aria-hidden', String(open));
-            detailsBtn.textContent = open ? 'Venue Info' : 'Hide Info';
-            if(!open){
-              // bring into view on small screens and focus first heading for accessibility
-              detailsPanel.scrollIntoView({behavior:'smooth', block:'nearest'});
-              detailsPanel.querySelector('h5')?.focus?.();
-            }
+            detailsBtn.textContent = open ? 'Program & Venue' : 'Hide Info';
+            if(!open){ detailsPanel.scrollIntoView({behavior:'smooth', block:'nearest'}); detailsPanel.querySelector('h5')?.focus?.(); }
           }, {passive:true});
         }
         if(snacksBtn && snacksList){
@@ -333,15 +323,15 @@
             const open = snacksBtn.getAttribute('aria-expanded')==='true';
             snacksBtn.setAttribute('aria-expanded', String(!open));
             snacksList.classList.toggle('show');
-            snacksBtn.textContent = open ? 'Snacks & Drinks' : 'Hide Snacks';
+            snacksBtn.textContent = open ? 'Food & Drinks' : 'Hide Snacks';
             if(!open) snacksList.querySelector('li')?.focus?.();
           }, {passive:true});
         }
       })();
 
-      /* RSVP + cancellation flow (cancel opens two-question modal) */
+      /* RSVP + cancellation flow */
       (function(){
-        const EVENT_KEY = 'Ice Skating Party';
+        const EVENT_KEY = 'Christmas Celebration';
         const STORE_KEY = 'ww_rsvps_v1';
         const USER_KEY  = 'ww_rsvp_user_v1';
 
@@ -378,7 +368,7 @@
         function updateCount(){ const l=list(); rsvpCountEl.textContent = `${l.length} RSVP${l.length===1?'':'s'}` }
         function currentId(){ const u=readUser(); return u[EVENT_KEY]||null }
 
-        /* modal helpers (works with backdrop elements) */
+        /* modal helpers */
         let lastFocused=null;
         function trapFocus(container){
           lastFocused=document.activeElement;
@@ -406,7 +396,7 @@
           releaseFocusTrap(backdrop);
         }
 
-        /* render user card and attach cancel->openCancelModal */
+        /* render user card */
         function renderUserCard(){
           rsvpCardContainer.innerHTML='';
           const id = currentId();
@@ -442,7 +432,7 @@
           showModal(rsvpModal);
         }
 
-        /* open cancel modal with two questions */
+        /* open cancel modal */
         let _pendingCancelId = null;
         function openCancelModal(id){
           _pendingCancelId = id || currentId();
@@ -452,7 +442,7 @@
           showModal(cancelModal);
         }
 
-        // wire cancel modal actions
+        // cancel modal wiring
         cancelForm.addEventListener('submit', function(ev){
           ev.preventDefault();
           if(!_pendingCancelId){ hideModal(cancelModal); return; }

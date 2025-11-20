@@ -1,585 +1,365 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Winter Wonderland Events</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Montserrat', Arial, sans-serif;
-            background: linear-gradient(135deg, #adbbca 0%, #8db8d4 60%, #75a2e7 100%);
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-        .container {
-            max-width: 820px;
-            margin: 48px auto;
-            background: rgba(200, 236, 227, 0.98);
-            border-radius: 40px;
-            box-shadow: 0 16px 64px 0 rgba(46,139,87,0.10), 0 2px 16px 0 #e0eafc88;
-            padding: 68px 48px 48px 48px;
-            text-align: center;
-            position: relative;
-            border: 2px solid #e3f0ff;
-            z-index: 2;
-        }
-        h1 {
-            font-family: 'Great Vibes', cursive;
-            color: #3a5a8c;
-            font-size: 3.2em;
-            margin-bottom: 18px;
-            letter-spacing: 6px;
-            text-shadow: 0 2px 32px #e0eafc88, 0 0px 2px #fff;
-            font-weight: 400;
-        }
-        .intro {
-            font-size: 1.25em;
-            color: #3a5a8c;
-            margin-bottom: 44px;
-            background: linear-gradient(90deg, #f7fafc 0%, #e3f0ff 100%);
-            border-radius: 20px;
-            padding: 26px 18px;
-            box-shadow: 0 2px 18px #e3f0ff44;
-            font-weight: 500;
-            border: 1.5px solid #dbe6f6;
-        }
-        .event-list {
-            list-style: none;
-            padding: 0;
-            margin: 0 auto 44px auto;
-            max-width: 500px;
-        }
-        .event-list li {
-            background: linear-gradient(90deg, #f7fafc 0%, #e3f0ff 100%);
-            border-radius: 22px;
-            margin: 24px 0;
-            padding: 32px 22px;
-            font-size: 1.22em;
-            box-shadow: 0 2px 18px rgba(46,139,87,0.10);
-            transition: box-shadow 0.22s, transform 0.22s, background 0.3s;
-            position: relative;
-            border: 1.5px solid #e3f0ff;
-        }
-        .event-list li.rsvped {
-            background: linear-gradient(90deg, #d1f7e7 0%, #b3e5fc 100%);
-        }
-        .event-list li:hover,
-        .event-list li:focus-within {
-            box-shadow: 0 10px 36px rgba(46,139,87,0.18);
-            transform: scale(1.04);
-            border-color: #3a5a8c;
-        }
-        .event-link {
-            text-decoration: none;
-            color: #3a5a8c;
-            font-weight: bold;
-            font-size: 1.18em;
-            transition: color 0.22s;
-            outline: none;
-            display: block;
-            letter-spacing: 1px;
-        }
-        .event-link:focus,
-        .event-link:hover {
-            color: #b48bc8;
-            text-decoration: underline;
-        }
-        .event-date {
-            display: block;
-            font-size: 1.05em;
-            margin-top: 10px;
-            font-weight: 400;
-            letter-spacing: 1px;
-            opacity: 0.85;
-            font-family: 'Great Vibes', cursive;
-        }
-        .countdown {
-            font-size: 1.08em;
-            color: #3887be;
-            margin-top: 10px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            background: #e3f0ff;
-            border-radius: 8px;
-            padding: 6px 12px;
-            display: inline-block;
-        }
-        .rsvp-btn, .remove-rsvp-btn {
-            background: linear-gradient(90deg, #3a5a8c 0%, #b48bc8 100%);
-            color: #fff;
-            border: none;
-            border-radius: 12px;
-            padding: 10px 28px;
-            font-size: 1.08em;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 14px;
-            margin-bottom: 6px;
-            box-shadow: 0 2px 10px #3a5a8c44;
-            transition: background 0.2s, color 0.2s, transform 0.2s;
-            display: inline-block;
-        }
-        .rsvp-btn:focus, .remove-rsvp-btn:focus {
-            outline: 2px solid #b48bc8;
-        }
-        .rsvp-btn:hover, .remove-rsvp-btn:hover {
-            background: linear-gradient(90deg, #b48bc8 0%, #3a5a8c 100%);
-            color: #fff;
-            transform: scale(1.05);
-        }
-        .remove-rsvp-btn {
-            background: linear-gradient(90deg, #b48bc8 0%, #3a5a8c 100%);
-            margin-left: 10px;
-        }
-        .rsvp-form {
-            display: none;
-            margin-top: 12px;
-            background: #f7fafc;
-            border-radius: 12px;
-            padding: 18px 16px;
-            box-shadow: 0 2px 10px #e3f0ff44;
-            text-align: left;
-            max-width: 340px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .rsvp-form label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: #3a5a8c;
-        }
-        .rsvp-form input, .rsvp-form select {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 14px;
-            border-radius: 6px;
-            border: 1px solid #b48bc8;
-            font-size: 1em;
-        }
-        .rsvp-form button {
-            background: linear-gradient(90deg, #3a5a8c 0%, #b48bc8 100%);
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            padding: 8px 22px;
-            font-size: 1em;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 2px 8px #3a5a8c44;
-            transition: background 0.2s, color 0.2s;
-        }
-        .rsvp-form button:hover {
-            background: linear-gradient(90deg, #b48bc8 0%, #3a5a8c 100%);
-        }
-        .rsvp-success {
-            color: #388e3c;
-            font-weight: bold;
-            margin-top: 10px;
-            margin-bottom: 8px;
-        }
-        .footer {
-            margin-top: 54px;
-            color: #3a5a8c;
-            font-size: 1.18em;
-            letter-spacing: 1px;
-            background: linear-gradient(90deg, #e3f0ff 0%, #f7fafc 100%);
-            border-radius: 14px;
-            padding: 18px 0;
-            box-shadow: 0 2px 14px #e3f0ff44;
-            font-weight: 500;
-            border: 1.5px solid #dbe6f6;
-        }
-        /* Decorative snowflakes */
-        .snowfall {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none;
-            z-index: 1;
-        }
-        .snowflake-anim {
-            position: absolute;
-            color: #fff;
-            font-size: 1.6em;
-            opacity: 0.7;
-            pointer-events: none;
-            animation: snow-anim 12s linear infinite;
-        }
-        @keyframes snow-anim {
-            0% { transform: translateY(-10px) rotate(0deg);}
-            100% { transform: translateY(100vh) rotate(360deg);}
-        }
-        /* Mobile menu styles */
-        .menu-toggle {
-            display: none;
-            background: linear-gradient(90deg, #3a5a8c 0%, #b48bc8 100%);
-            color: #fff;
-            border: none;
-            border-radius: 14px;
-            padding: 16px 32px;
-            font-size: 1.18em;
-            font-weight: bold;
-            cursor: pointer;
-            margin-bottom: 32px;
-            box-shadow: 0 2px 14px #3a5a8c44;
-            transition: background 0.2s, color 0.2s;
-        }
-        .menu-toggle:focus {
-            outline: 2px solid #b48bc8;
-        }
-        .menu-toggle:hover {
-            background: linear-gradient(90deg, #b48bc8 0%, #3a5a8c 100%);
-            color: #fff;
-        }
-        @media (max-width: 600px) {
-            .container {
-                max-width: 98vw;
-                padding: 32px 4vw 32px 4vw;
-            }
-            .event-list {
-                max-width: 98vw;
-            }
-            .menu-toggle {
-                display: block;
-            }
-            .event-list {
-                display: none;
-            }
-            .event-list.active {
-                display: block;
-            }
-        }
-        /* Music player styles */
-        .music-player {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            background: #e3f0ff;
-            border-radius: 18px;
-            box-shadow: 0 2px 12px #b48bc844;
-            padding: 12px 18px;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .music-player button {
-            background: linear-gradient(90deg, #3a5a8c 0%, #b48bc8 100%);
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            padding: 6px 16px;
-            font-size: 1em;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 2px 8px #3a5a8c44;
-            transition: background 0.2s, color 0.2s;
-        }
-        .music-player button:hover {
-            background: linear-gradient(90deg, #b48bc8 0%, #3a5a8c 100%);
-        }
-        .music-player label {
-            font-size: 1em;
-            color: #3a5a8c;
-            font-weight: 500;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Winter Wonderland Events</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg-start:#060814;
+      --bg-end:#081224; /* subtler bottom tone */
+      --panel:#fbfbfd;
+      --muted:#9fb5cc;
+      --accent:#cfb76b;
+      --card-bg: rgba(255,255,255,0.02);
+      --glass: rgba(255,255,255,0.04);
+    }
+
+    html,body{height:100%;margin:0;font-family:Montserrat,system-ui,Arial;background:
+      radial-gradient(1200px 400px at 10% 10%, rgba(12,36,56,0.16), transparent 8%),
+      linear-gradient(180deg,var(--bg-start),var(--bg-end));color:var(--panel);-webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
+
+    .container{
+      max-width:980px;margin:44px auto;padding:44px;border-radius:20px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.006));
+      box-shadow: 0 18px 60px rgba(2,7,18,0.7); border:1px solid rgba(255,255,255,0.02);
+      backdrop-filter: blur(6px);
+    }
+
+    header{display:flex;justify-content:space-between;align-items:center;gap:12px}
+    h1{font-family:'Great Vibes',cursive;color:var(--accent);font-size:2.8rem;margin:0;letter-spacing:0.6px}
+    .subtitle{color:var(--muted);font-weight:600;font-size:0.98rem}
+
+    .intro{margin-top:12px;color:#dbeffb;padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);background:linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00))}
+
+    .event-list{list-style:none;padding:0;margin:20px 0 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+    .event-card{
+      padding:14px;border-radius:12px;background:var(--card-bg);border:1px solid rgba(255,255,255,0.02);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.45);transition:transform .13s,box-shadow .13s;
+    }
+    .event-card:hover{transform:translateY(-6px);box-shadow:0 22px 48px rgba(0,0,0,0.55)}
+    .event-link{font-weight:700;color:var(--panel);text-decoration:none;display:block}
+    .event-date{font-family:'Great Vibes',cursive;color:var(--muted);display:block;margin-top:6px;font-size:0.95rem}
+
+    .meta-row{display:flex;gap:8px;align-items:center;margin-top:12px;flex-wrap:wrap}
+    .pill{background:rgba(255,255,255,0.02);padding:6px 10px;border-radius:999px;font-weight:600;color:var(--muted);font-size:0.9rem}
+    .countdown{color:#dff3ff;padding:6px 10px;border-radius:10px;background:rgba(255,255,255,0.01);font-weight:700;font-size:0.88rem}
+
+    .controls{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+    .rsvp-btn{background:linear-gradient(90deg,#123c55,#376b9a);color:#fff;padding:8px 12px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+    .remove-btn{background:linear-gradient(90deg,#a67bb5,#7a5fb0);color:#fff;padding:8px 12px;border-radius:10px;border:none;cursor:pointer;font-weight:700;display:none}
+
+    .event-locations-link{color:var(--muted);text-decoration:underline;font-size:0.92rem}
+
+    .music-player{position:fixed;right:18px;bottom:18px;background:rgba(255,255,255,0.02);padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);display:flex;gap:10px;align-items:center;z-index:80}
+    .music-player button{background:linear-gradient(90deg,#1b4b69,#3f7096);color:#fff;border:none;padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:700}
+
+    .snowfall{position:fixed;inset:0;pointer-events:none;z-index:1}
+    .snowflake-anim{position:fixed;top:-10vh;opacity:0.6;font-size:0.9rem;filter:drop-shadow(0 6px 14px rgba(0,0,0,0.5));}
+
+    .footer{margin-top:22px;color:var(--muted);font-size:0.95rem;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+
+    a:focus,button:focus{outline:3px solid rgba(207,183,107,0.12);outline-offset:3px}
+
+    @media (max-width:720px){
+      .container{padding:22px}
+      .music-player{right:12px;bottom:12px;padding:8px}
+    }
+  </style>
 </head>
 <body>
-    <!-- Animated Snowfall -->
-    <div class="snowfall" aria-hidden="true"></div>
-    <div class="container" role="main" aria-label="Winter Wonderland">
+  <div class="snowfall" aria-hidden="true"></div>
+
+  <div class="container" role="main" aria-label="Winter Wonderland">
+    <header>
+      <div>
         <h1 tabindex="0">Winter Wonderland</h1>
-        <div class="intro" tabindex="0">
-          Join us for a series of festive events filled with joy, laughter, and holiday cheer. Whether you're looking to skate on ice, watch classic holiday movies, decorate cookies, or meet Santa himself, there's something for everyone to enjoy. Check out the events below and mark your calendars!
-        </div>
-        <button class="menu-toggle" aria-controls="eventList" aria-expanded="false" aria-label="Toggle event menu">
-            Show Events
-        </button>
-        <ul class="event-list" id="eventList">
-            <li>
-                <a class="event-link" href="Holiday-Movie-Night.html" tabindex="0" aria-label="Holiday Movie Night, December 1 and December 2">
-                    🎬 Holiday Movie Night
-                    <span class="event-date" style="color:#3a5a8c;">December 1 & December 2</span>
-                </a>
-                <div class="countdown" data-date="2025-12-01T18:00:00">Loading...</div>
-                <button class="rsvp-btn" data-event="Holiday Movie Night">RSVP</button>
-                <form class="rsvp-form" data-event="Holiday Movie Night">
-                    <label>Name: <input type="text" name="name" required></label>
-                    <label>Email: <input type="email" name="email" required></label>
-                    <button type="submit">Submit RSVP</button>
-                    <div class="rsvp-success"></div>
-                </form>
-            </li>
-            <li>
-                <a class="event-link" href="Ice-Skating.html" tabindex="0" aria-label="Ice Skating, December 5 to December 15">
-                    ⛸️ Ice Skating
-                    <span class="event-date" style="color:#b48bc8;">December 5 – December 15</span>
-                </a>
-                <div class="countdown" data-date="2025-12-05T10:00:00">Loading...</div>
-                <button class="rsvp-btn" data-event="Ice Skating">RSVP</button>
-                <form class="rsvp-form" data-event="Ice Skating">
-                    <label>Name: <input type="text" name="name" required></label>
-                    <label>Email: <input type="email" name="email" required></label>
-                    <button type="submit">Submit RSVP</button>
-                    <div class="rsvp-success"></div>
-                </form>
-            </li>
-            <li>
-                <a class="event-link" href="Cookie-Decorating.html" tabindex="0" aria-label="Cookie Decorating Workshop, December 18 to December 20">
-                    🍪 Cookie Decorating Workshop
-                    <span class="event-date" style="color:#d2691e;">December 18 – December 20</span>
-                </a>
-                <div class="countdown" data-date="2025-12-18T14:00:00">Loading...</div>
-                <button class="rsvp-btn" data-event="Cookie Decorating Workshop">RSVP</button>
-                <form class="rsvp-form" data-event="Cookie Decorating Workshop">
-                    <label>Name: <input type="text" name="name" required></label>
-                    <label>Email: <input type="email" name="email" required></label>
-                    <button type="submit">Submit RSVP</button>
-                    <div class="rsvp-success"></div>
-                </form>
-            </li>
-            <li>
-                <a class="event-link" href="Santa-Workshop.html" tabindex="0" aria-label="Santa's Workshop, December 22 to December 24">
-                    🎅 Santa's Workshop
-                    <span class="event-date" style="color:#8b3c2e;">December 22 – December 24</span>
-                </a>
-                <div class="countdown" data-date="2025-12-22T11:00:00">Loading...</div>
-                <button class="rsvp-btn" data-event="Santa's Workshop">RSVP</button>
-                <form class="rsvp-form" data-event="Santa's Workshop">
-                    <label>Name: <input type="text" name="name" required></label>
-                    <label>Email: <input type="email" name="email" required></label>
-                    <button type="submit">Submit RSVP</button>
-                    <div class="rsvp-success"></div>
-                </form>
-            </li>
-            <li>
-                <a class="event-link" href="Christmas-Event-Invitation.html" tabindex="0" aria-label="Christmas Season Celebration, December 20 to December 31">
-                    🎄 Christmas Season Celebration
-                    <span class="event-date" style="color:#3a5a8c;">December 20 – December 31</span>
-                </a>
-                <div class="countdown" data-date="2025-12-20T17:00:00">Loading...</div>
-                <button class="rsvp-btn" data-event="Christmas Season Celebration">RSVP</button>
-                <form class="rsvp-form" data-event="Christmas Season Celebration">
-                    <label>Name: <input type="text" name="name" required></label>
-                    <label>Email: <input type="email" name="email" required></label>
-                    <button type="submit">Submit RSVP</button>
-                    <div class="rsvp-success"></div>
-                </form>
-            </li>
-            <li>
-                <a class="event-link" href="Gift-Exchange.html" tabindex="0" aria-label="Gift Exchange and Celebration, December 25, December 31 and January 1">
-                    🎁 Gift Exchange & Celebration
-                    <span class="event-date" style="color:#7d8b2e;">December 25, December 31 & January 1</span>
-                </a>
-                <div class="countdown" data-date="2025-12-25T15:00:00">Loading...</div>
-                <button class="rsvp-btn" data-event="Gift Exchange & Celebration">RSVP</button>
-                <form class="rsvp-form" data-event="Gift Exchange & Celebration">
-                    <label>Name: <input type="text" name="name" required></label>
-                    <label>Email: <input type="email" name="email" required></label>
-                    <button type="submit">Submit RSVP</button>
-                    <div class="rsvp-success"></div>
-                </form>
-            </li>
-            <li>
-                <a class="event-link" href="Event-location.html" tabindex="0" aria-label="Event Locations">
-                    📍 Event Locations
-                    <span class="event-date" style="color:#b48bc8;">See where each event happens</span>
-                </a>
-            </li>
-        </ul>
-        <div class="footer" tabindex="0">
-            Brought to you by: Winter Wonderland Committee &mdash; <span id="footer-year"></span><br>
-            <span style="font-size:1em; color:#7fa7d6;">
-                <strong>Contact:</strong> <a href="mailto:winter@wonderland.com" style="color:#3a5a8c;text-decoration:underline;">winter@wonderland.com</a> &nbsp;|&nbsp;
-                <strong>Follow us:</strong>
-                <a href="https://facebook.com" target="_blank" style="color:#3a5a8c;text-decoration:none;">Facebook</a> &bull;
-                <a href="https://twitter.com" target="_blank" style="color:#3a5a8c;text-decoration:none;">Twitter</a> &bull;
-                <a href="https://instagram.com" target="_blank" style="color:#3a5a8c;text-decoration:none;">Instagram</a>
-            </span>
-            <br>
-            <span style="font-size:0.95em; color:#888;">
-                &copy; <span id="footer-year-copy"></span> Winter Wonderland. All rights reserved.
-            </span>
-        </div>
-    <!-- Music Player -->
-    <div class="music-player" id="musicPlayer">
-        <label for="musicToggle">Winter Melody</label>
-        <button id="musicToggle">Play</button>
-        <audio id="bgMusic" loop>
-            <source src="winter-melody.mp3" type="audio/mp3">
-        </audio>
+        <div class="subtitle">Festive events & community celebrations</div>
+      </div>
+      <div style="text-align:right">
+        <div style="color:#d6e9ff;font-weight:700">Main locations: Winter Wonderland Hall • Main Plaza • Community Kitchen</div>
+        <div style="color:var(--muted);font-size:.92rem;margin-top:6px">Accessible venues • Parking nearby</div>
+      </div>
+    </header>
+
+    <div class="intro" tabindex="0">
+      Season schedule — RSVP for events you plan to attend. Click "Event Locations" to view where each event takes place.
     </div>
-    <script>
-        // Animated Snowfall
-        function createSnowfall() {
-            const snowContainer = document.querySelector('.snowfall');
-            for (let i = 0; i < 40; i++) {
-                const snow = document.createElement('span');
-                snow.className = 'snowflake-anim';
-                snow.textContent = ['❄️','❅','❆'][Math.floor(Math.random()*3)];
-                snow.style.left = Math.random() * 100 + 'vw';
-                snow.style.fontSize = (1.2 + Math.random()*1.2) + 'em';
-                snow.style.animationDuration = (8 + Math.random()*8) + 's';
-                snow.style.top = (-10 - Math.random()*40) + 'px';
-                snowContainer.appendChild(snow);
-            }
+
+    <ul class="event-list" id="eventList">
+      <li class="event-card">
+        <a class="event-link" href="Holiday-Movie-Night.html">🎬 Holiday Movie Night
+          <span class="event-date">December 1 & December 2</span>
+        </a>
+        <div class="meta-row">
+          <span class="pill">Community Hall</span>
+          <a class="event-locations-link" href="Event-location.html#community-hall">Location</a>
+          <div class="countdown" data-date="2025-12-01T18:00:00">Loading...</div>
+        </div>
+        <div class="controls">
+          <button class="rsvp-btn" data-event="Holiday Movie Night">RSVP</button>
+          <button class="remove-btn">Remove RSVP</button>
+        </div>
+      </li>
+
+      <li class="event-card">
+        <a class="event-link" href="Ice-Skating.html">⛸ Ice Skating
+          <span class="event-date">December 5 – December 15</span>
+        </a>
+        <div class="meta-row">
+          <span class="pill">Outdoor Rink</span>
+          <a class="event-locations-link" href="Event-location.html#outdoor-rink">Location</a>
+          <div class="countdown" data-date="2025-12-05T10:00:00">Loading...</div>
+        </div>
+        <div class="controls">
+          <button class="rsvp-btn" data-event="Ice Skating">RSVP</button>
+          <button class="remove-btn">Remove RSVP</button>
+        </div>
+      </li>
+
+      <li class="event-card">
+        <a class="event-link" href="Christmas-event.html">🎄 Christmas Season Celebration
+          <span class="event-date">December 20 – December 31</span>
+        </a>
+        <div class="meta-row">
+          <span class="pill">Winter Hall</span>
+          <a class="event-locations-link" href="Event-location.html#winter-hall">Location</a>
+          <div class="countdown" data-date="2025-12-20T17:00:00">Loading...</div>
+        </div>
+        <div class="controls">
+          <button class="rsvp-btn" data-event="Christmas Season Celebration">RSVP</button>
+          <button class="remove-btn">Remove RSVP</button>
+        </div>
+      </li>
+
+      <li class="event-card">
+        <a class="event-link" href="Santa-Visit.html">🎅 Santa Visit
+          <span class="event-date">December 12 • 10:00 AM</span>
+        </a>
+        <div class="meta-row">
+          <span class="pill">Main Plaza</span>
+          <a class="event-locations-link" href="Event-location.html#main-plaza">Location</a>
+          <div class="countdown" data-date="2025-12-12T10:00:00">Loading...</div>
+        </div>
+        <div class="controls">
+          <button class="rsvp-btn" data-event="Santa Visit">RSVP</button>
+          <button class="remove-btn">Remove RSVP</button>
+        </div>
+      </li>
+
+      <li class="event-card">
+        <a class="event-link" href="Santa-Workshop.html">🧰 Santa Workshop
+          <span class="event-date">December 14 • 11:00 AM</span>
+        </a>
+        <div class="meta-row">
+          <span class="pill">Community Hall — Workshop Room</span>
+          <a class="event-locations-link" href="Event-location.html#community-hall">Location</a>
+          <div class="countdown" data-date="2025-12-14T11:00:00">Loading...</div>
+        </div>
+        <div class="controls">
+          <button class="rsvp-btn" data-event="Santa Workshop">RSVP</button>
+          <button class="remove-btn">Remove RSVP</button>
+        </div>
+      </li>
+
+      <li class="event-card">
+        <a class="event-link" href="Cookie-Decorating.html">🍪 Cookie Decorating
+          <span class="event-date">December 10 • 2:00 PM</span>
+        </a>
+        <div class="meta-row">
+          <span class="pill">Community Kitchen</span>
+          <a class="event-locations-link" href="Event-location.html#community-kitchen">Location</a>
+          <div class="countdown" data-date="2025-12-10T14:00:00">Loading...</div>
+        </div>
+        <div class="controls">
+          <button class="rsvp-btn" data-event="Cookie Decorating">RSVP</button>
+          <button class="remove-btn">Remove RSVP</button>
+        </div>
+      </li>
+
+      <li class="event-card">
+        <a class="event-link" href="Gift-Exchange.html">🎁 Gift Exchange
+          <span class="event-date">December 18 • 5:00 PM</span>
+        </a>
+        <div class="meta-row">
+          <span class="pill">Community Hall</span>
+          <a class="event-locations-link" href="Event-location.html#community-hall">Location</a>
+          <div class="countdown" data-date="2025-12-18T17:00:00">Loading...</div>
+        </div>
+        <div class="controls">
+          <button class="rsvp-btn" data-event="Gift Exchange">RSVP</button>
+          <button class="remove-btn">Remove RSVP</button>
+        </div>
+      </li>
+
+      <li class="event-card">
+        <a class="event-link" href="Carol-Night.html">🎶 Carol Night
+          <span class="event-date">December 22 • 6:00 PM</span>
+        </a>
+        <div class="meta-row">
+          <span class="pill">Town Square</span>
+          <a class="event-locations-link" href="Event-location.html#town-square">Location</a>
+          <div class="countdown" data-date="2025-12-22T18:00:00">Loading...</div>
+        </div>
+        <div class="controls">
+          <button class="rsvp-btn" data-event="Carol Night">RSVP</button>
+          <button class="remove-btn">Remove RSVP</button>
+        </div>
+      </li>
+
+      <li class="event-card">
+        <a class="event-link" href="New-Years-Eve.html">✨ New Year's Eve Ball
+          <span class="event-date">December 31 • 9:00 PM</span>
+        </a>
+        <div class="meta-row">
+          <span class="pill">Grand Hall</span>
+          <a class="event-locations-link" href="Event-location.html#grand-hall">Location</a>
+          <div class="countdown" data-date="2025-12-31T21:00:00">Loading...</div>
+        </div>
+        <div class="controls">
+          <button class="rsvp-btn" data-event="New Years Eve Ball">RSVP</button>
+          <button class="remove-btn">Remove RSVP</button>
+        </div>
+      </li>
+
+      <li class="event-card">
+        <a class="event-link" href="Event-location.html"> 📍 Event Locations
+          <span class="event-date">Various</span>
+        </a>
+      </li>
+    </ul>
+
+    <div class="footer">
+      <div>Brought to you by Winter Wonderland Committee — <span id="footer-year"></span></div>
+      <div><a href="mailto:winter@wonderland.com" style="color:var(--muted);text-decoration:none">winter@wonderland.com</a></div>
+    </div>
+  </div>
+
+  <div class="music-player" aria-label="Background music player">
+    <span style="font-weight:700">Winter Melody</span>
+    <button id="musicToggle" aria-pressed="false" aria-label="Play winter melody">▶ Play</button>
+    <audio id="bgMusic" loop preload="none" playsinline>
+      <source src="winter-melody.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <script>
+  (function(){
+    /* snow (lightweight) */
+    (function(){
+      const root = document.querySelector('.snowfall');
+      if(!root) return;
+      const flakes = 22;
+      for(let i=0;i<flakes;i++){
+        const f = document.createElement('span');
+        f.className = 'snowflake-anim';
+        f.textContent = ['❄','❅','❆'][Math.floor(Math.random()*3)];
+        f.style.left = (Math.random()*100)+'vw';
+        f.style.fontSize = (0.8 + Math.random()*1.2)+'rem';
+        f.style.animation = `fall ${8 + Math.random()*12}s linear ${-Math.random()*10}s infinite`;
+        root.appendChild(f);
+      }
+      const s = document.createElement('style');
+      s.textContent = '@keyframes fall{0%{transform:translateY(-15vh)}100%{transform:translateY(120vh)}}';
+      document.head.appendChild(s);
+    })();
+
+    /* countdowns */
+    function updateCountdowns(){
+      document.querySelectorAll('.countdown').forEach(cd=>{
+        const dateStr = cd.dataset.date;
+        if(!dateStr) return;
+        const diff = new Date(dateStr) - new Date();
+        if(diff <= 0){ cd.textContent = 'Event started!'; return; }
+        const d = Math.floor(diff/86400000);
+        const h = Math.floor((diff%86400000)/3600000);
+        const m = Math.floor((diff%3600000)/60000);
+        const s = Math.floor((diff%60000)/1000);
+        cd.textContent = `Starts in ${d}d ${h}h ${m}m ${s}s`;
+      });
+    }
+    setInterval(updateCountdowns,1000);
+    updateCountdowns();
+
+    /* RSVP storage and UI */
+    const RSVPS_KEY = 'winter_rsvps_v1';
+    function readStore(){ try{return JSON.parse(localStorage.getItem(RSVPS_KEY)||'{}')}catch(e){return{}} }
+    function writeStore(v){ try{ localStorage.setItem(RSVPS_KEY, JSON.stringify(v)); }catch(e){} }
+    function refreshRSVPUI(){
+      const store = readStore();
+      document.querySelectorAll('.event-card').forEach(card=>{
+        const r = card.querySelector('.rsvp-btn');
+        const rem = card.querySelector('.remove-btn');
+        if(!r || !rem) return;
+        const ev = r.dataset.event;
+        const has = !!(store[ev] && store[ev].length);
+        r.style.display = has ? 'none' : '';
+        rem.style.display = has ? 'inline-block' : 'none';
+        card.style.boxShadow = has ? '0 24px 60px rgba(207,183,107,0.06)' : '';
+      });
+    }
+
+    document.addEventListener('click', function(e){
+      const r = e.target.closest('.rsvp-btn');
+      if(r){
+        const ev = r.dataset.event;
+        const name = prompt('Name to RSVP:'); if(!name) return;
+        const email = prompt('Email (optional):') || '';
+        const s = readStore(); s[ev] = s[ev] || []; s[ev].push({name:name.trim(), email:email.trim(), time:new Date().toISOString()});
+        writeStore(s); refreshRSVPUI(); alert('Thanks — RSVP recorded.'); return;
+      }
+      const rem = e.target.closest('.remove-btn');
+      if(rem){
+        const card = rem.closest('.event-card'); if(!card) return;
+        const rbtn = card.querySelector('.rsvp-btn'); if(!rbtn) return;
+        const ev = rbtn.dataset.event; const s = readStore(); delete s[ev]; writeStore(s); refreshRSVPUI(); return;
+      }
+    }, {passive:true});
+    refreshRSVPUI();
+
+    /* music play/pause with accessible labels */
+    (function(){
+      const btn = document.getElementById('musicToggle');
+      const audio = document.getElementById('bgMusic');
+      let playing = false;
+      if(audio){ audio.volume = 0.5; audio.playsInline = true; audio.preload = 'none'; }
+      function setState(p){
+        playing = !!p;
+        if(btn){
+          btn.textContent = playing ? '⏸ Pause' : '▶ Play';
+          btn.setAttribute('aria-pressed', String(playing));
+          btn.setAttribute('aria-label', playing ? 'Pause winter melody' : 'Play winter melody');
         }
-        createSnowfall();
-
-        // Countdown Timer for each event
-        function updateCountdowns() {
-            const countdowns = document.querySelectorAll('.countdown');
-            countdowns.forEach(function(cd) {
-                const dateStr = cd.getAttribute('data-date');
-                if (!dateStr) return;
-                const eventDate = new Date(dateStr);
-                const now = new Date();
-                let diff = eventDate - now;
-                if (diff <= 0) {
-                    cd.textContent = "Event started!";
-                    return;
-                }
-                let days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                let hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-                let mins = Math.floor((diff / (1000 * 60)) % 60);
-                let secs = Math.floor((diff / 1000) % 60);
-                cd.textContent = `Starts in ${days}d ${hours}h ${mins}m ${secs}s`;
-            });
+      }
+      async function start(){
+        if(!audio) return;
+        try{ await audio.play(); setState(true); } catch(err){
+          // require explicit gesture: attach one-time resume
+          const resume = async ()=>{ try{ await audio.play(); setState(true); }catch{} document.body.removeEventListener('click', resume); document.body.removeEventListener('touchstart', resume); };
+          document.body.addEventListener('click', resume, {once:true});
+          document.body.addEventListener('touchstart', resume, {once:true});
+          alert('Tap once anywhere on the page to enable audio playback.');
         }
-        setInterval(updateCountdowns, 1000);
-        updateCountdowns();
+      }
+      function pause(){ if(!audio) return; audio.pause(); setState(false); }
 
-        // RSVP Button and Form Logic
-        document.querySelectorAll('.rsvp-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const event = btn.getAttribute('data-event');
-                document.querySelectorAll('.rsvp-form').forEach(form => {
-                    form.style.display = 'none';
-                });
-                const form = document.querySelector(`.rsvp-form[data-event="${event}"]`);
-                if (form) form.style.display = 'block';
-            });
-        });
+      if(btn) btn.addEventListener('click', function(){ playing ? pause() : start(); }, {passive:true});
+      if(audio){ audio.addEventListener('play', ()=> setState(true)); audio.addEventListener('pause', ()=> setState(false)); }
+      setState(false);
+    })();
 
-        document.querySelectorAll('.rsvp-form').forEach(form => {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const name = form.querySelector('input[name="name"]').value.trim();
-                const email = form.querySelector('input[name="email"]').value.trim();
-                if (!name || !email) return;
-                let rsvps = JSON.parse(localStorage.getItem('winter_rsvps') || '{}');
-                const event = form.getAttribute('data-event');
-                rsvps[event] = [{ name, email, time: new Date().toISOString() }];
-                localStorage.setItem('winter_rsvps', JSON.stringify(rsvps));
-                form.querySelector('.rsvp-success').textContent = "Thank you for your RSVP!";
-                form.reset();
-                setTimeout(() => {
-                    form.style.display = 'none';
-                    form.querySelector('.rsvp-success').textContent = "";
-                    updateRSVPBoxes();
-                }, 1200);
-            });
-        });
+    /* footer year */
+    const fy = document.getElementById('footer-year'); if(fy) fy.textContent = new Date().getFullYear();
 
-        // RSVP box color and Remove RSVP button
-        function updateRSVPBoxes() {
-            let rsvps = JSON.parse(localStorage.getItem('winter_rsvps') || '{}');
-            document.querySelectorAll('.event-list li').forEach(li => {
-                const rsvpBtn = li.querySelector('.rsvp-btn');
-                const event = rsvpBtn ? rsvpBtn.getAttribute('data-event') : null;
-                if (event && rsvps[event] && rsvps[event].length > 0) {
-                    li.classList.add('rsvped');
-                    if (rsvpBtn) rsvpBtn.style.display = 'none';
-                    // Add Remove RSVP button if not present
-                    if (!li.querySelector('.remove-rsvp-btn')) {
-                        const removeBtn = document.createElement('button');
-                        removeBtn.className = 'remove-rsvp-btn';
-                        removeBtn.textContent = "Remove RSVP";
-                        removeBtn.onclick = function() {
-                            delete rsvps[event];
-                            localStorage.setItem('winter_rsvps', JSON.stringify(rsvps));
-                            updateRSVPBoxes();
-                        };
-                        // Insert after RSVP button
-                        if (rsvpBtn) rsvpBtn.parentNode.insertBefore(removeBtn, rsvpBtn.nextSibling);
-                    }
-                } else {
-                    li.classList.remove('rsvped');
-                    if (rsvpBtn) rsvpBtn.style.display = 'inline-block';
-                    // Remove Remove RSVP button if present
-                    const removeBtn = li.querySelector('.remove-rsvp-btn');
-                    if (removeBtn) removeBtn.remove();
-                }
-            });
-        }
-        updateRSVPBoxes();
-
-        // Mobile menu toggle for accessibility
-        const menuToggle = document.querySelector('.menu-toggle');
-        const eventList = document.getElementById('eventList');
-        menuToggle.addEventListener('click', function() {
-            const expanded = eventList.classList.toggle('active');
-            menuToggle.setAttribute('aria-expanded', expanded);
-            menuToggle.textContent = expanded ? 'Hide Events' : 'Show Events';
-        });
-        function handleResize() {
-            if (window.innerWidth > 600) {
-                eventList.classList.add('active');
-                menuToggle.setAttribute('aria-expanded', true);
-                menuToggle.style.display = 'none';
-            } else {
-                eventList.classList.remove('active');
-                menuToggle.setAttribute('aria-expanded', false);
-                menuToggle.style.display = 'block';
-                menuToggle.textContent = 'Show Events';
-            }
-        }
-        window.addEventListener('resize', handleResize);
-        window.addEventListener('DOMContentLoaded', handleResize);
-
-        // Music Player (with autoplay fix for browsers)
-        const musicPlayer = document.getElementById('musicPlayer');
-        const musicToggle = document.getElementById('musicToggle');
-        const bgMusic = document.getElementById('bgMusic');
-        let isPlaying = false;
-        musicToggle.addEventListener('click', function() {
-            // Try to play music, handle browser restrictions
-            if (!isPlaying) {
-                bgMusic.volume = 0.5;
-                const playPromise = bgMusic.play();
-                if (playPromise !== undefined) {
-                    playPromise.then(() => {
-                        musicToggle.textContent = "Pause";
-                        isPlaying = true;
-                    }).catch(() => {
-                        // If play fails, try to resume after user interaction
-                        document.body.addEventListener('click', resumeMusicOnce, { once: true });
-                        alert("Please click anywhere on the page to allow music playback.");
-                    });
-                }
-            } else {
-                bgMusic.pause();
-                musicToggle.textContent = "Play";
-                isPlaying = false;
-            }
-        });
-        function resumeMusicOnce() {
-            bgMusic.play();
-            musicToggle.textContent = "Pause";
-            isPlaying = true;
-        }
-        bgMusic.addEventListener('ended', function() {
-            musicToggle.textContent = "Play";
-            isPlaying = false;
-        });
-
-        // Footer year
-        document.getElementById('footer-year').textContent = new Date().getFullYear();
-        document.getElementById('footer-year-copy').textContent = new Date().getFullYear();
-    </script>
+  })();
+  </script>
+  <footer class="site-foot" aria-hidden="false">
+  <div>Questions? <a href="mailto:info@winterhall.example" style="color:var(--accent)">info@winterhall.example</a></div>
+  <div class="small">© Winter Wonderland</div>
+  <div class="small" style="margin-top:6px;color:var(--muted);font-style:italic">
+    This event is imaginary — created to lift someone's mood and for entertainment only.
+  </div>
+</footer>
 </body>
 </html>

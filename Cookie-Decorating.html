@@ -1,245 +1,928 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cookie Decorating Workshop Invitation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Montserrat', Arial, sans-serif;
-            background: linear-gradient(120deg, #fffde4 0%, #f7e9d7 100%);
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-        }
-        .container {
-            max-width: 600px;
-            margin: 48px auto;
-            background: rgba(255,255,255,0.97);
-            border-radius: 24px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-            padding: 48px 32px 32px 32px;
-            text-align: center;
-        }
-        h1 {
-            font-family: 'Great Vibes', cursive;
-            color: #d2691e;
-            font-size: 2.6em;
-            margin-bottom: 12px;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 8px #fff6f6;
-        }
-        .event-details {
-            color: #333;
-            margin-bottom: 24px;
-            font-size: 1.15em;
-        }
-        .coming-soon {
-            font-size: 1.2em;
-            color: #d2691e;
-            font-weight: bold;
-            margin-bottom: 10px;
-            animation: pulse 1.5s infinite;
-        }
-        @keyframes pulse {
-            0% { color: #d2691e; }
-            50% { color: #ff9800; }
-            100% { color: #d2691e; }
-        }
-        .days-left {
-            font-size: 1.1em;
-            color: #d2691e;
-            margin-bottom: 8px;
-        }
-        .time-left {
-            font-size: 1em;
-            color: #ff9800;
-            margin-bottom: 16px;
-        }
-        .description {
-            margin: 18px 0 24px 0;
-            color: #444;
-            font-size: 1.08em;
-        }
-        .dates {
-            font-size: 1.15em;
-            color: #d2691e;
-            margin-bottom: 24px;
-            font-weight: bold;
-        }
-        .rsvp-btn {
-            background: linear-gradient(90deg, #d2691e 0%, #ff9800 100%);
-            color: #fff;
-            border: none;
-            border-radius: 12px;
-            padding: 14px 40px;
-            font-size: 1.1em;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 2px 8px rgba(210,105,30,0.12);
-            transition: background 0.2s, transform 0.2s;
-        }
-        .rsvp-btn:focus,
-        .back-btn:focus,
-        .menu-toggle:focus {
-            outline: 2px solid #d2691e;
-        }
-        .rsvp-btn:hover {
-            background: linear-gradient(90deg, #ff9800 0%, #d2691e 100%);
-            transform: scale(1.05);
-        }
-        .footer {
-            margin-top: 36px;
-            color: #888;
-            font-size: 1em;
-        }
-        .highlight {
-            color: #d2691e;
-            font-weight: bold;
-        }
-        ul.event-list {
-            text-align: left;
-            margin: 18px auto 24px auto;
-            max-width: 400px;
-            color: #6d4c41;
-            font-size: 1.07em;
-        }
-        .back-btn {
-            margin-top: 20px;
-            padding: 10px 24px;
-            font-size: 1em;
-            border: none;
-            border-radius: 8px;
-            background: linear-gradient(90deg, #8b892e 0%, #d78a26 100%);
-            color: #fff;
-            cursor: pointer;
-            box-shadow: 0 2px 8px rgba(46,139,87,0.12);
-            transition: background 0.2s, transform 0.2s;
-            font-weight: bold;
-        }
-        .back-btn:hover {
-            background: linear-gradient(90deg, #d7cb26 0%, #8b6a2e 100%);
-            transform: scale(1.05);
-        }
-        /* Mobile menu styles */
-        .menu-toggle {
-            display: none;
-            background: #d2691e;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            padding: 10px 18px;
-            font-size: 1.1em;
-            font-weight: bold;
-            cursor: pointer;
-            margin-bottom: 18px;
-        }
-        @media (max-width: 600px) {
-            .container {
-                max-width: 98vw;
-                padding: 24px 4vw 24px 4vw;
-            }
-            .menu-toggle {
-                display: block;
-            }
-            .event-details {
-                display: none;
-            }
-            .event-details.active {
-                display: block;
-            }
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cookie Decorating — Community Event</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg-0:#041524; --bg-1:#07283a; --card:#f8fafc; --muted:#9fb6c6; --accent:#ffd87a;
+      --primary:#6fd8ff; --glass: rgba(115, 149, 194, 0.03); --maxw:980px;
+      --focus: 3px solid rgba(255,215,122,0.25);
+      --radius:10px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Montserrat,system-ui,Arial;background:linear-gradient(180deg,var(--bg-0),var(--bg-1));color:var(--card);-webkit-font-smoothing:antialiased}
+    a{color:inherit}
+    .wrap{max-width:var(--maxw);margin:18px auto;padding:18px}
+    header.site{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand h1{margin:0;font-family:'Great Vibes',cursive;color:var(--accent);font-size:1.6rem;line-height:1}
+    .brand .tag{font-size:.9rem;color:var(--muted);font-family:Montserrat,Arial}
+    .controls{display:flex;gap:8px;align-items:center}
+    .btn{padding:8px 12px;border-radius:10px;border:none;cursor:pointer;background:linear-gradient(90deg,var(--primary),#7fd5f0);color:#042028;font-weight:700}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--card)}
+    .btn.holly{background:linear-gradient(90deg,#f59e76,#ff8b7a);color:#fff}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:16px;border-radius:var(--radius);border:1px solid rgba(255,255,255,0.04)}
+    .layout{display:grid;grid-template-columns:320px 1fr;gap:16px;margin-top:14px}
+    .list{display:grid;gap:8px;margin-top:10px}
+    .entry{display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:8px;background:rgba(255,255,255,0.02)}
+    label.small{display:block;font-size:.9rem;color:var(--muted);margin-bottom:6px}
+    select,input[type="text"],input[type="email"],input[type="number"],textarea{width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:var(--card)}
+    .age-badge{display:inline-block;padding:6px 8px;border-radius:8px;background:rgba(255,255,255,0.02);color:var(--accent);font-weight:700}
+    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;padding:18px;z-index:2200}
+    .modal-backdrop.show{display:flex}
+    .modal{width:100%;max-width:820px;background:#0f2a3a;padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);color:var(--card);max-height:calc(100vh - 80px);overflow:auto}
+    .toast{position:fixed;right:18px;bottom:18px;background:var(--accent);color:#041525;padding:10px 14px;border-radius:10px;display:none;font-weight:700}
+    .stats{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+    .stat{background:var(--glass);padding:8px;border-radius:8px;color:var(--muted);font-size:.9rem}
+    .photo-preview{height:80px;border-radius:8px;object-fit:cover;border:1px solid rgba(255,255,255,0.06);display:block;margin-top:8px}
+    .child-row{display:flex;gap:8px;align-items:center}
+    .danger{color:#ffb3b3;font-size:.85rem}
+    .menu-toggle{display:none}
+    nav.mobile-nav{display:none}
+    .vol-list{max-height:220px;overflow:auto;padding-right:6px;margin-top:8px}
+    .progress{height:8px;background:rgba(255,255,255,0.03);border-radius:8px;overflow:hidden;margin-top:6px}
+    .progress > i{display:block;height:100%;background:linear-gradient(90deg,#ffd87a,#ffb86b)}
+    .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+    .skip-link:focus{left:18px;top:18px;width:auto;height:auto;background:#fff;padding:8px;border-radius:6px;color:#041524}
+    .rsvp-entry{border:1px dashed rgba(255,255,255,0.03);padding:12px;border-radius:8px;margin-bottom:8px;background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent)}
+    .rsvp-entry .remove-entry{float:right}
+    @media(max-width:900px){
+      .layout{grid-template-columns:1fr}
+      .menu-toggle{display:inline-flex}
+      nav.site-nav{display:none}
+      nav.mobile-nav{display:block;position:fixed;left:0;top:0;bottom:0;width:86%;background:linear-gradient(180deg,var(--bg-0),var(--bg-1));z-index:2400;padding:22px;transform:translateX(-120%);transition:transform .24s;border-right:1px solid rgba(255,255,255,0.03)}
+      nav.mobile-nav.show{transform:translateX(0)}
+      .modal{max-width:92%}
+    }
+    :focus{outline:none;box-shadow:var(--focus)}
+    .visually-hidden{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+  </style>
 </head>
 <body>
-    <div class="container" role="main" aria-label="Cookie Decorating Workshop Event">
-        <h1 tabindex="0">🍪 Cookie Decorating Workshop 🍪</h1>
-        <button class="menu-toggle" aria-controls="eventDetails" aria-expanded="false" aria-label="Toggle event details">
-            Show Details
-        </button>
-        <div class="event-details" id="eventDetails">
-            <div class="coming-soon">Coming Soon!</div>
-            <div class="days-left">
-                The workshop starts in <span id="daysLeft"></span> days.
-            </div>
-            <div class="time-left">
-                (<span id="timeLeft"></span>)
-            </div>
-            <div class="description">
-                <span class="highlight">Unleash your creativity and sweeten your holidays!</span><br>
-                Join us for a fun-filled Cookie Decorating Workshop and enjoy a series of festive events:
-                <ul class="event-list">
-                    <li>🎨 Cookie Decorating Contest</li>
-                    <li>🍫 Hot Chocolate Bar</li>
-                    <li>👨‍🍳 Baking Demonstrations</li>
-                    <li>🎁 Holiday Treats Exchange</li>
-                    <li>🎶 Festive Music & Games</li>
-                    <li>📸 Photo Booth with Props</li>
-                </ul>
-                <span style="color:#d2691e; font-weight:bold;">Perfect for families, friends, and anyone who loves cookies!</span>
-            </div>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <div class="wrap" id="page">
+    <header class="site" role="banner" aria-label="Cookie Decorating header">
+      <div style="display:flex;align-items:center;gap:12px">
+        <button id="menuToggle" class="btn ghost menu-toggle" aria-controls="mobileNav" aria-expanded="false" aria-label="Open menu">☰</button>
+        <div class="brand" role="img" aria-label="Cookie Decorating event">
+          <h1 tabindex="0">Cookie Decorating</h1>
+          <div class="tag">Family cookie-decorating station — Dec 20 • Free</div>
         </div>
-        <div class="dates" tabindex="0">
-            <strong>Event Dates:</strong> December 18 – December 20
+      </div>
+
+      <div class="controls" role="navigation" aria-label="Top controls">
+        <nav class="site-nav" aria-hidden="false">
+        <button id="backBtn" class="back" aria-label="Back to events">← Back</button>
+          <button id="shareBtn" class="btn ghost" aria-label="Share event">Share</button>
+          <button id="ticketBtn" class="btn ghost" aria-label="Ticket options">Ticket</button>
+        </nav>
+
+        <button id="rsvpBtn" class="btn" aria-haspopup="dialog" aria-controls="rsvpModal">RSVP</button>
+      </div>
+    </header>
+
+    <nav id="mobileNav" class="mobile-nav" aria-hidden="true" role="dialog" aria-label="Mobile menu">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <strong style="font-size:1.05rem">Menu</strong>
+        <button id="mobileClose" class="btn ghost" aria-label="Close menu">✕</button>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <button id="mShare" class="btn ghost">Share event</button>
+        <button id="mTicket" class="btn ghost">Ticket</button>
+        <a href="#rsvpList" class="btn">Who's coming</a>
+        <button id="mVol" class="btn holly">Volunteer</button>
+        <button id="darkToggle" class="btn ghost" aria-pressed="false">Invert colors</button>
+      </div>
+    </nav>
+
+    <main id="main" class="card" role="main" aria-label="Cookie Decorating main">
+      <div class="layout" role="region" aria-label="Event layout">
+        <aside aria-label="Sidebar">
+          <div class="card" aria-labelledby="rsvp-heading">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div><div id="rsvp-heading" class="small">RSVP</div><div style="font-weight:800">Cookie Decorating — Dec 20</div></div>
+              <div id="rsvpCount" class="age-badge" aria-live="polite">0 RSVPs</div>
+            </div>
+
+            <div style="margin-top:12px;display:flex;gap:8px">
+              <button id="viewBtn" class="btn ghost">Who's coming</button>
+              <button id="volBtn" class="btn holly" aria-haspopup="dialog" aria-controls="volModal">Volunteer</button>
+            </div>
+
+            <div style="margin-top:12px">
+              <label class="small" for="sessionFilter">Filter session</label>
+              <select id="sessionFilter" aria-label="Filter sessions"><option value="">All sessions</option></select>
+            </div>
+
+            <div class="stats" aria-hidden="false" style="margin-top:12px">
+              <div class="stat" id="stat-sessions">Sessions: —</div>
+              <div class="stat" id="stat-kids">Avg kids / RSVP: —</div>
+              <div class="stat" id="stat-cap">Seats left: —</div>
+            </div>
+          </div>
+
+          <div style="margin-top:12px">
+            <h4 style="margin:6px 0;color:var(--accent)">Who's coming</h4>
+            <div id="rsvpList" class="list" aria-live="polite"><div class="small">No RSVPs yet.</div></div>
+          </div>
+
+          <div style="margin-top:12px" class="card" aria-label="Volunteer desk">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div><div class="small">Volunteer desk</div><div style="font-weight:700">Help with tables</div></div>
+              <div><button id="volQuick" class="btn ghost">Sign up</button></div>
+            </div>
+            <div class="small" style="margin-top:8px;color:var(--muted)">Volunteers get a cookie pack.</div>
+            <div id="volListPlaceholder" class="vol-list" aria-live="polite"><div class="small">No volunteers yet.</div></div>
+          </div>
+        </aside>
+
+        <section aria-label="Details">
+          <h2 style="margin:0;color:var(--accent)">Cookie Decorating — Family Session</h2>
+          <p class="small" style="margin-top:8px;color:var(--muted)">Pick a session. Each session targets an age group — selecting a session shows recommended ages and validates entered child ages. You can add per-child dietary info and a photo.</p>
+
+          <div class="card" style="margin-top:12px" aria-labelledby="sessions-heading">
+            <h4 id="sessions-heading" style="margin:6px 0;color:var(--accent)">Sessions & seats</h4>
+            <div id="sessionSummary" class="small" aria-live="polite">Loading…</div>
+            <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+              <button id="printAll" class="btn ghost">Print attendees</button>
+              <button id="shareAttendees" class="btn ghost">Share attendees</button>
+              <button id="exportJson" class="btn ghost">Export JSON</button>
+              <button id="clearAll" class="btn ghost">Clear data</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- RSVP modal (supports up to 4 RSVP entries in one submit) -->
+  <div class="modal-backdrop" id="rsvpModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="rsvpTitle">
+    <div class="modal" role="document">
+      <button id="rsvpClose" class="btn ghost" style="float:right" aria-label="Close RSVP dialog">✕</button>
+      <h3 id="rsvpTitle">RSVP — Cookie Decorating</h3>
+
+      <form id="rsvpForm" novalidate>
+        <p class="small">You can submit up to 4 RSVPs at once (e.g. register multiple families). Use "Add RSVP" to add more entries.</p>
+
+        <div id="rsvpEntries">
+          <!-- Entry template injected by JS; one entry created on open -->
         </div>
-        <button class="rsvp-btn" onclick="alert('Thank you for your RSVP! Get ready for a sweet celebration!')" aria-label="RSVP for Cookie Decorating Workshop">RSVP</button>
-        <div class="footer" tabindex="0">
-            Location: <span class="highlight">Sugar & Spice Community Center</span><br>
-            Hosted by: <span class="highlight">Winter Wonderland - The Cookie Crew</span><br>
-            Why this event?: <span class="highlight">To spread holiday cheer and create delicious memories with our community! All ages are welcome!</span>
+
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <button type="button" id="addRsvpEntry" class="btn ghost">Add RSVP</button>
+          <button type="button" id="loadMe" class="btn ghost">Load my RSVP</button>
         </div>
-        <button onclick="location.href='index.html'" class="back-btn" aria-label="Back to Main Page">
-            Back to Main Page
-        </button>
+
+        <div style="display:flex;justify-content:space-between;gap:8px;margin-top:12px;align-items:center">
+          <div></div>
+          <div>
+            <button type="button" id="rsvpCancel" class="btn ghost">Cancel</button>
+            <button type="submit" id="rsvpSubmit" class="btn">Confirm RSVP(s)</button>
+          </div>
+        </div>
+      </form>
     </div>
-    <script>
-        // Countdown logic: days, total hours, minutes, seconds
-        function updateCountdown() {
-            const now = new Date();
-            let eventYear = now.getFullYear();
-            const eventStart = new Date(eventYear, 11, 18, 0, 0, 0); // December is month 11 (0-indexed)
-            if (now > eventStart) {
-                eventYear++;
-            }
-            const nextEventStart = new Date(eventYear, 11, 18, 0, 0, 0);
-            let diff = nextEventStart - now;
+  </div>
 
-            let daysLeft = Math.floor(diff / (1000 * 60 * 60 * 24));
-            let totalHoursLeft = Math.floor(diff / (1000 * 60 * 60));
-            let minutesLeft = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            let secondsLeft = Math.floor((diff % (1000 * 60)) / 1000);
+  <!-- Volunteer modal -->
+  <div class="modal-backdrop" id="volModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="volTitle">
+    <div class="modal">
+      <button id="volClose" class="btn ghost" style="float:right" aria-label="Close volunteer dialog">✕</button>
+      <h3 id="volTitle">Volunteer — Cookie Decorating</h3>
+      <form id="volForm" novalidate>
+        <label class="small">Full name *</label>
+        <input id="volName" type="text" required>
+        <label class="small" style="margin-top:8px">Role</label>
+        <select id="volRole"><option value="">Any</option><option value="helper">Helper</option><option value="setup">Setup</option></select>
+        <label style="margin-top:8px"><input id="volAgree" type="checkbox" required> I agree to be contacted</label>
+        <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:12px">
+          <button type="button" id="volBack" class="btn ghost">Close</button>
+          <button type="submit" class="btn">Sign up</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
-            document.getElementById('daysLeft').textContent = daysLeft;
-            document.getElementById('timeLeft').textContent =
-                `${totalHoursLeft} hours, ${minutesLeft} minutes, ${secondsLeft} seconds`;
+  <!-- Ticket options modal -->
+  <div class="modal-backdrop" id="ticketModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="ticketTitle">
+    <div class="modal" role="document">
+      <button id="ticketClose" class="btn ghost" style="float:right" aria-label="Close ticket dialog">✕</button>
+      <h3 id="ticketTitle">Ticket — Options</h3>
+      <p class="small">Choose: "Download as QR" creates a QR (scan from another device to open the ticket). "Download ticket" saves the full ticket file immediately.</p>
+      <div style="display:flex;gap:8px;margin-top:12px">
+        <button id="ticketDownloadQr" class="btn ghost">Download as QR</button>
+        <button id="ticketDownloadHtml" class="btn">Download ticket</button>
+      </div>
+      <div id="ticketQrPreview" style="margin-top:12px;display:none">
+        <div class="small">QR preview (scan from phone):</div>
+        <img id="ticketQrImg" alt="QR preview" style="width:240px;height:240px;border-radius:8px;margin-top:8px;background:#fff;padding:6px">
+      </div>
+      <div style="margin-top:12px" class="small">Note: QR encodes the ticket HTML as a data: URL. Some scanners may block data: URIs — if that happens use "Download ticket".</div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script>
+  (function(){
+    'use strict';
+    // storage keys
+    const RSVP_KEY = 'cookie_rsvps_v2';
+    const VOL_KEY = 'cookie_vols_v2';
+    const MYRSVP = 'cookie_my_rsvp_v2';
+    const MYVOL = 'cookie_my_vol_v2';
+
+    const SESSIONS = [
+      { id:'09-10', label:'09:00–10:00', capacity:16, ages:{min:1,max:3,label:'1–3 (toddlers)'} },
+      { id:'10-11', label:'10:00–11:00', capacity:20, ages:{min:3,max:5,label:'3–5'} },
+      { id:'11-12', label:'11:00–12:00', capacity:20, ages:{min:5,max:8,label:'5–8'} },
+      { id:'13-14', label:'13:00–14:00', capacity:18, ages:{min:8,max:12,label:'8–12'} }
+    ];
+
+    const $ = id => document.getElementById(id);
+    function read(k){ try{ return JSON.parse(localStorage.getItem(k) || '[]'); }catch{ return []; } }
+    function write(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){ console.warn(e); } }
+    function uid(p='id'){ return p+'_'+Date.now()+'_'+Math.random().toString(36).slice(2,6); }
+    function toast(msg, ms=2400){ const t=$('toast'); if(!t) return; t.textContent=msg; t.style.display='block'; clearTimeout(toast._t); toast._t=setTimeout(()=>t.style.display='none',ms); }
+    function escapeHtml(s){ return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+    // elements
+    const menuToggle = $('menuToggle'), mobileNav = $('mobileNav'), mobileClose = $('mobileClose');
+    const mShare = $('mShare'), mTicket = $('mTicket'), mVol = $('mVol'), darkToggle = $('darkToggle');
+
+    const rsvpBtn = $('rsvpBtn'), rsvpModal = $('rsvpModal'), rsvpClose = $('rsvpClose'), rsvpCancel = $('rsvpCancel');
+    const rsvpForm = $('rsvpForm'), rsvpEntries = $('rsvpEntries'), addRsvpEntryBtn = $('addRsvpEntry'), loadMe = $('loadMe');
+    const rsvpList = $('rsvpList'), rsvpCount = $('rsvpCount'), sessionFilter = $('sessionFilter'), sessionSummary = $('sessionSummary'), viewBtn = $('viewBtn');
+    const shareBtn = $('shareBtn'), ticketBtn = $('ticketBtn'), printAll = $('printAll'), shareAttendees = $('shareAttendees'), clearAll = $('clearAll'), exportJson = $('exportJson');
+    const volBtn = $('volBtn'), volModal = $('volModal'), volQuick = $('volQuick'), volForm = $('volForm');
+    const photoInput = $('photoInput'), photoPreview = $('photoPreview');
+
+    const ticketModal = $('ticketModal'), ticketClose = $('ticketClose'), ticketDownloadQr = $('ticketDownloadQr'), ticketDownloadHtml = $('ticketDownloadHtml'), ticketQrPreview = $('ticketQrPreview'), ticketQrImg = $('ticketQrImg');
+
+    let lastFocus = null;
+    const MAX_ENTRIES = 4;
+
+    function trapFocus(modalEl){
+      const focusable = modalEl.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled])');
+      if(!focusable.length) return ()=>{};
+      const first = focusable[0], last = focusable[focusable.length -1];
+      function keyHandler(e){
+        if(e.key !== 'Tab') return;
+        if(e.shiftKey){
+          if(document.activeElement === first){ e.preventDefault(); last.focus(); }
+        } else {
+          if(document.activeElement === last){ e.preventDefault(); first.focus(); }
         }
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
+      }
+      modalEl._keyHandler = keyHandler;
+      document.addEventListener('keydown', keyHandler);
+      return function release(){ document.removeEventListener('keydown', keyHandler); delete modalEl._keyHandler; };
+    }
 
-        // Mobile menu toggle for accessibility
-        const menuToggle = document.querySelector('.menu-toggle');
-        const eventDetails = document.getElementById('eventDetails');
-        menuToggle.addEventListener('click', function() {
-            const expanded = eventDetails.classList.toggle('active');
-            menuToggle.setAttribute('aria-expanded', expanded);
-            menuToggle.textContent = expanded ? 'Hide Details' : 'Show Details';
+    function openPanel(panel){
+      lastFocus = document.activeElement;
+      if(panel === mobileNav){
+        menuToggle.setAttribute('aria-expanded','true'); mobileNav.classList.add('show'); mobileNav.setAttribute('aria-hidden','false'); mobileNav.focus && mobileNav.focus();
+      } else {
+        panel.classList.add('show'); panel.style.display='flex'; panel.setAttribute('aria-hidden','false'); const rel = trapFocus(panel); panel._release = rel;
+        panel.querySelector('input,select,button,textarea')?.focus();
+      }
+      document.body.style.overflow = 'hidden';
+    }
+    function closePanel(panel){
+      if(panel === mobileNav){
+        menuToggle.setAttribute('aria-expanded','false'); mobileNav.classList.remove('show'); mobileNav.setAttribute('aria-hidden','true');
+        menuToggle.focus();
+      } else {
+        if(panel._release) panel._release();
+        panel.classList.remove('show'); panel.style.display='none'; panel.setAttribute('aria-hidden','true');
+        if(lastFocus) try{ lastFocus.focus(); }catch{}
+      }
+      document.body.style.overflow = '';
+    }
+
+    menuToggle?.addEventListener('click', ()=>{
+      const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+      if(expanded) closePanel(mobileNav); else openPanel(mobileNav);
+    });
+    mobileClose?.addEventListener('click', ()=> closePanel(mobileNav));
+    mShare?.addEventListener('click', ()=> shareBtn.click());
+    mTicket?.addEventListener('click', ()=> ticketBtn.click());
+    mVol?.addEventListener('click', ()=> openPanel(volModal));
+
+
+      // Back button: navigate back if possible, otherwise go to homepage
+    const backBtn = $('backBtn');
+    backBtn?.addEventListener('click', () => {
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+       // fallback — change '/' to a different route if needed
+        window.location.href = '/';
+      }
+    });
+
+    // RSVP button open/close handlers
+    rsvpBtn?.addEventListener('click', ()=> openPanel(rsvpModal));
+    rsvpClose?.addEventListener('click', ()=> closePanel(rsvpModal));
+    rsvpCancel?.addEventListener('click', ()=> closePanel(rsvpModal));
+
+    darkToggle?.addEventListener('click', ()=>{
+      const pressed = darkToggle.getAttribute('aria-pressed') === 'true';
+      darkToggle.setAttribute('aria-pressed', String(!pressed));
+      document.documentElement.classList.toggle('inverted');
+      toast(pressed ? 'Colors restored' : 'Colors inverted');
+    });
+
+    function seatsLeft(sessionId){
+      const arr = read(RSVP_KEY);
+      const session = SESSIONS.find(s=>s.id===sessionId);
+      const capacity = session ? session.capacity : 0;
+      const bookedChildren = arr.filter(r=>r.session===sessionId).reduce((sum, r)=>{
+        if(Array.isArray(r.childrenAges) && r.childrenAges.length) return sum + r.childrenAges.length;
+        const k = Number(r.kids) || 0;
+        return sum + (k>0 ? k : 1);
+      }, 0);
+      return Math.max(0, capacity - bookedChildren);
+    }
+
+    // --- RSVP entries handling (supports multiple RSVPs per form) ---
+    function createRsvpEntry(data){
+      const idx = rsvpEntries.children.length;
+      const wrapper = document.createElement('div');
+      wrapper.className = 'rsvp-entry';
+      wrapper.dataset.entry = idx;
+
+      wrapper.innerHTML = `
+        <button type="button" class="btn ghost remove-entry" style="float:right">Remove</button>
+        <div style="display:flex;gap:8px;align-items:center;justify-content:space-between">
+          <div style="flex:1">
+            <label class="small">Full name *</label>
+            <input class="entry-name" type="text" required placeholder="Parent / guardian name">
+          </div>
+          <div style="width:240px">
+            <label class="small">Email (optional)</label>
+            <input class="entry-email" type="email" placeholder="you@example.com">
+          </div>
+        </div>
+
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <div style="width:160px">
+            <label class="small">Number of kids</label>
+            <select class="entry-kids"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4+</option></select>
+          </div>
+          <div style="flex:1">
+            <label class="small">Session *</label>
+            <select class="entry-session" required></select>
+          </div>
+        </div>
+
+        <div style="margin-top:8px" class="small">Time: <span class="entry-session-time age-badge">—</span> · Recommended ages: <span class="entry-age-hint age-badge">—</span></div>
+
+        <div class="entry-childrenAges" style="margin-top:8px" aria-live="polite"></div>
+
+        <div style="margin-top:8px">
+          <label class="small">Photo (optional)</label>
+          <input class="entry-photo" type="file" accept="image/*">
+          <img class="entry-photo-preview photo-preview" alt="Preview" style="display:none">
+        </div>
+
+        <label class="small" style="margin-top:8px">Notes</label>
+        <textarea class="entry-notes" rows="2" placeholder="e.g. allergies"></textarea>
+
+        <label style="margin-top:8px"><input class="entry-agree" type="checkbox" required> I agree to event terms</label>
+      `;
+
+      // add functionality for entry: session change, kids change, photo preview, remove
+      const name = wrapper.querySelector('.entry-name');
+      const email = wrapper.querySelector('.entry-email');
+      const kids = wrapper.querySelector('.entry-kids');
+      const sessionSel = wrapper.querySelector('.entry-session');
+      const sessionTimeEl = wrapper.querySelector('.entry-session-time');
+      const ageHintEl = wrapper.querySelector('.entry-age-hint');
+      const childrenAgesContainer = wrapper.querySelector('.entry-childrenAges');
+      const photoInputLocal = wrapper.querySelector('.entry-photo');
+      const photoPreviewLocal = wrapper.querySelector('.entry-photo-preview');
+      const agree = wrapper.querySelector('.entry-agree');
+      const removeBtn = wrapper.querySelector('.remove-entry');
+
+      removeBtn.addEventListener('click', ()=>{
+        if(rsvpEntries.children.length <= 1){ toast('At least one RSVP entry is required'); return; }
+        wrapper.remove();
+      });
+
+      sessionSel.addEventListener('change', ()=>{
+        const sid = sessionSel.value;
+        const s = SESSIONS.find(x=>x.id===sid);
+        sessionTimeEl.textContent = s ? s.label : '—';
+        ageHintEl.textContent = s ? s.ages.label : 'All ages';
+        renderChildAgeInputsFor(wrapper);
+      });
+
+      kids.addEventListener('change', ()=> renderChildAgeInputsFor(wrapper));
+
+      photoInputLocal.addEventListener('change', e=>{
+        const f = e.target.files && e.target.files[0]; if(!f) return;
+        const reader = new FileReader();
+        reader.onload = () => { photoPreviewLocal.src = reader.result; photoPreviewLocal.style.display = 'block'; photoPreviewLocal.dataset.data = reader.result; };
+        reader.readAsDataURL(f);
+      });
+
+      // populate initial values if provided
+      if(data){
+        name.value = data.name||'';
+        email.value = data.email||'';
+        kids.value = data.kids||'1';
+        // session will be set after populateSessions runs
+        setTimeout(()=> {
+          if(data.session) sessionSel.value = data.session;
+          sessionSel.dispatchEvent(new Event('change'));
+          wrapper.querySelector('.entry-notes').value = data.notes||'';
+          if(data.photo){ photoPreviewLocal.src = data.photo; photoPreviewLocal.style.display = 'block'; photoPreviewLocal.dataset.data = data.photo; }
+        }, 20);
+      }
+
+      rsvpEntries.appendChild(wrapper);
+      // ensure session options populated
+      populateSessionOptionsFor(wrapper);
+      renderChildAgeInputsFor(wrapper);
+      return wrapper;
+    }
+
+    function populateSessionOptionsFor(entryEl){
+      const sel = entryEl.querySelector('.entry-session');
+      sel.innerHTML = '';
+      SESSIONS.forEach(s=>{
+        const left = seatsLeft(s.id);
+        const opt = document.createElement('option');
+        opt.value = s.id;
+        opt.textContent = `${s.label} — ${left} left`;
+        if(left<=0) opt.disabled = true;
+        sel.appendChild(opt);
+      });
+    }
+
+    function renderChildAgeInputsFor(entryEl){
+      const kidsSel = entryEl.querySelector('.entry-kids');
+      const raw = kidsSel ? kidsSel.value || '1' : '1';
+      const freeform = raw === '4';
+      const sessionSel = entryEl.querySelector('.entry-session');
+      const sid = sessionSel ? sessionSel.value || '' : '';
+      const session = SESSIONS.find(x=>x.id===sid);
+      const min = session? session.ages.min : 0;
+      const max = session? session.ages.max : 17;
+      const container = entryEl.querySelector('.entry-childrenAges');
+      container.innerHTML = '';
+      if(freeform){
+        const wrap = document.createElement('div'); wrap.style.marginTop='8px';
+        const lbl = document.createElement('label'); lbl.className='small'; lbl.textContent = `Children ages (comma separated) — recommended ${min}–${max}`;
+        const ta = document.createElement('textarea'); ta.className='childrenAgesText'; ta.rows=2; ta.style.width='100%'; ta.placeholder='e.g. 9, 9, 8';
+        wrap.appendChild(lbl); wrap.appendChild(ta); container.appendChild(wrap);
+      } else {
+        const count = Math.max(1, Math.min(3, Number(raw)));
+        for(let i=1;i<=count;i++){
+          const wrap = document.createElement('div'); wrap.style.marginTop='8px'; wrap.className='child-row';
+          const lbl = document.createElement('label'); lbl.className='small'; lbl.textContent = `Child ${i} age (recommended ${min}–${max})`;
+          const inp = document.createElement('input'); inp.type='number'; inp.min=0; inp.max=17; inp.className='child-age'; inp.placeholder=`${min}–${max}`; inp.dataset.index = (i-1);
+          const diet = document.createElement('input'); diet.type='text'; diet.placeholder='Diet / allergies (optional)'; diet.dataset.dietIndex = (i-1);
+          inp.addEventListener('input', ()=> {
+            const v = inp.value===''?null: Number(inp.value);
+            const warn = wrap.querySelector('.warn');
+            if(v!==null && (v<min || v>max)){
+              if(!warn){ const w = document.createElement('div'); w.className='warn danger'; w.textContent = `Age outside recommended ${min}–${max}`; wrap.appendChild(w); }
+            } else { if(warn) warn.remove(); }
+          });
+          wrap.appendChild(lbl); wrap.appendChild(inp); wrap.appendChild(diet);
+          container.appendChild(wrap);
+        }
+      }
+    }
+
+    function collectEntryData(entryEl){
+      const name = entryEl.querySelector('.entry-name').value.trim();
+      const email = entryEl.querySelector('.entry-email').value.trim();
+      const kids = entryEl.querySelector('.entry-kids').value;
+      const session = entryEl.querySelector('.entry-session').value;
+      const notes = entryEl.querySelector('.entry-notes').value.trim();
+      const agree = entryEl.querySelector('.entry-agree').checked;
+      // children ages
+      const ta = entryEl.querySelector('.childrenAgesText');
+      let childrenAges = [];
+      let childrenDiet = [];
+      if(ta && ta.value.trim()){
+        const parts = ta.value.split(/[,;]+/).map(s=>s.trim()).filter(Boolean);
+        childrenAges = parts.map(p=>{ const n=Number(p); return Number.isFinite(n) ? n : null; });
+      } else {
+        const inputs = entryEl.querySelectorAll('input.child-age');
+        inputs.forEach(i=> childrenAges.push(i.value===''?null:Number(i.value)));
+        const dietInputs = entryEl.querySelectorAll('input[data-diet-index]');
+        dietInputs.forEach(i=> childrenDiet.push(i.value || ''));
+      }
+      const photoPreviewLocal = entryEl.querySelector('.entry-photo-preview');
+      const photo = photoPreviewLocal && photoPreviewLocal.dataset.data ? photoPreviewLocal.dataset.data : '';
+      return { name, email, kids, session, notes, agree, childrenAges, childrenDiet, photo };
+    }
+
+    function validateEntryData(data){
+      if(!data.name) return { ok:false, reason:'Enter name' };
+      if(!data.session) return { ok:false, reason:'Choose a session' };
+      if(!data.agree) return { ok:false, reason:'Agree to terms' };
+      // validate ages against session
+      const s = SESSIONS.find(x=>x.id===data.session);
+      if(s && Array.isArray(data.childrenAges)){
+        for(const a of data.childrenAges){
+          if(a===null) continue;
+          if(typeof a!=='number' || isNaN(a)) return { ok:false, reason:'Enter valid ages' };
+          if(a<0 || a>17) return { ok:false, reason:'Enter realistic ages (0–17)' };
+          if(a < s.ages.min || a > s.ages.max) return { ok:false, reason:`One or more ages outside recommended ${s.ages.min}–${s.ages.max}` };
+        }
+      }
+      // seat availability check: simple per-session aggregate (we will check total after collecting all entries)
+      return { ok:true };
+    }
+
+    // add/remove entries
+    function addRsvpEntry(data){
+      if(rsvpEntries.children.length >= MAX_ENTRIES){ toast(`Maximum ${MAX_ENTRIES} RSVPs at once`); return; }
+      const el = createRsvpEntry(data);
+      // focus first name
+      el.querySelector('.entry-name').focus();
+    }
+    addRsvpEntryBtn?.addEventListener('click', ()=> addRsvpEntry());
+
+    // populate sessions for global selects (filter) and per-entry selects
+    function populateSessions(){
+      // sessionFilter
+      sessionFilter.innerHTML = '<option value="">All sessions</option>';
+      SESSIONS.forEach(s=>{
+        const left = seatsLeft(s.id);
+        const opt = document.createElement('option');
+        opt.value = s.id;
+        opt.textContent = `${s.label} — ${left} left`;
+        sessionFilter.appendChild(opt);
+      });
+
+      // for each entry, populate options
+      const entrySessionSelects = document.querySelectorAll('.entry-session');
+      entrySessionSelects.forEach(sel=>{
+        sel.innerHTML = '';
+        SESSIONS.forEach(s=>{
+          const left = seatsLeft(s.id);
+          const opt = document.createElement('option');
+          opt.value = s.id;
+          opt.textContent = `${s.label} — ${left} left`;
+          if(left<=0) opt.disabled = true;
+          sel.appendChild(opt);
         });
-        // Show details by default on desktop
-        function handleResize() {
-            if (window.innerWidth > 600) {
-                eventDetails.classList.add('active');
-                menuToggle.setAttribute('aria-expanded', true);
-                menuToggle.style.display = 'none';
-            } else {
-                eventDetails.classList.remove('active');
-                menuToggle.setAttribute('aria-expanded', false);
-                menuToggle.style.display = 'block';
-                menuToggle.textContent = 'Show Details';
-            }
+      });
+
+      updateSessionInfoAll();
+    }
+
+    function updateSessionInfoAll(){
+      // update per-entry session time/age hint and children inputs
+      document.querySelectorAll('.rsvp-entry').forEach(entryEl=>{
+        const sel = entryEl.querySelector('.entry-session');
+        const timeEl = entryEl.querySelector('.entry-session-time');
+        const hintEl = entryEl.querySelector('.entry-age-hint');
+        const s = SESSIONS.find(x=>x.id===sel.value);
+        timeEl.textContent = s ? s.label : '—';
+        hintEl.textContent = s ? s.ages.label : 'All ages';
+        renderChildAgeInputsFor(entryEl);
+      });
+      renderSessionSummary();
+    }
+
+    function renderSessionSummary(){
+      const el = sessionSummary;
+      el.innerHTML = '';
+      const arr = read(RSVP_KEY);
+      SESSIONS.forEach(s=>{
+        const left = seatsLeft(s.id);
+        const filled = arr.filter(r=>r.session===s.id).reduce((sum, r)=>{
+          if(Array.isArray(r.childrenAges) && r.childrenAges.length) return sum + r.childrenAges.length;
+          return sum + (Number(r.kids)||1);
+        }, 0);
+        const wrapper = document.createElement('div');
+        wrapper.style.marginTop = '8px';
+        const pct = Math.min(100, Math.round((filled / s.capacity) * 100));
+        wrapper.innerHTML = `<strong>${escapeHtml(s.label)}</strong> — ${left}/${s.capacity} left (${filled} booked)
+          <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="${s.capacity}" aria-valuenow="${filled}" aria-label="Seats filled"><i style="width:${pct}%"></i></div>
+          <div class="small" style="margin-top:6px">Recommended: <span class="age-badge">${escapeHtml(s.ages.label)}</span></div>`;
+        el.appendChild(wrapper);
+      });
+    }
+
+    // form submit: collect all entries and add them to storage (each becomes its own RSVP record)
+    rsvpForm.addEventListener('submit', (ev)=>{
+      ev.preventDefault();
+      const entries = Array.from(document.querySelectorAll('.rsvp-entry'));
+      if(!entries.length){ toast('Add at least one RSVP'); return; }
+
+      // collect only filled entries (skip blank blocks)
+      const toSave = [];
+      for(const entryEl of entries){
+        const data = collectEntryData(entryEl);
+        const hasChildAges = Array.isArray(data.childrenAges) && data.childrenAges.some(a => a !== null && a !== '');
+        const isFilled = Boolean(data.name || data.email || data.notes || data.photo || hasChildAges);
+        if(!isFilled){
+          // skip empty entry
+          continue;
         }
-        window.addEventListener('resize', handleResize);
-        window.addEventListener('DOMContentLoaded', handleResize);
-    </script>
+        const v = validateEntryData(data);
+        if(!v.ok){ toast(v.reason); entryEl.querySelector('.entry-name').focus(); return; }
+        toSave.push(data);
+      }
+
+      if(!toSave.length){ toast('Add at least one RSVP'); return; }
+
+      // verify seats: aggregate existing + new
+      const existing = read(RSVP_KEY);
+      const bookedMap = {};
+      existing.forEach(r=>{
+        const cnt = Array.isArray(r.childrenAges) && r.childrenAges.length ? r.childrenAges.length : (Number(r.kids)||1);
+        bookedMap[r.session] = (bookedMap[r.session] || 0) + cnt;
+      });
+      for(const d of toSave){
+        const cnt = Array.isArray(d.childrenAges) && d.childrenAges.length ? d.childrenAges.length : (Number(d.kids)||1);
+        bookedMap[d.session] = (bookedMap[d.session] || 0) + cnt;
+      }
+      for(const sid in bookedMap){
+        const s = SESSIONS.find(x=>x.id===sid);
+        if(s && bookedMap[sid] > s.capacity){ toast(`Not enough seats in session ${s.label}`); return; }
+      }
+
+      // persist each saved RSVP as separate record; set MYRSVP to first saved id
+      const arr = existing.slice();
+      const savedIds = [];
+      for(const d of toSave){
+        const id = uid('rsvp');
+        savedIds.push(id);
+        const s = SESSIONS.find(x=>x.id===d.session);
+        arr.push({ id, name: d.name, email: d.email, session: d.session, kids: d.kids, ageRange: s? s.ages.label : 'All ages', childrenAges: d.childrenAges, childrenDiet: d.childrenDiet, photo: d.photo, notes: d.notes, ts: new Date().toISOString() });
+      }
+      write(RSVP_KEY, arr);
+      try{ if(savedIds.length) localStorage.setItem(MYRSVP, savedIds[0]); }catch{}
+
+      toast('RSVP(s) recorded');
+      closePanel(rsvpModal);
+      populateSessions(); renderRsvps(); renderSessionSummary(); updateStats();
+    });
+
+    // load my RSVP into single-entry editing (will populate one entry form)
+    loadMe?.addEventListener('click', ()=>{
+      const my = localStorage.getItem(MYRSVP);
+      if(!my){ toast('No saved RSVP'); return; }
+      const arr = read(RSVP_KEY); const entry = arr.find(x=>x.id===my);
+      if(!entry){ toast('Saved RSVP not found'); return; }
+      // reset entries area and create single entry with data
+      rsvpEntries.innerHTML = '';
+      addRsvpEntry({
+        name: entry.name,
+        email: entry.email,
+        kids: entry.kids || '1',
+        session: entry.session,
+        notes: entry.notes || '',
+        photo: entry.photo || ''
+      });
+      // populate children ages after render
+      setTimeout(()=> {
+        const el = rsvpEntries.querySelector('.rsvp-entry');
+        if(!el) return;
+        // if many ages, switch to freeform
+        if(Array.isArray(entry.childrenAges) && entry.childrenAges.length > 3){
+          el.querySelector('.entry-kids').value = '4';
+          renderChildAgeInputsFor(el);
+          const ta = el.querySelector('.childrenAgesText');
+          if(ta) ta.value = entry.childrenAges.map(a=> a===null ? '' : String(a)).join(', ');
+        } else if(Array.isArray(entry.childrenAges)){
+          entry.childrenAges.forEach((a,idx)=>{ const inp = el.querySelector(`input.child-age[data-index="${idx}"]`); if(inp) inp.value = a; });
+        }
+        if(entry.childrenDiet && Array.isArray(entry.childrenDiet)) entry.childrenDiet.forEach((d,idx)=>{ const di = el.querySelector(`input[data-diet-index="${idx}"]`); if(di) di.value = d; });
+        if(entry.photo){ const pp = el.querySelector('.entry-photo-preview'); if(pp){ pp.src = entry.photo; pp.style.display = 'block'; pp.dataset.data = entry.photo; } }
+      }, 80);
+      openPanel(rsvpModal);
+    });
+
+    // render RSVPs list
+    function renderRsvps(filterText='', sessionVal=''){
+      const arr = read(RSVP_KEY).slice().sort((a,b)=> (a.name||'').localeCompare(b.name||''));
+      rsvpList.innerHTML=''; let list = arr;
+      if(sessionVal) list = list.filter(x=>x.session===sessionVal);
+      if(filterText) list = list.filter(x=> (x.name||'').toLowerCase().includes(filterText.toLowerCase()) || (x.notes||'').toLowerCase().includes(filterText.toLowerCase()));
+      const totalKids = arr.reduce((sum, r)=>{ if(Array.isArray(r.childrenAges) && r.childrenAges.length) return sum + r.childrenAges.length; return sum + (Number(r.kids)||1); }, 0);
+      if(!list.length){ rsvpList.innerHTML='<div class="small">No RSVPs yet.</div>'; rsvpCount.textContent = `${arr.length} RSVP${arr.length===1?'':'s'} · ${totalKids} kid${totalKids===1?'':'s'}`; return; }
+      rsvpCount.textContent = `${arr.length} RSVP${arr.length===1?'':'s'} · ${totalKids} kid${totalKids===1?'':'s'}`;
+      const mine = localStorage.getItem(MYRSVP);
+      list.forEach(a=>{
+        const li = document.createElement('div'); li.className='entry';
+        const mineBadge = mine===a.id ? ' · <span style="color:var(--muted);font-size:.9rem">you</span>':'';
+        const s = SESSIONS.find(x=>x.id===a.session);
+        const children = Array.isArray(a.childrenAges) && a.childrenAges.length ? ` · child ages: ${a.childrenAges.map(x=>x===null? '—':x).join(', ')}` : '';
+        const diet = Array.isArray(a.childrenDiet) && a.childrenDiet.some(Boolean) ? ` · diet: ${a.childrenDiet.filter(Boolean).join('; ')}` : '';
+        const img = a.photo ? `<img src="${a.photo}" style="width:56px;height:56px;object-fit:cover;border-radius:6px;margin-left:8px" alt="photo">` : '';
+        li.innerHTML = `<div style="max-width:65%"><div style="font-weight:700">${escapeHtml(a.name)}${mineBadge}</div>
+          <div class="small">Kids: <strong>${escapeHtml(a.kids|| (Array.isArray(a.childrenAges)? a.childrenAges.length : '1'))}</strong> · Ages: <span class="age-badge">${escapeHtml(a.ageRange|| (s? s.ages.label : 'All ages'))}</span>${children}${diet}</div>
+          <div class="small">${escapeHtml(a.notes||'')}</div></div>
+          <div style="text-align:right;display:flex;flex-direction:column;align-items:flex-end"><div class="small">${new Date(a.ts).toLocaleString()}</div><div style="margin-top:8px;display:flex;gap:8px;align-items:center"><button class="btn ghost" data-rid="${a.id}" ${mine===a.id?'data-own="1"':''}>${mine===a.id?'Cancel':'Remove'}</button>${img}</div></div>`;
+        rsvpList.appendChild(li);
+      });
+    }
+
+    rsvpList.addEventListener('click',(e)=>{
+      const btn = e.target.closest('button[data-rid]'); if(!btn) return;
+      const id = btn.getAttribute('data-rid'); const own = btn.hasAttribute('data-own');
+      if(own){
+        if(!confirm('Cancel your RSVP?')) return;
+        const arr = read(RSVP_KEY).filter(x=>x.id!==id); write(RSVP_KEY,arr); if(localStorage.getItem(MYRSVP)===id) localStorage.removeItem(MYRSVP); renderRsvps(); renderSessionSummary(); updateStats(); toast('Your RSVP was cancelled');
+      } else {
+        if(!confirm('Remove this RSVP?')) return;
+        const arr = read(RSVP_KEY).filter(x=>x.id!==id); write(RSVP_KEY,arr); renderRsvps(); renderSessionSummary(); updateStats(); toast('RSVP removed');
+      }
+    });
+
+    // volunteers
+    const volListEl = $('volListPlaceholder');
+    function renderVols(){ const arr = read(VOL_KEY); volListEl.innerHTML=''; if(!arr.length){ volListEl.innerHTML='<div class="small">No volunteers yet.</div>'; return; } const mine=localStorage.getItem(MYVOL); arr.forEach(v=>{ const node=document.createElement('div'); node.className='entry'; const own=mine===v.id; node.innerHTML=`<div style="max-width:70%"><div style="font-weight:700">${escapeHtml(v.name)}${own? ' · <span style="color:var(--muted);font-size:.9rem">you</span>':''}</div><div class="small">${escapeHtml(v.role||'Volunteer')} · ${new Date(v.ts).toLocaleString()}</div></div><div><button class="btn ghost" data-vid="${v.id}" ${own? 'data-own="1"':''}>${own?'Cancel':'Remove'}</button></div>`; volListEl.appendChild(node); }); }
+    volForm.addEventListener('submit',(ev)=>{ ev.preventDefault(); const name=$('volName').value.trim(); const role=$('volRole').value; const agree=$('volAgree').checked; if(!name){ toast('Enter name'); $('volName').focus(); return; } if(!agree){ toast('Agree to be contacted'); $('volAgree').focus(); return; } const arr = read(VOL_KEY); const e = { id: uid('vol'), name, role, ts: new Date().toISOString() }; arr.unshift(e); write(VOL_KEY,arr); try{ localStorage.setItem(MYVOL,e.id);}catch{} closePanel(volModal); renderVols(); toast('Volunteer recorded'); });
+    volListEl.addEventListener('click',(e)=>{ const b=e.target.closest('button[data-vid]'); if(!b) return; const id=b.getAttribute('data-vid'); const own=b.hasAttribute('data-own'); if(!confirm(own?'Cancel your signup?':'Remove this volunteer?')) return; const arr=read(VOL_KEY).filter(v=>v.id!==id); write(VOL_KEY,arr); if(localStorage.getItem(MYVOL)===id) localStorage.removeItem(MYVOL); renderVols(); toast(own?'Your signup cancelled':'Volunteer removed'); });
+
+    // misc actions
+    clearAll?.addEventListener('click', ()=>{ if(!confirm('Clear all saved data?')) return; localStorage.removeItem(RSVP_KEY); localStorage.removeItem(VOL_KEY); localStorage.removeItem(MYRSVP); localStorage.removeItem(MYVOL); populateSessions(); renderRsvps(); renderVols(); renderSessionSummary(); updateStats(); toast('Local data cleared'); });
+    printAll?.addEventListener('click', ()=>{ const arr=read(RSVP_KEY); if(!arr.length){ toast('No RSVPs'); return; } const w=window.open('','','width=700,height=800'); if(!w){ toast('Unable to open print'); return; } const html=`<html><head><title>Attendees</title><style>body{font-family:Arial;padding:20px;color:#041524}</style></head><body><h1>Cookie Decorating — RSVPs</h1>${arr.map(a=>`<p><strong>${escapeHtml(a.name)}</strong> — Kids: ${escapeHtml(a.kids||'1')} — Ages: ${escapeHtml(a.ageRange||'—')} — ${escapeHtml(a.notes||'')}</p>`).join('')}</body></html>`; w.document.write(html); w.document.close(); setTimeout(()=>w.print(),300); });
+    shareAttendees?.addEventListener('click', async ()=>{ const arr = read(RSVP_KEY); if(!arr.length){ toast('No RSVPs to share'); return; } const summary = arr.map(a=>`${a.name} — kids:${a.kids||'1'} — ages:${a.ageRange||'—'} — session:${a.session} — notes:${a.notes||''}`).join('\n\n'); const payload = `Cookie Decorating — Attendees\n\n${summary}\n\nGenerated: ${new Date().toLocaleString()}`; if(navigator.share){ try{ await navigator.share({ title:'Cookie Decorating attendees', text:payload }); toast('Shared'); return; }catch{} } try{ await navigator.clipboard.writeText(payload); toast('Copied attendees'); }catch(e){ const blob=new Blob([payload],{type:'text/plain'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='attendees.txt'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url); toast('Attendees downloaded'); } });
+    exportJson?.addEventListener('click', ()=>{ const arr = read(RSVP_KEY); if(!arr.length){ toast('No RSVPs'); return; } const blob = new Blob([JSON.stringify(arr, null, 2)], { type: 'application/json' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'attendees.json'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url); toast('JSON exported'); });
+
+    // --- Ticket building and options (QR included in downloaded ticket at top-right) ---
+    function buildTicketHtml(entry){
+      const s = SESSIONS.find(x=>x.id===entry.session);
+      const childrenList = Array.isArray(entry.childrenAges) && entry.childrenAges.length ? entry.childrenAges.map(x=> x===null ? '—' : String(x)).join(', ') : '';
+      const diet = Array.isArray(entry.childrenDiet)&&entry.childrenDiet.some(Boolean)? `<div style="margin-top:8px"><strong>Dietary:</strong> ${escapeHtml(entry.childrenDiet.filter(Boolean).join('; '))}</div>` : '';
+      const photoBlock = entry.photo ? `<div style="margin-top:12px"><img src="${entry.photo}" style="max-width:260px;border-radius:8px" alt="uploaded photo"></div>` : '';
+      const ticketId = escapeHtml(entry.id);
+      const now = new Date().toLocaleString();
+
+      // QR payload: small JSON so scanners can open or show ticket reference
+      const qrPayload = JSON.stringify({ id: entry.id, name: entry.name, session: s ? s.label : entry.session });
+      const qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=' + encodeURIComponent(qrPayload);
+
+      // ticket HTML: QR placed at top-right inside the ticket wrapper
+      return `<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Cookie Decorating — Ticket</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#f7fbff;--muted:#6b7a86;--accent:#ffb86b;--ink:#05202a}
+    body{margin:0;background:linear-gradient(180deg,var(--bg),#fff);font-family:Montserrat,Arial;color:var(--ink)}
+    .wrap{max-width:720px;margin:28px auto;padding:22px}
+    .ticket{position:relative;background:#fff;border-radius:14px;padding:20px;border:1px solid #e6f0f8;display:flex;gap:18px;align-items:flex-start}
+    .qr{position:absolute;right:18px;top:18px;width:140px;height:140px;border-radius:10px;background:#fff;padding:8px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(4,20,36,0.06)}
+    .left{flex:1}
+    .brand{font-family:'Great Vibes',cursive;color:var(--accent);font-size:2.2rem}
+    .small{color:var(--muted);font-size:0.85rem}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="ticket" role="document" aria-label="Event ticket">
+      <div class="qr" aria-hidden="false"><img src="${qrUrl}" alt="Ticket QR" style="width:100%;height:100%;object-fit:contain;border-radius:6px;background:#fff"></div>
+      <div class="left">
+        <div class="brand">Cookie Decorating</div>
+        <div class="meta">Family cookie-decorating — Community Center · Dec 20</div>
+        <div style="margin-top:14px;display:flex;gap:12px;align-items:center">
+          <div style="flex:1">
+            <div style="font-weight:700;font-size:1.05rem">${escapeHtml(s ? s.label : 'Session')}</div>
+            <div class="small">Recommended ages: <strong>${escapeHtml(s ? s.ages.label : 'All ages')}</strong></div>
+          </div>
+          <div style="background:linear-gradient(90deg,#041524,#0b3b4a);color:#fff;padding:8px 10px;border-radius:8px;font-weight:700">
+            Admit ${Array.isArray(entry.childrenAges) ? entry.childrenAges.length : (entry.kids || 1)}
+          </div>
+        </div>
+
+        <div style="margin-top:14px;padding:12px;border-radius:8px;background:#fbfdff;border:1px dashed #e6f0f8">
+          <div><strong>Parent / Guardian:</strong> ${escapeHtml(entry.name)}</div>
+          <div><strong>Session:</strong> ${escapeHtml(s ? s.label : (entry.session || '—'))}</div>
+          <div><strong>Kids:</strong> ${Array.isArray(entry.childrenAges) ? entry.childrenAges.length : (entry.kids || 1)} ${childrenList ? `· Ages: ${escapeHtml(childrenList)}` : ''}</div>
+          ${diet}
+          ${photoBlock}
+        </div>
+
+        <footer style="margin-top:12px;color:var(--muted);font-size:0.8rem">
+          Ticket ID: <strong>${ticketId}</strong> · Generated: ${escapeHtml(now)}<br>Please bring this ticket printed or on your phone.
+        </footer>
+      </div>
+
+      <div style="width:160px;display:flex;flex-direction:column;align-items:center">
+        <div style="width:140px;height:140px;border-radius:8px;background:#fff;display:flex;align-items:center;justify-content:center;border:6px solid #fff"></div>
+        <div style="margin-top:12px;text-align:center">
+          <div style="font-weight:700">Admit</div>
+          <div class="small">${Array.isArray(entry.childrenAges) ? entry.childrenAges.length : (entry.kids || 1)} child${(Array.isArray(entry.childrenAges) ? entry.childrenAges.length : (entry.kids || 1))===1?'':'ren'}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>`;
+    }
+
+    // open ticket options modal
+    ticketBtn.addEventListener('click', ()=>{
+      const my = localStorage.getItem(MYRSVP);
+      if(!my){ toast('No RSVP — please RSVP first'); openPanel(rsvpModal); return; }
+      ticketModal.dataset.ticketId = my;
+      ticketQrPreview.style.display = 'none';
+      ticketQrImg.src = '';
+      openPanel(ticketModal);
+    });
+
+    ticketClose?.addEventListener('click', ()=> closePanel(ticketModal));
+
+    // Download full ticket HTML
+    ticketDownloadHtml.addEventListener('click', ()=>{
+      const id = ticketModal.dataset.ticketId;
+      const arr = read(RSVP_KEY); const e = arr.find(x=>x.id===id);
+      if(!e){ toast('RSVP not found'); return; }
+      const html = buildTicketHtml(e);
+      const blob = new Blob([html], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = `cookie-ticket-${e.id}.html`; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+      toast('Ticket downloaded');
+      closePanel(ticketModal);
+    });
+
+    // Generate/download QR that encodes ticket HTML as a data: URL
+    ticketDownloadQr.addEventListener('click', async ()=>{
+      const id = ticketModal.dataset.ticketId;
+      const arr = read(RSVP_KEY); const e = arr.find(x=>x.id===id);
+      if(!e){ toast('RSVP not found'); return; }
+      const html = buildTicketHtml(e);
+      const dataUrl = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
+      // Use public QR API to create PNG of the data: URL
+      const qrApi = 'https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=' + encodeURIComponent(dataUrl);
+      ticketQrImg.src = qrApi;
+      ticketQrPreview.style.display = 'block';
+      try{
+        const resp = await fetch(qrApi);
+        if(!resp.ok) throw new Error('QR generation failed');
+        const blob = await resp.blob();
+        const u = URL.createObjectURL(blob);
+        const a = document.createElement('a'); a.href = u; a.download = `cookie-qr-${e.id}.png`; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(u);
+        toast('QR downloaded');
+      }catch(err){
+        console.warn(err);
+        toast('Unable to generate QR — use "Download ticket" instead.');
+      }
+    });
+
+    // keyboard: Escape to close modals/menu
+    document.addEventListener('keydown',(e)=>{
+      if(e.key === 'Escape'){
+        if(rsvpModal.classList.contains('show')) closePanel(rsvpModal);
+        if(volModal.classList.contains('show')) closePanel(volModal);
+        if(ticketModal.classList.contains('show')) closePanel(ticketModal);
+        if(mobileNav.classList.contains('show')) closePanel(mobileNav);
+      }
+    });
+
+    // ensure button types
+    document.querySelectorAll('button').forEach(b=>{ if(!b.hasAttribute('type')) b.setAttribute('type','button'); });
+
+    // simple stats
+    function updateStats(){
+      const arr = read(RSVP_KEY);
+      $('stat-sessions').textContent = `Sessions: ${SESSIONS.length}`;
+      const totalKids = arr.reduce((sum, r)=>{ if(Array.isArray(r.childrenAges) && r.childrenAges.length) return sum + r.childrenAges.length; return sum + (Number(r.kids)||1); }, 0);
+      const avgKids = arr.length ? (totalKids / arr.length).toFixed(2) : '—';
+      $('stat-kids').textContent = `Avg kids / RSVP: ${avgKids}`;
+      const sid = ''; // no per-entry selection here
+      if(sid){ $('stat-cap').textContent = `Seats left (${sid}): ${seatsLeft(sid)}`; } else { $('stat-cap').textContent = `Seats left: —`; }
+    }
+
+    // init: create first RSVP entry when opening modal
+    try{ if(!Array.isArray(read(RSVP_KEY))) write(RSVP_KEY,[]); if(!Array.isArray(read(VOL_KEY))) write(VOL_KEY,[]); }catch(e){}
+    // create default one entry in rsvpEntries
+    rsvpEntries.innerHTML = '';
+    addRsvpEntry();
+
+    // initial populate
+    populateSessions(); renderRsvps(); renderVols(); renderSessionSummary(); updateStats();
+
+    // when sessionFilter changes, re-render rsvps and update per-entry session options
+    sessionFilter?.addEventListener('change', ()=>{ renderRsvps('', sessionFilter.value); populateSessions(); });
+
+    $('viewBtn').addEventListener('click', ()=>{ $('rsvpList').scrollIntoView({behavior:'smooth'}); toast('Viewing RSVP list'); });
+    $('volBtn').addEventListener('click', ()=> openPanel(volModal));
+    $('volQuick').addEventListener('click', ()=> openPanel(volModal));
+  })();
+  </script>
 </body>
 </html>

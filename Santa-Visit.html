@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Santa Visit — Winter Wonderland</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg-0:#041524; --bg-1:#0b2f44;
+      --panel:#f6f8fb; --muted:#9fb6c6; --accent:#ffd87a; --holly:#e75a4c;
+      --card-radius:14px; --glass: rgba(255,255,255,0.03);
+      --maxw:1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Montserrat,system-ui,Arial;background:
+      linear-gradient(180deg,var(--bg-0),var(--bg-1));color:var(--panel);-webkit-font-smoothing:antialiased}
+    a{color:inherit}
+    .wrap{max-width:var(--maxw);margin:18px auto;padding:18px}
+    header.site{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand h1{margin:0;font-family:'Great Vibes',cursive;color:var(--accent);font-size:1.6rem}
+    .sub{font-size:.92rem;color:var(--muted)}
+    .controls-row{display:flex;gap:8px;align-items:center}
+    .back{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--panel);padding:8px 12px;border-radius:10px;cursor:pointer}
+    .menu-toggle{display:none;background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px;border-radius:8px;color:var(--panel)}
+    nav.site-nav{display:flex;gap:12px;align-items:center}
+    .visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap;border:0;padding:0;margin:-1px}
+
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.03)}
+    .layout{display:grid;grid-template-columns:340px 1fr;gap:18px;margin-top:16px;align-items:start}
+    .poster{border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.03)}
+    .poster img{width:100%;height:100%;object-fit:cover;display:block}
+    .controls{display:flex;gap:8px;align-items:center;margin-top:12px;flex-wrap:wrap}
+    .btn{padding:10px 14px;border-radius:10px;border:none;cursor:pointer;background:linear-gradient(90deg,#9ee7ff,#7fd5f0);color:#042028;font-weight:700}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--panel)}
+    .btn.holly{background:linear-gradient(90deg,var(--holly),#ff8b7a);color:#fff}
+    .small{font-size:.92rem;color:var(--muted)}
+    .count{background:rgba(255,255,255,0.02);padding:6px 10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);font-weight:700}
+    .list{display:grid;gap:8px;margin-top:12px}
+    .entry{display:flex;justify-content:space-between;align-items:flex-start;padding:10px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border:1px solid rgba(255,255,255,0.03)}
+    .entry .meta{max-width:68%}
+    .entry .name{font-weight:700;color:var(--accent)}
+    .meta .note{color:var(--muted);font-size:.9rem;margin-top:6px}
+    .modal-backdrop{position:fixed;inset:0;background:rgba(2,6,11,0.66);display:none;align-items:center;justify-content:center;z-index:2200;padding:18px}
+    .modal-backdrop.show{display:flex}
+    .modal{max-width:620px;width:100%;border-radius:12px;padding:18px;background:linear-gradient(180deg,#0f2a3a,#0b2432);color:var(--panel);border:1px solid rgba(255,255,255,0.03)}
+    .modal h3{margin:0 0 8px 0;font-family:'Great Vibes',cursive;color:var(--accent);font-size:1.3rem}
+    .modal label{display:block;color:var(--muted);margin-top:10px;font-size:.95rem}
+    .modal input,.modal select,.modal textarea{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);margin-top:6px;background:#eef6fb;color:#042028}
+    .toast{position:fixed;right:18px;bottom:18px;background:linear-gradient(90deg,var(--holly),#ffd88d);color:#061523;padding:10px 14px;border-radius:10px;display:none;z-index:3000;font-weight:700}
+    footer.site-foot{margin-top:18px;color:var(--muted);font-size:.9rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+    .mobile-nav{display:none;position:fixed;top:0;left:0;right:0;height:100vh;background:linear-gradient(180deg,var(--bg-0),var(--bg-1));z-index:2400;padding:22px;transform:translateX(-110%);transition:transform .24s ease}
+    .mobile-nav.show{transform:translateX(0)}
+    .mobile-nav .close{display:block;margin-bottom:16px}
+    .sr-only{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+
+    @media (max-width:900px){
+      .layout{grid-template-columns:1fr}
+      .menu-toggle{display:inline-flex}
+      nav.site-nav{display:none}
+      .mobile-nav{display:block}
+    }
+  </style>
+</head>
+<body>
+  <a class="sr-only" href="#main">Skip to main content</a>
+  <canvas class="snow" aria-hidden="true" style="position:fixed;left:0;top:0;width:100vw;height:100vh;pointer-events:none;z-index:1"></canvas>
+
+  <div class="wrap" id="page">
+    <header class="site" role="banner" aria-label="Site header">
+      <div class="brand" role="group" aria-label="Event title and info">
+        <button id="backBtn" class="back" aria-label="Back to events">← Back</button>
+        <div>
+          <h1 tabindex="0">Santa Visit</h1>
+          <div class="sub">Winter Wonderland Hall — Dec 24 • Family sessions</div>
+        </div>
+      </div>
+
+      <div class="controls-row" role="navigation" aria-label="Top controls">
+        <nav class="site-nav" aria-hidden="false">
+          <button id="shareBtn" class="btn ghost" aria-label="Share event">Share</button>
+          <button id="exportBtn" class="btn ghost" aria-label="Download RSVP ticket">Download ticket</button>
+        </nav>
+
+        <button id="menuToggle" class="menu-toggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu">☰</button>
+      </div>
+    </header>
+
+    <nav id="mobileNav" class="mobile-nav" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Mobile menu">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <strong style="font-size:1.1rem">Menu</strong>
+        <button id="mobileClose" class="close btn ghost" aria-label="Close menu">✕</button>
+      </div>
+      <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px">
+        <a href="#" id="mShare" class="btn ghost" role="button">Share event</a>
+        <a href="#" id="mExport" class="btn ghost" role="button">Download ticket</a>
+        <a href="#rsvpList" class="btn" role="button">See who’s coming</a>
+        <a href="#volList" class="btn holly" role="button">Volunteer</a>
+      </div>
+      <div style="margin-top:18px;color:var(--muted);font-size:.9rem">
+        <p><em>This event is imaginary — created to lift someone's mood and for entertainment only.</em></p>
+      </div>
+    </nav>
+
+    <main id="main" class="card" role="main" aria-label="Santa Visit event">
+      <div class="layout" role="region" aria-label="Event layout">
+        <!-- left column -->
+        <aside aria-label="Event sidebar">
+          <div class="poster" aria-hidden="false">
+            <img src="https://media.istockphoto.com/id/1427748601/photo/little-secret-for-santa.jpg?s=612x612&w=0&k=20&c=44TjhsVP7EBWQK0RbLgCDbB5n4aQXoo-VfO6HGb0nMQ=" alt="Santa with children" loading="lazy" decoding="async">
+          </div>
+
+          <div style="margin-top:12px" class="card" aria-labelledby="rsvp-head">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div>
+                <div id="rsvp-head" class="small">RSVP</div>
+                <div style="font-weight:800">Santa Visit — Dec 24</div>
+              </div>
+              <div id="rsvpCount" class="count" aria-live="polite">0 RSVPs</div>
+            </div>
+
+            <div class="controls" style="margin-top:12px">
+              <button id="rsvpBtn" class="btn" aria-haspopup="dialog" aria-controls="rsvpModal">RSVP</button>
+              <button id="viewBtn" class="btn ghost" aria-controls="rsvpList">View list</button>
+              <button id="volBtn" class="btn holly" aria-haspopup="dialog" aria-controls="volModal">Volunteer</button>
+            </div>
+
+            <div class="small" style="margin-top:10px;color:var(--muted)">Sessions limited — reserve your spot. You can cancel your RSVP or volunteer signup later.</div>
+          </div>
+
+          <div style="margin-top:12px">
+            <h4 style="margin:6px 0;color:var(--holly);font-family:'Great Vibes',cursive">Who's coming</h4>
+            <div id="rsvpList" class="list" aria-live="polite"><div class="small">No RSVPs yet.</div></div>
+          </div>
+
+          <div style="margin-top:12px" class="card" aria-label="Volunteer desk">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div>
+                <div class="small">Volunteer desk</div>
+                <div style="font-weight:700">Help at the event</div>
+              </div>
+              <div><button id="volQuick" class="btn ghost" aria-controls="volModal">Sign up</button></div>
+            </div>
+            <div class="small" style="margin-top:8px;color:var(--muted)">Volunteers receive a thank-you meal. Roles: photos, gifts, usher.</div>
+          </div>
+
+          <div style="margin-top:12px">
+            <h4 style="margin:6px 0;color:var(--accent);font-family:'Great Vibes',cursive">Volunteers</h4>
+            <div id="volList" class="list" aria-live="polite"><div class="small">No volunteers yet.</div></div>
+          </div>
+        </aside>
+
+        <!-- right column -->
+        <section aria-label="Event details">
+          <h2 style="margin:0;color:var(--holly);font-family:'Great Vibes',cursive">Santa Visit — Family Sessions</h2>
+          <p class="small" style="margin-top:8px">Bring your family for a photo with Santa, seasonal treats, and a small gift for kids. Sessions are 30 minutes long; space is limited so please RSVP for your preferred time.</p>
+
+          <div style="margin-top:12px" class="card" aria-label="Details card">
+            <h4 style="margin:6px 0;color:var(--accent);font-family:'Great Vibes',cursive">Details</h4>
+            <div class="small">Dec 24 • Sessions every 30 minutes from 3PM to 7PM. Donations welcome. Accessible venue.</div>
+            <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
+              <button id="printAll" class="btn ghost">Print attendees</button>
+              <button id="clearAll" class="btn ghost" title="Clear all local data">Clear local data</button>
+            </div>
+          </div>
+
+          <div style="margin-top:12px">
+            <h4 style="margin:6px 0;color:var(--accent);font-family:'Great Vibes',cursive">FAQ</h4>
+            <div class="card small" style="padding:12px">
+              <strong>Will there be snacks?</strong>
+              <p style="margin:8px 0;color:var(--muted)">Yes — there will be seasonal treats but you have to pay for them.</p>
+              <strong>Can I take photos?</strong>
+              <p style="margin:8px 0;color:var(--muted)">Yes — volunteers will help with photos. Professional photographers welcome with notice.</p>
+            </div>
+          </div>
+
+          <footer class="site-foot" aria-hidden="false" style="margin-top:18px">
+            <div>Questions? <a href="mailto:info@winterwonderland.com" style="color:var(--accent)">info@winterwonderland.com</a></div>
+            <div class="small">© Winter Wonderland</div>
+          </footer>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- RSVP modal -->
+  <div class="modal-backdrop" id="rsvpModal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="rsvpTitle">
+    <div class="modal" role="document">
+      <button class="btn ghost" id="rsvpClose" aria-label="Close RSVP dialog" style="float:right">✕</button>
+      <h3 id="rsvpTitle">RSVP — Santa Visit</h3>
+      <form id="rsvpForm" novalidate>
+        <label for="rsvpName">Full name <span aria-hidden="true" style="color:var(--holly)">*</span></label>
+        <input id="rsvpName" name="name" type="text" placeholder="For better identification" autocomplete="name" required>
+
+        <label for="rsvpEmail">Email (optional)</label>
+        <input id="rsvpEmail" name="email" type="email" placeholder="you@example.com" autocomplete="email">
+
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <div style="flex:1">
+            <label for="rsvpGuests">Children attending</label>
+            <select id="rsvpGuests" name="guests" aria-label="Children attending">
+              <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">More than 4</option>
+            </select>
+          </div>
+          <div style="flex:1">
+            <label for="rsvpTime">Preferred session</label>
+            <select id="rsvpTime" name="time">
+              <option value="">Any</option>
+              <option value="15:00">3:00 PM</option><option value="15:30">3:30 PM</option><option value="16:00">4:00 PM</option>
+              <option value="16:30">4:30 PM</option><option value="17:00">5:00 PM</option><option value="17:30">5:30 PM</option>
+              <option value="18:00">6:00 PM</option><option value="18:30">6:30 PM</option>
+            </select>
+          </div>
+        </div>
+
+        <label style="margin-top:8px"><input type="checkbox" id="rsvpAgree" required> I agree to event terms</label>
+
+        <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:12px">
+          <button type="button" id="rsvpCancel" class="btn ghost">Cancel</button>
+          <button type="submit" id="rsvpSubmit" class="btn">Confirm RSVP</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Volunteer modal -->
+  <div class="modal-backdrop" id="volModal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="volTitle">
+    <div class="modal" role="document">
+      <button class="btn ghost" id="volClose" aria-label="Close volunteer dialog" style="float:right">✕</button>
+      <h3 id="volTitle">Volunteer — Santa Visit</h3>
+      <form id="volForm" novalidate>
+        <label for="volName">Full name <span aria-hidden="true" style="color:var(--holly)">*</span></label>
+        <input id="volName" name="volName" type="text" required>
+
+        <label for="volRole">Role</label>
+        <select id="volRole" name="volRole">
+          <option value="">Any</option><option value="photos">Photos</option><option value="gifts">Gifts</option><option value="usher">Usher</option>
+        </select>
+
+        <label style="margin-top:8px"><input type="checkbox" id="volAgree" required> I agree to be contacted</label>
+
+        <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:12px">
+          <button type="button" id="volBack" class="btn ghost">Close</button>
+          <button type="submit" id="volSubmit" class="btn holly">Sign up</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script>
+  (function(){
+    'use strict';
+    // keys
+    const RSVP_KEY = 'santa_rsvps_v4';
+    const VOL_KEY = 'santa_vols_v4';
+    const MYVOL = 'santa_my_vol_v2';
+    const MYRSVP = 'santa_my_rsvp_v2';
+
+    // helpers
+    const $ = id => document.getElementById(id);
+    function read(k){ try{ return JSON.parse(localStorage.getItem(k) || '[]'); }catch{ return []; } }
+    function write(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){ console.warn(e); } }
+    function uid(pref='id'){ return pref + '_' + Date.now() + '_' + Math.random().toString(36).slice(2,6); }
+    function toast(msg, ms=2400){ const t=$('toast'); if(!t) return; t.textContent = msg; t.style.display='block'; clearTimeout(toast._t); toast._t = setTimeout(()=> t.style.display='none', ms); }
+    function escapeHtml(s){ return String(s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+    // elements
+    const backBtn = $('backBtn'), menuToggle = $('menuToggle'), mobileNav = $('mobileNav'), mobileClose = $('mobileClose');
+    const shareBtn = $('shareBtn'), exportBtn = $('exportBtn'), mShare = $('mShare'), mExport = $('mExport');
+    const rsvpBtn = $('rsvpBtn'), rsvpModal = $('rsvpModal'), rsvpForm = $('rsvpForm'), rsvpCancel = $('rsvpCancel'), rsvpClose = $('rsvpClose'), rsvpList = $('rsvpList'), rsvpCount = $('rsvpCount'), rsvpSubmit = $('rsvpSubmit');
+    const volBtn = $('volBtn'), volModal = $('volModal'), volForm = $('volForm'), volBack = $('volBack'), volClose = $('volClose'), volList = $('volList'), volQuick = $('volQuick');
+    const clearAll = $('clearAll'), printAll = $('printAll'), viewBtn = $('viewBtn');
+
+    // Back button behavior
+    backBtn?.addEventListener('click', ()=> {
+      try{ if(history.length>1) history.back(); else location.href='index.html'; }catch(e){ location.href='index.html'; }
+    }, {passive:true});
+
+    // Mobile menu
+    menuToggle?.addEventListener('click', ()=> {
+      const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+      menuToggle.setAttribute('aria-expanded', String(!expanded));
+      mobileNav.classList.toggle('show');
+      mobileNav.setAttribute('aria-hidden', String(expanded));
+      if(!expanded) mobileNav.querySelector('.close')?.focus();
+    });
+    mobileClose?.addEventListener('click', ()=> {
+      menuToggle.setAttribute('aria-expanded', 'false'); mobileNav.classList.remove('show'); mobileNav.setAttribute('aria-hidden','true'); menuToggle.focus();
+    });
+    // quick mobile actions
+    mShare?.addEventListener('click', (e)=>{ e.preventDefault(); shareEvent(); });
+    mExport?.addEventListener('click', (e)=>{ e.preventDefault(); downloadTicket(); });
+
+    // share
+    async function shareEvent(){
+      const data = { title:'Santa Visit — Winter Wonderland', text:'Join Santa Visit — Dec 24 (imaginary event)', url: location.href };
+      if(navigator.share){ try{ await navigator.share(data); toast('Shared'); }catch(e){ toast('Share cancelled'); } }
+      else { navigator.clipboard?.writeText(`${data.title}\n${data.text}\n${data.url}`); toast('Event info copied'); }
+    }
+    shareBtn?.addEventListener('click', shareEvent);
+
+    // RSVP behaviour
+    function openModal(el){ if(!el) return; el.classList.add('show'); el.setAttribute('aria-hidden','false'); const first = el.querySelector('input,select,button,textarea'); first?.focus(); document.body.style.overflow='hidden'; }
+    function closeModal(el){ if(!el) return; el.classList.remove('show'); el.setAttribute('aria-hidden','true'); document.body.style.overflow=''; menuToggle?.focus(); }
+
+    rsvpBtn?.addEventListener('click', ()=> { rsvpForm.reset(); openModal(rsvpModal); });
+    rsvpClose?.addEventListener('click', ()=> closeModal(rsvpModal));
+    rsvpCancel?.addEventListener('click', ()=> closeModal(rsvpModal));
+
+    rsvpForm?.addEventListener('submit', (ev)=> {
+      ev.preventDefault();
+      const name = $('rsvpName').value.trim();
+      const email = $('rsvpEmail').value.trim();
+      const guests = $('rsvpGuests').value;
+      const time = $('rsvpTime').value;
+      const agree = $('rsvpAgree').checked;
+      if(!name){ toast('Please enter your name'); $('rsvpName').focus(); return; }
+      if(!agree){ toast('Please agree to terms'); $('rsvpAgree').focus(); return; }
+      const arr = read(RSVP_KEY);
+      const existingId = localStorage.getItem(MYRSVP);
+      if(existingId){
+        const idx = arr.findIndex(x=>x.id===existingId);
+        if(idx>-1){
+          arr[idx] = Object.assign({}, arr[idx], { name, email, guests, time, ts: new Date().toISOString() });
+          write(RSVP_KEY, arr);
+          toast('RSVP updated');
+        } else {
+          const id = uid('rsvp'); arr.push({ id, name, email, guests, time, ts:new Date().toISOString() }); write(RSVP_KEY, arr); localStorage.setItem(MYRSVP, id); toast('RSVP recorded');
+        }
+      } else {
+        const id = uid('rsvp'); arr.push({ id, name, email, guests, time, ts:new Date().toISOString() }); write(RSVP_KEY, arr); localStorage.setItem(MYRSVP, id); toast('RSVP recorded');
+      }
+      closeModal(rsvpModal); renderRsvps();
+    });
+
+    // Volunteer behaviour
+    volBtn?.addEventListener('click', ()=> { volForm.reset(); openModal(volModal); });
+    volQuick?.addEventListener('click', ()=> { volForm.reset(); openModal(volModal); });
+    volClose?.addEventListener('click', ()=> closeModal(volModal));
+    volBack?.addEventListener('click', ()=> closeModal(volModal));
+
+    volForm?.addEventListener('submit', (ev)=> {
+      ev.preventDefault();
+      const name = $('volName').value.trim();
+      const role = $('volRole').value;
+      const agree = $('volAgree').checked;
+      if(!name){ toast('Enter your name'); $('volName').focus(); return; }
+      if(!agree){ toast('Agree to be contacted'); $('volAgree').focus(); return; }
+      const arr = read(VOL_KEY);
+      const entry = { id: uid('vol'), name, role, ts: new Date().toISOString() };
+      arr.unshift(entry);
+      write(VOL_KEY, arr);
+      try{ localStorage.setItem(MYVOL, entry.id); }catch(e){/*ignore*/ }
+      closeModal(volModal); renderVols(); toast('Volunteer signup recorded');
+    });
+
+    // render functions
+    function renderRsvps(){
+      const arr = read(RSVP_KEY);
+      rsvpList.innerHTML = '';
+      if(!arr.length){ rsvpList.innerHTML = '<div class="small">No RSVPs yet.</div>'; rsvpCount.textContent='0 RSVPs'; return; }
+      rsvpCount.textContent = `${arr.length} RSVP${arr.length===1?'':'s'}`;
+      const mine = localStorage.getItem(MYRSVP);
+      arr.forEach(a=>{
+        const node = document.createElement('div'); node.className='entry';
+        const mineBadge = mine===a.id ? ' · <span class="small" style="color:var(--muted)">you</span>' : '';
+        node.innerHTML = `<div class="meta"><div class="name">${escapeHtml(a.name)}${mineBadge}</div><div class="note">${escapeHtml(a.guests||'0')} children · ${escapeHtml(a.time||'Any')} · ${new Date(a.ts).toLocaleString()}</div></div>
+                          <div><button class="btn ghost" data-rid="${a.id}" ${mine===a.id ? 'data-own="1"':''}>${mine===a.id ? 'Cancel my RSVP' : 'Remove'}</button></div>`;
+        rsvpList.appendChild(node);
+      });
+    }
+
+    rsvpList?.addEventListener('click', (e)=>{
+      const btn = e.target.closest('button[data-rid]');
+      if(!btn) return;
+      const id = btn.getAttribute('data-rid'); const own = btn.hasAttribute('data-own');
+      if(own){
+        // cancel own RSVP
+        if(!confirm('Cancel your RSVP?')) return;
+        const arr = read(RSVP_KEY).filter(x=>x.id!==id); write(RSVP_KEY, arr); if(localStorage.getItem(MYRSVP)===id) localStorage.removeItem(MYRSVP); renderRsvps(); toast('Your RSVP was cancelled');
+      } else {
+        if(!confirm('Remove this RSVP entry?')) return;
+        const arr = read(RSVP_KEY).filter(x=>x.id!==id); write(RSVP_KEY, arr); if(localStorage.getItem(MYRSVP)===id) localStorage.removeItem(MYRSVP); renderRsvps(); toast('RSVP removed');
+      }
+    });
+
+    function renderVols(){
+      const arr = read(VOL_KEY);
+      volList.innerHTML = '';
+      if(!arr.length){ volList.innerHTML = '<div class="small">No volunteers yet.</div>'; return; }
+      const mine = localStorage.getItem(MYVOL);
+      arr.forEach(v=>{
+        const node = document.createElement('div'); node.className='entry';
+        const own = mine===v.id;
+        node.innerHTML = `<div class="meta"><div class="name">${escapeHtml(v.name)}${own? ' · <span class="small" style="color:var(--muted)">you</span>':''}</div><div class="note">${escapeHtml(v.role||'Volunteer')} · ${new Date(v.ts).toLocaleString()}</div></div>
+                          <div><button class="btn ghost" data-vid="${v.id}" ${own? 'data-own="1"':''}>${own? 'Cancel' : 'Remove'}</button></div>`;
+        volList.appendChild(node);
+      });
+    }
+
+    volList?.addEventListener('click', (e)=>{
+      const btn = e.target.closest('button[data-vid]'); if(!btn) return;
+      const id = btn.getAttribute('data-vid'); const own = btn.hasAttribute('data-own');
+      if(!confirm(own ? 'Cancel your volunteer signup?' : 'Remove this volunteer entry?')) return;
+      const arr = read(VOL_KEY).filter(v=>v.id!==id); write(VOL_KEY, arr); if(localStorage.getItem(MYVOL)===id) localStorage.removeItem(MYVOL); renderVols(); toast(own ? 'Your volunteer signup was cancelled.' : 'Volunteer removed');
+    });
+
+    // misc actions
+    clearAll?.addEventListener('click', ()=> {
+      if(!confirm('Clear all saved RSVPs and volunteers from localStorage?')) return;
+      localStorage.removeItem(RSVP_KEY); localStorage.removeItem(VOL_KEY); localStorage.removeItem(MYVOL); localStorage.removeItem(MYRSVP);
+      renderRsvps(); renderVols(); toast('Local data cleared');
+    });
+
+    printAll?.addEventListener('click', ()=> {
+      const arr = read(RSVP_KEY);
+      if(!arr.length){ toast('No RSVPs to print'); return; }
+      const w = window.open('','','width=700,height=900'); if(!w){ toast('Unable to open print window'); return; }
+      const html = `<html><head><title>RSVP list</title><style>body{font-family:Arial;padding:20px;color:#04171a} h1{color:#b2392b}</style></head><body><h1>Santa Visit RSVPs</h1>${arr.map(a=>`<p><strong>${escapeHtml(a.name)}</strong> — ${escapeHtml(a.guests||'0')} children — ${escapeHtml(a.time||'Any')} — ${new Date(a.ts).toLocaleString()}</p>`).join('')}</body></html>`;
+      w.document.write(html); w.document.close(); w.focus(); setTimeout(()=>w.print(), 300);
+    });
+
+    viewBtn?.addEventListener('click', ()=> { $('rsvpList').scrollIntoView({behavior:'smooth'}); toast('Viewing RSVP list'); });
+
+    // download a simple HTML ticket for the user's RSVP
+    function downloadTicket(){
+      const myId = localStorage.getItem(MYRSVP);
+      if(!myId){
+        toast('No RSVP found. Please RSVP first.');
+        openModal(rsvpModal);
+        return;
+      }
+      const arr = read(RSVP_KEY);
+      const entry = arr.find(x=>x.id === myId);
+      if(!entry){
+        toast('RSVP not available');
+        return;
+      }
+      const ticketId = entry.id;
+      const ticketHtml = `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Santa Visit Ticket</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1"><style>
+        body{font-family:Arial,Helvetica,sans-serif;background:#f6f8fb;color:#041524;padding:24px}
+        .card{max-width:600px;margin:0 auto;padding:20px;border-radius:12px;background:white;border:1px solid #e6eef3}
+        h1{margin:0 0 8px;color:#c0392b}
+        .muted{color:#5b6b75}
+        .box{margin-top:12px;padding:12px;border-radius:8px;background:#f0fbff;border:1px dashed #a7d8e9}
+        .meta{margin-top:10px;font-size:14px}
+        .id{margin-top:16px;font-weight:700;color:#2b6b5a}
+        .note{margin-top:12px;color:#667; font-size:13px}
+        </style></head><body>
+        <div class="card">
+          <h1>Santa Visit — Entry Ticket</h1>
+          <div class="muted">Winter Wonderland Hall — Dec 24</div>
+          <div class="box">
+            <strong>${escapeHtml(entry.name)}</strong>
+            <div class="meta">${escapeHtml(entry.guests||'0')} children · ${escapeHtml(entry.time||'Any')}</div>
+            <div class="id">Ticket ID: ${escapeHtml(ticketId)}</div>
+          </div>
+          <div class="note">Present this ticket (digital or printed) at the check-in desk. This is an imaginary event for entertainment only.</div>
+        </div>
+        </body></html>`;
+      const blob = new Blob([ticketHtml], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = `santa-ticket-${ticketId}.html`; document.body.appendChild(a);
+      a.click(); a.remove(); URL.revokeObjectURL(url);
+      toast('Ticket downloaded');
+    }
+
+    // replace old export button action with ticket download
+    exportBtn?.addEventListener('click', downloadTicket);
+
+    // mobile export button already hooked above to downloadTicket
+    // keyboard: close modal on Escape
+    document.addEventListener('keydown', (e)=> {
+      if(e.key === 'Escape'){
+        if(rsvpModal.classList.contains('show')) closeModal(rsvpModal);
+        if(volModal.classList.contains('show')) closeModal(volModal);
+        if(mobileNav.classList.contains('show')) { mobileNav.classList.remove('show'); mobileNav.setAttribute('aria-hidden','true'); menuToggle.setAttribute('aria-expanded','false'); menuToggle.focus(); }
+      }
+    });
+
+    // init
+    try{
+      if(!Array.isArray(read(RSVP_KEY))) write(RSVP_KEY, []);
+      if(!Array.isArray(read(VOL_KEY))) write(VOL_KEY, []);
+    }catch(e){ console.warn(e); }
+    renderRsvps(); renderVols();
+
+    // decorative snow (lightweight)
+    (function(){ const canvas=document.querySelector('.snow'); if(!canvas) return; const ctx=canvas.getContext('2d'); if(!ctx) return; let flakes=[]; function resize(){canvas.width=innerWidth;canvas.height=innerHeight; create();} function create(){flakes=[];const count=Math.max(8,Math.round((innerWidth*innerHeight)/120000)); for(let i=0;i<count;i++) flakes.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.6+0.4,s:Math.random()*1.2+0.2,a:Math.random()*0.8+0.08});} function draw(){ ctx.clearRect(0,0,canvas.width,canvas.height); for(const f of flakes){ ctx.beginPath(); ctx.fillStyle=`rgba(255,255,255,${f.a})`; ctx.arc(f.x,f.y,f.r,0,Math.PI*2); ctx.fill(); f.y+=f.s; f.x+=Math.sin(f.y/40)*0.3; if(f.y>canvas.height){ f.y=-8; f.x=Math.random()*canvas.width; } } requestAnimationFrame(draw); } addEventListener('resize',resize); resize(); draw(); })();
+
+    // small accessibility: ensure click targets are keyboard accessible, and set initial focusable states
+    (function(){ // ensure modal buttons have type
+      document.querySelectorAll('button').forEach(b=>{ if(!b.hasAttribute('type')) b.setAttribute('type','button'); });
+    })();
+  })();
+  </script>
+</body>
+</html>

@@ -1,244 +1,412 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gift Exchange Event Invitation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Montserrat', Arial, sans-serif;
-            background: linear-gradient(120deg, #f7e9d7 0%, #e0eafc 100%);
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-        }
-        .container {
-            max-width: 600px;
-            margin: 48px auto;
-            background: rgba(255,255,255,0.97);
-            border-radius: 24px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-            padding: 48px 32px 32px 32px;
-            text-align: center;
-        }
-        h1 {
-    font-family: 'Great Vibes', cursive;
-    color: #d7263d;
-    font-size: 2.4em;
-    margin-bottom: 12px;
-    letter-spacing: 2px;
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Gift Exchange & Celebration — Winter Wonderland</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#081227; --panel:#f7fafc; --accent:#d7f2e6; --mint:#9adfbf; --muted:#9fb1c4; --card:#07121a;
 }
-        .event-details {
-            color: #333;
-            margin-bottom: 24px;
-            font-size: 1.15em;
-        }
-        .coming-soon {
-            font-size: 1.2em;
-            color: #2e8b57;
-            font-weight: bold;
-            margin-bottom: 10px;
-            animation: pulse 1.5s infinite;
-        }
-        @keyframes pulse {
-            0% { color: #2e8b57; }
-            50% { color: #d7263d; }
-            100% { color: #2e8b57; }
-        }
-        .days-left {
-            font-size: 1.1em;
-            color: #d7263d;
-            margin-bottom: 8px;
-        }
-        .time-left {
-            font-size: 1em;
-            color: #2e8b57;
-            margin-bottom: 16px;
-        }
-        .description {
-            margin: 18px 0 24px 0;
-            color: #444;
-            font-size: 1.08em;
-        }
-        .dates {
-            font-size: 1.15em;
-            color: #d7263d;
-            margin-bottom: 24px;
-            font-weight: bold;
-        }
-        .rsvp-btn {
-            background: linear-gradient(90deg, #d7263d 0%, #2e8b57 100%);
-            color: #fff;
-            border: none;
-            border-radius: 12px;
-            padding: 14px 40px;
-            font-size: 1.1em;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 2px 8px rgba(46,139,87,0.12);
-            transition: background 0.2s, transform 0.2s;
-        }
-        .rsvp-btn:focus,
-        .back-btn:focus,
-        .menu-toggle:focus {
-            outline: 2px solid #d7263d;
-        }
-        .rsvp-btn:hover {
-            background: linear-gradient(90deg, #2e8b57 0%, #d7263d 100%);
-            transform: scale(1.05);
-        }
-        .footer {
-            margin-top: 36px;
-            color: #888;
-            font-size: 1em;
-        }
-        .highlight {
-            color: #d7263d;
-            font-weight: bold;
-        }
-        ul.gift-list {
-            text-align: left;
-            margin: 18px auto 24px auto;
-            max-width: 400px;
-            color: #2e8b57;
-            font-size: 1.07em;
-        }
-        .back-btn {
-            margin-top: 20px;
-            padding: 10px 24px;
-            font-size: 1em;
-            border: none;
-            border-radius: 8px;
-            background: linear-gradient(90deg, #2e8b57 0%, #d7263d 100%);
-            color: #fff;
-            cursor: pointer;
-            box-shadow: 0 2px 8px rgba(46,139,87,0.12);
-            transition: background 0.2s, transform 0.2s;
-            font-weight: bold;
-        }
-        .back-btn:hover {
-            background: linear-gradient(90deg, #d7263d 0%, #2e8b57 100%);
-            transform: scale(1.05);
-        }
-        /* Mobile menu styles */
-        .menu-toggle {
-            display: none;
-            background: #2e8b57;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            padding: 10px 18px;
-            font-size: 1.1em;
-            font-weight: bold;
-            cursor: pointer;
-            margin-bottom: 18px;
-        }
-        @media (max-width: 600px) {
-            .container {
-                max-width: 98vw;
-                padding: 24px 4vw 24px 4vw;
-            }
-            .menu-toggle {
-                display: block;
-            }
-            .event-details {
-                display: none;
-            }
-            .event-details.active {
-                display: block;
-            }
-        }
-    </style>
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Montserrat,system-ui,Arial;background:
+  radial-gradient(circle at 90% 20%, rgba(154,223,191,0.03), transparent 8%),
+  linear-gradient(180deg,#071025 0%, #081827 60%, #0d1b28 100%);color:var(--panel)}
+.wrap{max-width:980px;margin:36px auto;padding:20px}
+.card{
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius:16px;padding:22px;border:1px solid rgba(255,255,255,0.04);
+  box-shadow:0 20px 60px rgba(2,6,23,0.6);position:relative;overflow:hidden;
+}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.title h1{margin:0;font-family:'Great Vibes',cursive;color:var(--mint);font-size:2.2rem}
+.subtitle{color:var(--muted);font-weight:600}
+.main{display:flex;gap:24px;margin-top:18px;flex-wrap:wrap;align-items:flex-start}
+.poster{width:220px;min-width:140px;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#142026,#08141a);box-shadow:0 12px 36px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.03)}
+.poster img{width:100%;height:100%;display:block;object-fit:cover}
+.meta{flex:1 1 360px;min-width:220px}
+.pill{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);color:var(--panel);font-weight:600;margin-right:8px}
+.synopsis{color:#d6e9e4;line-height:1.5;margin-top:12px}
+.controls{display:flex;gap:12px;align-items:center;margin-top:14px;flex-wrap:wrap}
+.btn{background:linear-gradient(90deg,var(--mint),#d4f5e9);color:#082028;border:none;padding:10px 16px;border-radius:10px;font-weight:700;cursor:pointer;box-shadow:0 8px 18px rgba(154,223,191,0.12);display:inline-flex;align-items:center;gap:8px}
+.btn.secondary{background:transparent;color:var(--panel);border:1px solid rgba(255,255,255,0.06);box-shadow:none}
+.countdown{margin-left:6px;color:#cfe9ff;background:rgba(255,255,255,0.01);padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
+.details{margin-top:18px;padding:16px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border:1px solid rgba(255,255,255,0.03)}
+.details.hidden{display:none}
+.menu-toggle{display:none}
+.mobile-menu-btn{display:none;background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--panel);padding:8px 10px;border-radius:8px;font-weight:700}
+.mobile-menu{position:fixed;right:12px;bottom:14px;background:linear-gradient(180deg,#082028,#052026);border:1px solid rgba(255,255,255,0.04);padding:12px;border-radius:12px;box-shadow:0 20px 50px rgba(0,0,0,0.6);display:none;z-index:60;min-width:180px}
+.mobile-menu.open{display:block}
+.mobile-menu button{display:block;width:100%;margin:6px 0;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--panel);text-align:left}
+.rsvp-form{display:none;margin-top:12px;background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);max-width:420px}
+.rsvp-form label{display:block;color:var(--panel);margin-bottom:6px;font-weight:600}
+.rsvp-form input{width:100%;padding:8px;border-radius:6px;border:1px solid rgba(255,255,255,0.06);margin-bottom:10px;background:transparent;color:var(--panel)}
+.remove-btn{background:linear-gradient(90deg,#68c9a6,#b5f1df);color:#042022;border:none;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer}
+.rsvped{outline:3px solid rgba(154,223,191,0.08);box-shadow:0 30px 60px rgba(154,223,191,0.04)}
+.footer{margin-top:18px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.snow{position:fixed;left:0;top:0;width:100vw;height:100vh;pointer-events:none;z-index:1;opacity:.9}
+.back{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--panel);padding:8px 10px;border-radius:8px}
+@media (max-width:760px){ .main{flex-direction:column;align-items:center} header{align-items:flex-start} .details{display:none} .menu-toggle{display:inline-flex} .poster{width:180px} .card{padding:16px;border-radius:14px} .mobile-menu-btn{display:inline-flex} }
+:focus{outline:none}
+</style>
 </head>
 <body>
-    <div class="container" role="main" aria-label="Gift Exchange Event">
-        <h1 tabindex="0">🎁 Gift Exchange & Celebration 🎁</h1>
-        <button class="menu-toggle" aria-controls="eventDetails" aria-expanded="false" aria-label="Toggle event details">
-            Show Details
-        </button>
-        <div class="event-details" id="eventDetails">
-            <div class="coming-soon">Coming Soon!</div>
-            <div class="days-left">
-                The first Gift Exchange event starts in <span id="daysLeft"></span> days.
-            </div>
-            <div class="time-left">
-                (<span id="timeLeft"></span>)
-            </div>
-            <div class="description">
-                <span class="highlight">Share joy, laughter, and surprises!</span><br>
-                Join us for our festive Gift Exchange and celebration events:
-                <ul class="gift-list">
-                    <li>🎁 Secret Santa Gift Exchange</li>
-                    <li>🍰 Holiday Treats & Refreshments</li>
-                    <li>🎶 Festive Music & Caroling</li>
-                    <li>🎉 New Year's Eve Gift Swap</li>
-                    <li>🕺 Fun Games & Activities</li>
-                    <li>📸 Photo Booth & Memories</li>
-                </ul>
-                <span style="color:#2e8b57; font-weight:bold;">Bring a wrapped gift and your holiday spirit!</span>
-            </div>
+<canvas class="snow" aria-hidden="true"></canvas>
+
+<div class="wrap">
+  <div class="card" role="main" aria-label="Gift Exchange & Celebration">
+    <header>
+      <div style="display:flex;align-items:center;gap:12px">
+        <button id="backBtn" class="back" aria-label="Go back">← Back</button>
+        <div class="title">
+          <h1 tabindex="0">Gift Exchange & Celebration</h1>
+          <div class="subtitle">Share joy — swap gifts and celebrate together</div>
         </div>
-        <div class="dates" tabindex="0">
-            <strong>Event Dates:</strong> December 25, December 31 & January 1
+      </div>
+
+      <div style="display:flex;gap:8px;align-items:center">
+        <button id="menuToggle" class="btn secondary menu-toggle" aria-controls="details" aria-expanded="false">Show Details</button>
+        <button id="mobileMenuBtn" class="mobile-menu-btn" aria-expanded="false" aria-controls="mobileMenu">☰ Menu</button>
+      </div>
+    </header>
+
+    <div class="main">
+      <div class="poster" aria-hidden="false">
+        <img src="https://thumbs.dreamstime.com/b/cheerful-santa-green-pajama-suit-sits-amid-stacked-wrapped-gifts-red-studio-backdrop-creating-warm-playful-holiday-mood-413135846.jpg" alt="Wrapped gifts with Santa">
+      </div>
+
+      <div class="meta">
+        <div>
+          <span class="pill">Dec 25 • 3:00 PM</span>
+          <span class="pill">Community Hall</span>
+          <span class="pill">All ages</span>
         </div>
-        <button class="rsvp-btn" onclick="alert('Thank you for your RSVP! Get ready for a joyful exchange!')" aria-label="RSVP for Gift Exchange Event">RSVP</button>
-        <div class="footer" tabindex="0">
-            Location: <span class="highlight">Winter Wonderland Hall</span><br>
-            Hosted by: <span class="highlight">Winter Wonderland- Gift Exchange Team</span><br>
-            Why this event?: <span class="highlight">To spread joy and connect our community through the tradition of giving!</span>
+
+        <div class="synopsis" id="synopsis">
+          A festive community gathering with a friendly gift exchange, seasonal music, and treats.
+          Bring a wrapped gift (~$10) if you'd like to participate. Raffle and volunteer table on site.
         </div>
-        <button onclick="location.href='index.html'" class="back-btn" aria-label="Back to Main Page">
-            Back to Main Page
-        </button>
+
+        <div class="controls" id="controls">
+          <button id="rsvpBtn" class="btn" data-event="Gift Exchange & Celebration" aria-label="RSVP">RSVP</button>
+          <div id="countdown" class="countdown" data-date="2025-12-25T15:00:00">Loading...</div>
+
+          <!-- QR preview / download (hidden until RSVP exists) -->
+          <div id="qrWrap" style="display:none;margin-left:12px;align-items:center">
+            <img id="qrImg" alt="Ticket QR" style="width:120px;height:120px;border-radius:8px;background:#fff;padding:6px;display:block">
+            <div style="margin-top:6px;display:flex;gap:8px;justify-content:center">
+              <button id="downloadQr" class="btn secondary">Download QR</button>
+            </div>
+          </div>
+        </div>
+
+        <form id="rsvpForm" class="rsvp-form" aria-hidden="true">
+          <label>Name <input type="text" name="name" required></label>
+          <label>Email <input type="email" name="email" required></label>
+          <div style="display:flex;gap:8px;align-items:center">
+            <button type="submit" class="btn">Submit RSVP</button>
+            <button type="button" id="cancelRSVP" class="btn secondary">Cancel</button>
+            <button type="button" id="downloadTicket" class="btn secondary" style="display:none">Download Ticket</button>
+          </div>
+          <div id="rsvpSuccess" style="color:#7bd389;font-weight:700;margin-top:8px"></div>
+        </form>
+      </div>
     </div>
-    <script>
-        // Countdown logic: days, total hours, minutes, seconds (to first event)
-        function updateCountdown() {
-            const now = new Date();
-            let eventYear = now.getFullYear();
-            const eventStart = new Date(eventYear, 11, 25, 0, 0, 0); // December is month 11 (0-indexed)
-            if (now > eventStart) {
-                eventYear++;
-            }
-            const nextEventStart = new Date(eventYear, 11, 25, 0, 0, 0);
-            let diff = nextEventStart - now;
 
-            let daysLeft = Math.floor(diff / (1000 * 60 * 60 * 24));
-            let totalHoursLeft = Math.floor(diff / (1000 * 60 * 60));
-            let minutesLeft = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            let secondsLeft = Math.floor((diff % (1000 * 60)) / 1000);
+    <section id="details" class="details" aria-hidden="false">
+      <h3 style="margin-top:0;color:var(--mint);font-family:'Great Vibes',cursive">Event Details</h3>
+      <p style="color:#d6e9e4">This is a community-first event: music, seasonal treats, and a friendly gift swap. Gifts should be wrapped and labeled 'For: anyone'. We will have a raffle and announcements.</p>
+      <ul style="color:#cfe9ff;line-height:1.6">
+        <li>Free entry; raffle tickets sold on-site</li>
+        <li>Community volunteer table for donations</li>
+        <li>Indoor, family-friendly, wheelchair accessible</li>
+      </ul>
+    </section>
 
-            document.getElementById('daysLeft').textContent = daysLeft;
-            document.getElementById('timeLeft').textContent =
-                `${totalHoursLeft} hours, ${minutesLeft} minutes, ${secondsLeft} seconds`;
-        }
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
+    <footer class="footer">
+      <div>Location: <strong style="color:var(--mint)">Community Hall</strong></div>
+      <div style="color:var(--muted)">&copy; <span id="yearGift"></span> Winter Wonderland</div>
+    </footer>
+  </div>
+</div>
 
-        // Mobile menu toggle for accessibility
-        const menuToggle = document.querySelector('.menu-toggle');
-        const eventDetails = document.getElementById('eventDetails');
-        menuToggle.addEventListener('click', function() {
-            const expanded = eventDetails.classList.toggle('active');
-            menuToggle.setAttribute('aria-expanded', expanded);
-            menuToggle.textContent = expanded ? 'Hide Details' : 'Show Details';
+<!-- Mobile floating menu -->
+<div id="mobileMenu" class="mobile-menu" aria-hidden="true" role="navigation">
+  <button id="mobileDetailsBtn">Toggle Details</button>
+  <button id="mobileRsvpBtn">Open RSVP</button>
+  <button id="mobileDownloadQrBtn">Download QR</button>
+  <button id="mobileCloseBtn">Close</button>
+</div>
+
+<script>
+/* snowfall canvas (light) */
+(function(){
+  const canvas = document.querySelector('.snow');
+  const ctx = canvas.getContext('2d');
+  let flakes = [];
+  function resize(){ canvas.width = innerWidth; canvas.height = innerHeight; create(); }
+  function create(){ flakes=[]; const count = Math.round((innerWidth*innerHeight)/100000); for(let i=0;i<count;i++) flakes.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2+0.6,s:Math.random()*1+0.2}); }
+  function draw(){ ctx.clearRect(0,0,canvas.width,canvas.height); ctx.fillStyle="rgba(255,255,255,0.9)"; for(const f of flakes){ ctx.beginPath(); ctx.arc(f.x,f.y,f.r,0,Math.PI*2); ctx.fill(); f.y += f.s + Math.sin(f.x/40)*0.3; if(f.y>canvas.height){ f.y=-5; f.x=Math.random()*canvas.width; } } requestAnimationFrame(draw); }
+  addEventListener('resize',resize); resize(); draw();
+})();
+
+/* countdown */
+(function(){
+  const el = document.getElementById('countdown');
+  function update(){
+    const date = new Date(el.dataset.date);
+    const now = new Date();
+    const diff = date - now;
+    if(diff <= 0){ el.textContent = "Event started!"; return; }
+    const d = Math.floor(diff/(1000*60*60*24));
+    const h = Math.floor((diff/(1000*60*60))%24);
+    const m = Math.floor((diff/(1000*60))%60);
+    const s = Math.floor((diff/1000)%60);
+    el.textContent = `Starts in ${d}d ${h}h ${m}m ${s}s`;
+  }
+  update(); setInterval(update,1000);
+})();
+
+/* mobile details toggle (desktop fallback) */
+(function(){
+  const menuToggle = document.getElementById('menuToggle');
+  const details = document.getElementById('details');
+  const threshold = 760;
+  function applyInitial(){
+    const isMobile = window.innerWidth <= threshold;
+    if(isMobile){
+      details.classList.add('hidden');
+      details.setAttribute('aria-hidden','true');
+      if(menuToggle){ menuToggle.style.display='inline-flex'; menuToggle.setAttribute('aria-expanded','false'); menuToggle.textContent='Show Details'; }
+    } else {
+      details.classList.remove('hidden');
+      details.setAttribute('aria-hidden','false');
+      if(menuToggle){ menuToggle.style.display='none'; menuToggle.setAttribute('aria-expanded','true'); }
+    }
+  }
+  applyInitial();
+  window.addEventListener('resize', applyInitial);
+  if(menuToggle){
+    menuToggle.addEventListener('click', function(){
+      const hidden = details.classList.toggle('hidden');
+      details.setAttribute('aria-hidden', hidden ? 'true' : 'false');
+      menuToggle.setAttribute('aria-expanded', hidden ? 'false' : 'true');
+      menuToggle.textContent = hidden ? 'Show Details' : 'Hide Details';
+    });
+  }
+})();
+
+/* mobile floating menu behaviour */
+(function(){
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileDetailsBtn = document.getElementById('mobileDetailsBtn');
+  const mobileRsvpBtn = document.getElementById('mobileRsvpBtn');
+  const mobileDownloadQrBtn = document.getElementById('mobileDownloadQrBtn');
+  const mobileCloseBtn = document.getElementById('mobileCloseBtn');
+  const details = document.getElementById('details');
+  const rsvpBtn = document.getElementById('rsvpBtn');
+  const downloadQr = document.getElementById('downloadQr');
+
+  function openMenu(){ mobileMenu.classList.add('open'); mobileMenu.setAttribute('aria-hidden','false'); mobileMenuBtn.setAttribute('aria-expanded','true'); }
+  function closeMenu(){ mobileMenu.classList.remove('open'); mobileMenu.setAttribute('aria-hidden','true'); mobileMenuBtn.setAttribute('aria-expanded','false'); }
+
+  mobileMenuBtn.addEventListener('click', function(){
+    mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  mobileCloseBtn.addEventListener('click', closeMenu);
+
+  mobileDetailsBtn.addEventListener('click', function(){
+    const hidden = details.classList.toggle('hidden');
+    details.setAttribute('aria-hidden', hidden ? 'true' : 'false');
+    // sync main menu toggle label if visible
+    const menuToggle = document.getElementById('menuToggle');
+    if(menuToggle) menuToggle.textContent = hidden ? 'Show Details' : 'Hide Details';
+    closeMenu();
+  });
+
+  mobileRsvpBtn.addEventListener('click', function(){
+    rsvpBtn.click();
+    closeMenu();
+  });
+
+  mobileDownloadQrBtn.addEventListener('click', function(){
+    if(downloadQr) downloadQr.click();
+    else alert('QR not available yet.');
+    closeMenu();
+  });
+
+  // close when tapping outside on small screens
+  document.addEventListener('click', function(e){
+    if(!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) closeMenu();
+  });
+})();
+
+/* RSVP + ticket + QR logic */
+(function(){
+  const EVENT_KEY = 'Gift Exchange & Celebration';
+  const STORAGE_KEY = 'winter_rsvps';
+  const rsvpBtn = document.getElementById('rsvpBtn');
+  const rsvpForm = document.getElementById('rsvpForm');
+  const controls = document.getElementById('controls');
+  const successEl = document.getElementById('rsvpSuccess');
+  const cancelBtn = document.getElementById('cancelRSVP');
+  const downloadTicketBtn = document.getElementById('downloadTicket');
+  const card = document.querySelector('.card');
+  const backBtn = document.getElementById('backBtn');
+
+  // QR elements
+  const qrWrap = document.getElementById('qrWrap');
+  const qrImg = document.getElementById('qrImg');
+  const downloadQrBtn = document.getElementById('downloadQr');
+  let lastQrApi = '';
+
+  // event static info used in QR payload
+  const EVENT_INFO = {
+    venue: 'Community Hall',
+    address: '123 Main St, Yourtown',
+    contact: 'events@winterwonderland.local',
+    instructions: 'Bring a wrapped gift (~$10). Raffle and volunteer table on site. Arrive 15min early.',
+    timezone: 'local'
+  };
+
+  function store(){ try{ return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }catch{return {}} }
+  function save(s){ localStorage.setItem(STORAGE_KEY, JSON.stringify(s)); }
+
+  function makeTicketId(){
+    return 'GIFT-' + Date.now().toString(36).slice(-8).toUpperCase();
+  }
+
+  function buildTicketHtml(entry){
+    const now = new Date().toLocaleString();
+    return `<!doctype html><html><head><meta charset="utf-8"><title>Ticket — ${escapeHtml(entry.name)}</title><style>body{font-family:Arial;padding:18px;color:#041524} .ticket{border:1px solid #ddd;padding:16px;border-radius:8px} .meta{margin-top:8px;color:#333;font-size:.95rem}</style></head><body><div class="ticket"><h2>Gift Exchange & Celebration</h2><div class="meta"><strong>Ticket ID:</strong> ${escapeHtml(entry.id||entry.ticketId||'')}</div><div><strong>Name:</strong> ${escapeHtml(entry.name)}</div><div><strong>Email:</strong> ${escapeHtml(entry.email)}</div><div><strong>Venue:</strong> ${escapeHtml(EVENT_INFO.venue)}</div><div style="margin-top:8px;color:#666;font-size:.9rem">Generated: ${escapeHtml(now)}</div></div></body></html>`;
+  }
+  function escapeHtml(s){ return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+  function generateQrFor(entry){
+    // build a richer JSON payload for the QR
+    const payload = {
+      event: EVENT_KEY,
+      ticketId: entry.id || entry.ticketId || makeTicketId(),
+      name: entry.name,
+      email: entry.email,
+      time: entry.time,
+      venue: EVENT_INFO.venue,
+      address: EVENT_INFO.address,
+      contact: EVENT_INFO.contact,
+      instructions: EVENT_INFO.instructions,
+      maps: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(EVENT_INFO.address)}`
+    };
+
+    // Persist ticketId if not already stored
+    if(!entry.id && !entry.ticketId){
+      const st = store();
+      st[EVENT_KEY] = Object.assign({}, entry, { id: payload.ticketId });
+      save(st);
+      entry.id = payload.ticketId;
+    }
+
+    // Use public QR service to render this JSON payload (scanner will show JSON or follow maps link)
+    lastQrApi = 'https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=' + encodeURIComponent(JSON.stringify(payload));
+    qrImg.src = lastQrApi;
+    if(qrWrap) qrWrap.style.display = 'flex';
+  }
+
+  function render(){
+    const s = store();
+    const has = !!s[EVENT_KEY];
+    if(has){
+      rsvpBtn.style.display = 'none';
+      if(!controls.querySelector('.remove-btn')){
+        const rem = document.createElement('button');
+        rem.className = 'remove-btn';
+        rem.textContent = 'Remove RSVP';
+        rem.addEventListener('click', function(){
+          if(!confirm('Remove your RSVP?')) return;
+          const st = store(); delete st[EVENT_KEY]; save(st); render(); alert('Your RSVP was removed.');
         });
-        // Show details by default on desktop
-        function handleResize() {
-            if (window.innerWidth > 600) {
-                eventDetails.classList.add('active');
-                menuToggle.setAttribute('aria-expanded', true);
-                menuToggle.style.display = 'none';
-            } else {
-                eventDetails.classList.remove('active');
-                menuToggle.setAttribute('aria-expanded', false);
-                menuToggle.style.display = 'block';
-                menuToggle.textContent = 'Show Details';
-            }
-        }
-        window.addEventListener('resize', handleResize);
-        window.addEventListener('DOMContentLoaded', handleResize);
-    </script>
+        controls.insertBefore(rem, document.getElementById('countdown'));
+      }
+      card.classList.add('rsvped');
+      downloadTicketBtn.style.display = 'inline-flex';
+      const entry = s[EVENT_KEY];
+      if(entry) generateQrFor(entry);
+    } else {
+      rsvpBtn.style.display = 'inline-flex';
+      const rem = controls.querySelector('.remove-btn');
+      if(rem) rem.remove();
+      card.classList.remove('rsvped');
+      downloadTicketBtn.style.display = 'none';
+      if(qrWrap) qrWrap.style.display = 'none';
+      lastQrApi = '';
+    }
+    if(rsvpForm){ rsvpForm.style.display = 'none'; rsvpForm.setAttribute('aria-hidden','true'); }
+    successEl.textContent = '';
+  }
+
+  // open form
+  rsvpBtn.addEventListener('click', function(){
+    rsvpForm.style.display = 'block'; rsvpForm.setAttribute('aria-hidden','false');
+    const nameInput = rsvpForm.querySelector('input[name="name"]');
+    if(nameInput) nameInput.focus();
+  });
+
+  // cancel form
+  cancelBtn.addEventListener('click', function(){ rsvpForm.style.display='none'; rsvpForm.setAttribute('aria-hidden','true'); });
+
+  // submit RSVP
+  rsvpForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = rsvpForm.querySelector('input[name="name"]').value.trim();
+    const email = rsvpForm.querySelector('input[name="email"]').value.trim();
+    if(!name || !email){ alert('Please provide both name and email.'); return; }
+    // create entry with ticket id + helpful meta (used in QR)
+    const entry = { id: makeTicketId(), name, email, time: new Date().toISOString(), venue: EVENT_INFO.venue };
+    const st = store(); st[EVENT_KEY] = entry; save(st);
+    successEl.textContent = 'Thanks — RSVP saved.';
+    setTimeout(()=>{ render(); alert('Thanks — your RSVP is recorded.'); }, 500);
+  });
+
+  // download ticket
+  downloadTicketBtn.addEventListener('click', function(){
+    const st = store(); const entry = st[EVENT_KEY];
+    if(!entry){ alert('No RSVP found'); return; }
+    const html = buildTicketHtml(entry);
+    const blob = new Blob([html], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = `gift-exchange-ticket-${(entry.id||entry.name||'ticket').replace(/\s+/g,'_')}.html`; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+  });
+
+  // download QR image fetched from public API
+  downloadQrBtn.addEventListener('click', async function(){
+    if(!lastQrApi){ alert('QR not ready'); return; }
+    try{
+      const resp = await fetch(lastQrApi);
+      if(!resp.ok) throw new Error('QR fetch failed');
+      const blob = await resp.blob();
+      const u = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = u;
+      const st = store(); const entry = st[EVENT_KEY] || { name: 'ticket', id: 'ticket' };
+      a.download = `gift-exchange-qr-${(entry.id||entry.name||'ticket').replace(/\s+/g,'_')}.png`;
+      document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(u);
+    }catch(err){
+      console.warn(err);
+      alert('Unable to download QR. Right-click the image and save it instead.');
+    }
+  });
+
+  // back button behavior
+  backBtn.addEventListener('click', function(){
+    if(window.history.length > 1) window.history.back(); else window.location.href = '/';
+  });
+
+  render();
+})();
+
+/* footer year */
+document.getElementById('yearGift').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
